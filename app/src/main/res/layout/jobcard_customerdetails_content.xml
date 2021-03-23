@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_jobcard_customerdetails_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/_10sdp"
+    android:background="@color/db_box_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:id="@+id/tv_customer_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/customer_name"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <EditText
+            android:id="@+id/et_customer_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:padding="@dimen/_10sdp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:id="@+id/tv_customer_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mobile_number"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <EditText
+            android:id="@+id/et_customer_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="10"
+            android:padding="@dimen/_10sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/email_id"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <EditText
+            android:id="@+id/et_customer_email"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:padding="@dimen/_10sdp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:id="@+id/tv_customer_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/address"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <EditText
+            android:id="@+id/et_customer_address"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:padding="@dimen/_10sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/city"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg">
+
+            <Spinner
+                android:id="@+id/sp_customer_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/state"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg">
+
+            <Spinner
+                android:id="@+id/sp_customer_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pincode"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <EditText
+            android:id="@+id/et_customer_pincode"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="6"
+            android:padding="@dimen/_10sdp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/CRN"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+            android:id="@+id/tv_customer_crn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:padding="@dimen/_10sdp"
+            android:textSize="@dimen/_15sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:id="@+id/tv_customer_paymentType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_type"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg">
+
+            <Spinner
+                android:id="@+id/sp_customer_payment_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/payment_type_array"
+                android:padding="@dimen/_10sdp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:id="@+id/tv_customer_gst_applicable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gst"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg">
+
+            <Spinner
+                android:id="@+id/sp_customer_gst_applicable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/gst_array"
+                android:padding="@dimen/_10sdp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_gstin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gstin"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+
+        <EditText
+            android:id="@+id/et_customer_gstin"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLength="15"
+            android:padding="@dimen/_10sdp" />
+
+    </LinearLayout>
+</LinearLayout>

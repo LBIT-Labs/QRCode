@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ExpandableButton">
+        <attr name="text" format="string" />
+        <attr name="color" format="color" />
+        <attr name="childView" format="reference" />
+        <attr name="icon" format="reference" />
+    </declare-styleable>
+
+
+    <declare-styleable name="SpinnerTextView">
+        <attr name="android:prompt" />
+        <attr name="android:entries" />
+    </declare-styleable>
+
+
+    <declare-styleable name="SpinnerTextViews">
+        <attr name="dropdown_max_height" format="dimension|reference" />
+        <attr name="dropdown_item_height" format="dimension|reference" />
+        <attr name="arrow_icon" format="integer|reference" />
+        <attr name="collapse_item_display_background" format="integer|reference" />
+        <attr name="expand_item_display_background" format="integer|reference" />
+        <attr name="drop_down_list_background" format="integer|reference" />
+        <attr name="hint_text_enable" format="boolean|reference" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/qr_part_details_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colour_white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/layout_submit">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/feedback_toolbar_header" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/qr_code_bg"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_vendorName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                            android:id="@+id/tv_gp_vendorName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/_10sdp"
+                            android:text=""
+                            android:textColor="@color/colour_white"
+                            android:textSize="@dimen/_15sdp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@drawable/qr_empty_bg"></LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/sv_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Vehicle Details"
+                            android:textColor="@color/qr_code_bg"
+                            android:textSize="@dimen/_17sdp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:background="@drawable/im_list_border_bg"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:orientation="horizontal">
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:paddingLeft="@dimen/_20sdp"
+                                android:text="@string/reg_no"
+                                android:textColor="@color/qr_code_bg"
+                                android:textSize="@dimen/_13sdp" />
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.1"
+                                android:gravity="center"
+                                android:text=":" />
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                                android:id="@+id/tv_gp_regNo"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:paddingLeft="@dimen/_20sdp"
+                                android:text=""
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/_13sdp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:orientation="horizontal">
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:paddingLeft="@dimen/_20sdp"
+                                android:text="@string/customer_name"
+                                android:textColor="@color/qr_code_bg"
+                                android:textSize="@dimen/_13sdp" />
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.1"
+                                android:gravity="center"
+                                android:text=":" />
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                                android:id="@+id/tv_gp_customerName"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:paddingLeft="@dimen/_20sdp"
+                                android:text=""
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/_13sdp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:orientation="horizontal">
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:paddingLeft="@dimen/_20sdp"
+                                android:text="@string/mobile_number"
+                                android:textColor="@color/qr_code_bg"
+                                android:textSize="@dimen/_13sdp" />
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.1"
+                                android:gravity="center"
+                                android:text=":" />
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                                android:id="@+id/tv_gp_Mobile"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:paddingLeft="@dimen/_20sdp"
+                                android:text=""
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/_13sdp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:orientation="horizontal">
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:paddingLeft="@dimen/_20sdp"
+                                android:text="@string/technician_name"
+                                android:textColor="@color/qr_code_bg"
+                                android:textSize="@dimen/_13sdp" />
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.1"
+                                android:gravity="center"
+                                android:text=":" />
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                                android:id="@+id/tv_gp_technicianName"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:paddingLeft="@dimen/_20sdp"
+                                android:text=""
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/_13sdp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:orientation="horizontal">
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:paddingLeft="@dimen/_20sdp"
+                                android:text="@string/jobcard_no"
+                                android:textColor="@color/qr_code_bg"
+                                android:textSize="@dimen/_13sdp" />
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.1"
+                                android:gravity="center"
+                                android:text=":" />
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                                android:id="@+id/tv_gp_jobcard_no"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:paddingLeft="@dimen/_20sdp"
+                                android:text=""
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/_13sdp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_capture_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <workshop.lbit.qrcode.customfonts.MyTextView_Montserrat_Regular
+                            android:id="@+id/tv_capture_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/img_upload">
+
+                        </workshop.lbit.qrcode.customfonts.MyTextView_Montserrat_Regular>
+
+                        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Capture Image"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_15sdp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/ivCaptureImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:visibility="visible" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/layout_footer"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/_10sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:gravity="center">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                android:id="@+id/tv_gp_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/submit_bg"
+                android:gravity="center"
+                android:paddingLeft="@dimen/_50sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingRight="@dimen/_50sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:text="OUT"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/qr_code_bg"
+            android:orientation="horizontal"
+            android:padding="@dimen/_10sdp">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text=""
+                android:textAllCaps="true"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

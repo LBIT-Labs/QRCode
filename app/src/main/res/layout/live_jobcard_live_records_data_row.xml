@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/box_border_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/customer_name"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_14sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/tv_live_customer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/mobile_number"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_14sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/tv_live_mobile"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/job_id"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_14sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/tv_live_jobId"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/job_card_date"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_14sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/tv_live_jobcard_date"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/make"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_14sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/tv_live_make"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/reg_no"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_14sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/tv_live_regNo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_live_invoiceNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/invoice_no"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_14sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/tv_live_inviceNo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_live_invoiceDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/invoice_date"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_14sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/tv_live_inviceDate"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_live_invoiceAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/invoice_amount"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_14sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/tv_live_inviceAmount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/status"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_14sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/tv_live_status"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_live_estimateView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/estimate_view"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_14sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/tv_live_estimateView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_live_invoiceView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/invoice_view"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_14sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/tv_live_inviceView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:padding="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

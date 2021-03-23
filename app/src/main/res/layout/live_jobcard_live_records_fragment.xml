@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/layout_footer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/srl_swipetorefresh"
+                android:layout_width="wrap_content"
+                android:layout_height="0px"
+                android:layout_weight="1">
+
+                <workshop.lbit.qrcode.scroll.MyNestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_10sdp"
+                            android:orientation="vertical">
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/vehcile_search"
+                                android:textColor="@color/qr_code_bg"
+                                android:textSize="@dimen/_15sdp" />
+
+                            <EditText
+                                android:id="@+id/et_search"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:background="@drawable/border_bg"
+                                android:imeOptions="actionDone"
+                                android:inputType="number"
+                                android:maxLength="10"
+                                android:padding="@dimen/_10sdp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_live_jobcard_data"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_10sdp"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:orientation="vertical">
+
+                                <workshop.lbit.qrcode.scroll.MyViewPager
+                                    android:id="@+id/vp_pager"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </workshop.lbit.qrcode.scroll.MyNestedScrollView>
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/qr_code_bg"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:id="@+id/tvPrevious"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/icon_prev"
+                android:drawablePadding="@dimen/_5sdp"
+                android:gravity="start"
+                android:padding="@dimen/_10sdp"
+                android:text="Previous"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/yellow"
+                android:textSize="@dimen/_15sdp"
+                android:visibility="visible" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:id="@+id/tv_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15sdp"
+                android:visibility="visible" />
+
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:id="@+id/tvnext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/icon_next"
+                android:drawablePadding="@dimen/_5sdp"
+                android:gravity="end"
+                android:padding="@dimen/_10sdp"
+                android:text="Next"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/yellow"
+                android:textSize="@dimen/_15sdp"
+                android:visibility="visible" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

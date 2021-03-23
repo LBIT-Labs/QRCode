@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_jobcard_details_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/_10sdp"
+    android:background="@color/db_box_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:id="@+id/tv_vehicle_reg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/vehicle_reg"
+            android:hint="@string/hint_asteric"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <EditText
+            android:id="@+id/et_vehicle_reg_number"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:hint="AB10SP1220"
+            android:imeOptions="actionDone"
+            android:inputType="textCapCharacters"
+            android:maxLength="10"
+            android:padding="@dimen/_10sdp"
+            android:textAllCaps="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:id="@+id/tv_vehicle_make"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/make"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg">
+
+            <Spinner
+                android:id="@+id/sp_vehicle_make"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:id="@+id/tv_vehicle_model"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/model"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg">
+
+            <Spinner
+                android:id="@+id/sp_vehicle_model"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/variant"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_marginTop="@dimen/_10sdp"-->
+        <!--            android:background="@drawable/border_bg">-->
+
+        <!--            <Spinner-->
+        <!--                android:id="@+id/sp_vehicle_variant"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:padding="@dimen/_10sdp" />-->
+        <!--        </LinearLayout>-->
+
+        <EditText
+            android:id="@+id/et_vehicle_variant"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:padding="@dimen/_10sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/kms_driven"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+
+        <EditText
+            android:id="@+id/et_vehicle_kms_driven"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="8"
+            android:padding="@dimen/_10sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/number_plat_color"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg">
+
+            <Spinner
+                android:id="@+id/sp_vehicle_number_plate_colour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/number_plat_colour_array"
+                android:padding="@dimen/_10sdp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mfg"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg">
+
+            <Spinner
+                android:id="@+id/sp_vehicle_mfg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/mfg_array"
+                android:padding="@dimen/_10sdp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/engine_no"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+
+        <EditText
+            android:id="@+id/et_vehicle_engine_no"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:padding="@dimen/_10sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/chassis_no"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+
+        <EditText
+            android:id="@+id/et_vehicle_chassis_no"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:padding="@dimen/_10sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/insurance"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg">
+
+            <Spinner
+                android:id="@+id/sp_vehicle_insurance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/insurance_array"
+                android:padding="@dimen/_10sdp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/in_charge"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+
+        <EditText
+            android:id="@+id/et_vehicle_incharge"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:padding="@dimen/_10sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/in_charge_mobile"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+
+        <EditText
+            android:id="@+id/et_vehicle_incharge_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="10"
+            android:padding="@dimen/_10sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:id="@+id/tv_vehicle_driver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/driver"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+
+        <EditText
+            android:id="@+id/et_vehicle_driver"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:padding="@dimen/_10sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:id="@+id/tv_vehicle_driver_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/driver_mobile"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <EditText
+            android:id="@+id/et_vehicle_driver_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="10"
+            android:padding="@dimen/_10sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/location"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg">
+
+            <Spinner
+                android:id="@+id/sp_vehicle_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/insurance_array"
+                android:padding="@dimen/_10sdp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

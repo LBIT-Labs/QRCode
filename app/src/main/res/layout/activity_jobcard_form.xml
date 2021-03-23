@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colour_white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/layout_footer">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/feedback_toolbar_header" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/qr_code_bg"
+                        android:orientation="vertical">
+
+
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tabs"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            app:tabBackground="@color/qr_code_bg"
+                            app:tabGravity="fill"
+                            app:tabIndicatorHeight="3dp"
+                            app:tabMode="scrollable"
+                            app:tabIndicatorColor="@color/white"
+                            app:tabSelectedTextColor="@color/white"
+                            app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
+                            app:tabTextColor="@color/db_box_bg"
+                            android:clickable="false"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:background="@drawable/qr_empty_bg"></LinearLayout>
+                    </LinearLayout>
+
+                    <workshop.lbit.qrcode.viewpager.LockableViewPager
+                        android:id="@+id/jobcard_dashboard_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                    </workshop.lbit.qrcode.viewpager.LockableViewPager>
+
+                </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/qr_code_bg">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:id="@+id/tvPrevious"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:padding="@dimen/_10sdp"
+                android:text="Previous"
+                android:drawableLeft="@drawable/icon_prev"
+                android:drawablePadding="@dimen/_5sdp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/yellow"
+                android:textSize="@dimen/_15sdp"
+                android:visibility="visible" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:id="@+id/tvnext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:padding="@dimen/_10sdp"
+                android:text="Next"
+                android:drawablePadding="@dimen/_5sdp"
+                android:drawableRight="@drawable/icon_next"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/yellow"
+                android:textSize="@dimen/_15sdp"
+                android:visibility="visible" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

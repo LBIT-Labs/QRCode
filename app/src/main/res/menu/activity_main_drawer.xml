@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_Jobcard"
+            android:icon="@drawable/icon_jobcard"
+            android:title="Job Card" />
+
+        <item
+            android:id="@+id/nav_Livejobs"
+            android:icon="@drawable/icon_livejobcard"
+            android:title="Live Jobs" />
+
+        <item
+            android:id="@+id/nav_serviceHistory"
+            android:icon="@drawable/icon_service_history"
+            android:title="Service History" />
+
+        <item
+            android:id="@+id/nav_invManagement"
+            android:icon="@drawable/icon_inventiry"
+            android:title="Inventory Management" />
+
+        <item
+            android:id="@+id/nav_vendorService"
+            android:icon="@drawable/icon_vendor_service"
+            android:title="3rd Party Vendor Service" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Logout           V1.0.1" />
+    </group>
+
+</menu>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00589A</color>
+    <color name="colorPrimaryDark">#0077BB</color>
+    <color name="colorAccent">#0077BB</color>
+    <color name="white">#FFFFFF</color>
+    <color name="window_background">#FFF5F5F5</color>
+    <color name="black">#000000</color>
+    <color name="green">#008000</color>
+    <color name="sky_blue">#87ceeb</color>
+    <color name="timer_format">#6B709A</color>
+    <color name="textColor_40">#666B709A</color>
+    <color name="gray">#ACACAC</color>
+    <color name="dark_gray">#424242</color>
+    <color name="im_bg">#f5f8ff</color>
+    <color name="backgroundColor">#F6F6F6</color>
+    <color name="colorBlack">#000000</color>
+    <color name="blue">#3949AB</color>
+    <color name="apptheme_color">#666699</color>
+    <color name="liteColor">#eeeeee</color>
+    <color name="midnightBlue">#191970</color>
+    <color name="comparecar_color">#636363</color>
+    <color name="expandable_child">#80c8ff</color>
+    <color name="expandable_child2">#addcff</color>
+    <color name="expandable_drop_child2">#d2eafc</color>
+    <color name="branch_name">#7030a1</color>
+    <color name="db_box_bg">#f4fcff</color>
+    <color name="qr_code_bg">#3b5999</color>
+    <color name="qr_code_bg_tab">#eea81b</color>
+
+
+    <color name="red">#ff0000</color>
+    <color name="colour_white">#ffffff</color>
+    <color name="light_white">#F3F2F6</color>
+    <color name="transparent">#00000000</color>
+    <color name="yellow">#efbb13</color>
+    <color name="upcoming_bg">#19D454</color>
+    <color name="photo_tint">#38101010</color>
+    <color name="sky_blue_dark">#02C3EE</color>
+
+    <color name="login_border_stroke_clr">#000</color>
+    <color name="black_20">#33000000</color>
+    <color name="activity_bg">#e4e5e5</color>
+    <color name="shadowstroke">#c8c8c8</color>
+    <color name="specification_item_circle_bg">#A2A8B2</color>
+
+    <!--colors used in new design-->
+    <color name="hintColor">#ACAFB4</color>
+    <color name="textColor">#6B709A</color>
+    <color name="rateStarColor">#000000</color>
+    <color name="RoyalBlue">#4169E1</color>
+    <color name="selected_bg_color">#AAE5F7</color>
+    <color name="border_blue">#009CDF</color>
+    <color name="button_text">#02c3ee</color>
+    <color name="button_text_bg">#00589b</color>
+    <color name="caledner_bg">#36A5FF</color>
+    <color name="remarks_bg">#E2F3FD</color>
+    <color name="remarks_border">#8DCBFE</color>
+    <color name="opentask_bg">#aae5f6</color>
+    <color name="login_textcolor">#151515</color>
+
+
+    <color name="job_card_summary_bg_1">#f5f8ff</color>
+    <color name="job_card_summary_bg_2">#fafafa</color>
+    <color name="job_card_summary_bg_3">#fafafa</color>
+
+
+</resources>

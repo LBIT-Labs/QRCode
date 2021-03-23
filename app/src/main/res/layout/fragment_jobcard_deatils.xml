@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/_10sdp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/_10sdp">
+
+                    <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vehcile_search"
+                        android:textColor="@color/qr_code_bg"
+                        android:textSize="@dimen/_15sdp" />
+
+                    <EditText
+                        android:id="@+id/et_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@drawable/border_bg"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:padding="@dimen/_10sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    tools:context=".ui.JobCardFormActivity">
+
+                    <workshop.lbit.qrcode.helper.ExpandableButton
+                        android:id="@+id/eb_jabcard_vehicleDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        app:childView="@+id/ll_jobcard_details_layout"
+                        app:text="@string/jobcard_vehicledetails"/>
+
+                    <include layout="@layout/jobcard_details_content" />
+
+                    <workshop.lbit.qrcode.helper.ExpandableButton
+                        android:id="@+id/eb_jabcard_customerDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        app:childView="@+id/ll_jobcard_customerdetails_layout"
+                        app:text="@string/jobcard_customerdetails"/>
+
+                    <include layout="@layout/jobcard_customerdetails_content" />
+
+                    <workshop.lbit.qrcode.helper.ExpandableButton
+                        android:id="@+id/eb_jabcard_workshopDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        app:childView="@+id/ll_jobcard_workshop_layout"
+                        app:text="@string/jobcard_workshopdetails"/>
+
+                    <include layout="@layout/jobcard_workshop_content" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</LinearLayout>

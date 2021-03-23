@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center">
+                <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                    android:id="@+id/tv_im_qty"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="10"
+                    android:background="@drawable/cirle_bg"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_15sdp" />
+
+            </LinearLayout>
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text="@string/available_qty"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text="@string/part_desc"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                android:id="@+id/tv_im_part_desc"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text="@string/qr_oe_part_number"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                android:id="@+id/tv_im_oe_part_desc"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text="@string/part_no"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                android:id="@+id/tv_im_part_no"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text="@string/make"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                android:id="@+id/tv_im_make"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text="@string/qr_mrp"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                android:id="@+id/tv_im_mrp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text="@string/part_category"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                android:id="@+id/tv_im_part_category"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text="@string/location"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                android:id="@+id/tv_im_location"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text="@string/hsn"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                android:id="@+id/tv_im_hsn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text="@string/qr_supplier"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                android:id="@+id/tv_im_supplier"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

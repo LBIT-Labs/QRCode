@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_jobcard_workshop_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/_10sdp"
+    android:background="@color/db_box_bg"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:id="@+id/tv_workshop_technician"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/technician"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg">
+
+            <Spinner
+                android:id="@+id/sp_workshop_technician"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:entries="@array/technician_array"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:id="@+id/tv_workshop_supervisor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/supervisor"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg">
+
+            <Spinner
+                android:id="@+id/sp_workshop_supervisor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:entries="@array/supervisor_array"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:id="@+id/tv_workshop_supervisor_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/customer_name"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <EditText
+            android:id="@+id/et_workshop_supervisor_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="10"
+            android:padding="@dimen/_10sdp" />
+    </LinearLayout>
+
+
+</LinearLayout>
