@@ -30,13 +30,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import workshop.lbit.qrcode.R
 import workshop.lbit.qrcode.Singleton.UserSession
-import workshop.lbit.qrcode.adapter.LiveJobcardLiveRecordsDataAdapter
 import workshop.lbit.qrcode.adapter.VendorJobcardNewRecordsDataAdapter
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
 import workshop.lbit.qrcode.data.JobcardData
 import workshop.lbit.qrcode.interfaces.JobCardList
-import workshop.lbit.qrcode.interfaces.JobCardListService
-import workshop.lbit.qrcode.ui.JobCardFormActivity
 import workshop.lbit.qrcode.utils.Constants
 import workshop.lbit.qrcode.vendorjobcard.VendorJobCardFormActivity
 
@@ -68,19 +65,15 @@ class VendorNewJobcardFragment : Fragment(), View.OnClickListener, JobCardList {
     private val thresholdOffsetPixels = 1
     private var mCurrentFragmentPosition = 0
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        super.setUserVisibleHint(isVisibleToUser);
-        this.isVisibleToUser = isVisibleToUser;
-        if (isVisibleToUser && isAdded()) {
+        super.setUserVisibleHint(isVisibleToUser)
+        this.isVisibleToUser = isVisibleToUser
+        if (isVisibleToUser && isAdded) {
             et_search.setText("")
 
             loadData("")
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -91,7 +84,7 @@ class VendorNewJobcardFragment : Fragment(), View.OnClickListener, JobCardList {
             et_search.setText("")
 
             loadData("")
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -133,7 +126,7 @@ class VendorNewJobcardFragment : Fragment(), View.OnClickListener, JobCardList {
 
         }
 
-        et_search!!.addTextChangedListener(object : TextWatcher {
+        et_search.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
                 val text = editable.toString().trim()
 
@@ -172,10 +165,10 @@ class VendorNewJobcardFragment : Fragment(), View.OnClickListener, JobCardList {
 
             override fun onPageScrollStateChanged(state: Int) {
                 if (!scrollStarted && state == ViewPager.SCROLLBAR_POSITION_DEFAULT) {
-                    scrollStarted = true;
-                    checkDirection = true;
+                    scrollStarted = true
+                    checkDirection = true
                 } else {
-                    scrollStarted = false;
+                    scrollStarted = false
                 }
             }
 
@@ -211,7 +204,7 @@ class VendorNewJobcardFragment : Fragment(), View.OnClickListener, JobCardList {
             }
 
             override fun onPageSelected(position: Int) {
-                mCurrentFragmentPosition = position;
+                mCurrentFragmentPosition = position
             }
 
         })
@@ -298,7 +291,7 @@ class VendorNewJobcardFragment : Fragment(), View.OnClickListener, JobCardList {
 
             Log.e("TAG", "onClick_Previous: " + vp_pager!!.currentItem)
             val mPrev = (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
-            tv_size!!.text = mPrev
+            tv_size.text = mPrev
 
 
         } else if (i == R.id.tvnext) {
@@ -306,7 +299,7 @@ class VendorNewJobcardFragment : Fragment(), View.OnClickListener, JobCardList {
             vp_pager!!.setCurrentItem(getItemofviewpager(+1), true)
             Log.e("TAG", "onClick_Next: " + vp_pager!!.currentItem + 1)
             val mNext = (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
-            tv_size!!.text = mNext
+            tv_size.text = mNext
 
         }
     }
