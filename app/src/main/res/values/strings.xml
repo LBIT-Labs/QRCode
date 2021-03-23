@@ -87,12 +87,9 @@
     <string name="vendor_id">Vendor ID</string>
     <string name="total_amount">Total Amount</string>
     <string name="gatepass_no">GatePass No</string>
-    <string name="hi">Hi</string>
-    <string name="hello">Hello</string>
     <string name="gatepass_date">GatePass Date</string>
     <string name="gatepass_status">GatePass Status</string>
     <string name="gatepass_Auth_status">GatePass Auth Status</string>
-
     <string name="select_service">Service</string>
     <string name="jobcard_number">Jobcard Number</string>
     <string name="crn_no">CRN No.</string>
