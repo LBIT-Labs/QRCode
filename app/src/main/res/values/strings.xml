@@ -90,6 +90,7 @@
     <string name="hi">Hi</string>
     <string name="hello">Hello</string>
     <string name="gatepass_date">GatePass Date</string>
+
     <string name="gatepass_status">GatePass Status</string>
     <string name="gatepass_Auth_status">GatePass Auth Status</string>
 
