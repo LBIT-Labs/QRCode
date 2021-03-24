@@ -259,7 +259,7 @@
                 android:paddingRight="@dimen/_30sdp"
                 android:paddingBottom="@dimen/_10sdp"
                 android:text="@string/edit"
-                android:drawableLeft="@drawable/icon_edit"
+                android:drawableLeft="@drawable/icon_edit_white"
                 android:drawablePadding="@dimen/_5sdp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15sdp" />
@@ -276,7 +276,7 @@
                 android:paddingRight="@dimen/_30sdp"
                 android:paddingBottom="@dimen/_10sdp"
                 android:text="@string/delet"
-                android:drawableLeft="@drawable/icon_delete"
+                android:drawableLeft="@drawable/icon_delete_white"
                 android:drawablePadding="@dimen/_5sdp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15sdp" />

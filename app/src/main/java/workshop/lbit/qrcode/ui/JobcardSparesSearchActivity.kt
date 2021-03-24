@@ -1,6 +1,5 @@
 package workshop.lbit.qrcode.ui
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
@@ -40,7 +39,6 @@ import workshop.lbit.qrcode.data.QrData
 import workshop.lbit.qrcode.interfaces.QrDataList
 import workshop.lbit.qrcode.utils.Constants
 import workshop.lbit.qrcode.utils.Utilities
-import java.util.regex.Pattern
 
 class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, QrDataList {
 
@@ -89,11 +87,11 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
     lateinit var tv_spares_part_desc: MyTextView_Roboto_Medium
     lateinit var tv_spares_finalprice: MyTextView_Roboto_Medium
     lateinit var tv_spares_mrp: MyTextView_Roboto_Medium
-    lateinit var tv_spares_discount_txt: MyTextView_Roboto_Bold
+    lateinit var tv_spares_quantity_txt: MyTextView_Roboto_Bold
     lateinit var tv_spares_jobid_txt: MyTextView_Roboto_Bold
     lateinit var sp_spares_jobid: Spinner
 
-    var mSparesDiscount: String = ""
+    var mSparesDiscount: String = "0"
     var mSparesQuantity: String = ""
     var mSparesJobId: String = ""
     var mSparesFinalPrice: String = ""
@@ -109,7 +107,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jobcard_spares_search)
-        getSupportActionBar()!!.hide();
+        supportActionBar!!.hide()
 
         sharedpreferences = getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE)
         editor = sharedpreferences!!.edit()
@@ -134,6 +132,9 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
         iv_close.setOnClickListener {
             mPartDesc = ""
             et_search_part.setText("")
+            tvNodata.visibility = View.VISIBLE
+            ll_footer.visibility = View.GONE
+            ll_Parts_list.visibility = View.GONE
         }
 
         tv_submit.setOnClickListener {
@@ -141,7 +142,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
             if (mPartDesc.isNotEmpty()) {
 
                 val stringarry = mPartDesc.split("-")
-                val partNumber = stringarry.get(1)
+                val partNumber = stringarry.get(0)
                 getPartDetails(partNumber)
 
             } else {
@@ -172,17 +173,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
                 mPartDesc = parent.getItemAtPosition(position).toString()
                 et_search_part.setText(mPartDesc)
                 hideKeyboard()
-
-//                et_search_part.clearFocus()
-
-//                Utilities.hideSoftKeyboard(this@JobcardSparesSearchActivity)
-
-//                hideSoftKeyboard(this@JobcardSparesSearchActivity,et_search_part)
-//                et_search_part.setSelection(et_search_part.text.length)
-
-//                val `in`: InputMethodManager =
-//                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//                `in`.hideSoftInputFromWindow(view.windowToken, 0)
+                et_search_part.clearFocus()
 
             }
     }
@@ -194,18 +185,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
             imm?.let { it.hideSoftInputFromWindow(v.windowToken, 0) }
         }
     }
-//    private fun focusOnView() {
-//        Handler().post(Runnable {
-//            sv_scroll.scrollTo(0, ll_search_image.getTop())
-//        })
-//    }
 
-    fun hideSoftKeyboard(mContext: Context, username: EditText) {
-        if ((mContext as Activity).getCurrentFocus() != null && (mContext as Activity).getCurrentFocus() is EditText) {
-            val imm = mContext.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(username.windowToken, 0)
-        }
-    }
     private fun getPartDetails(partNumber: String) {
         val mProgressDialog = ProgressDialog(this@JobcardSparesSearchActivity)
         mProgressDialog.isIndeterminate = true
@@ -231,14 +211,10 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
                             if (mPartDetailsListArray!!.length() > 0) {
 
                                 et_search_part.clearFocus()
-//                                ll_search_image.requestFocus()
-//                                sv_scroll.requestFocus(View.FOCUS_UP);
-//                                sv_scroll.scrollTo(0, 4);
-//                                focusOnView()
 
                                 ll_search_image.visibility = View.VISIBLE
                                 ll_search_options.visibility = View.VISIBLE
-                                tvNodata!!.visibility = View.GONE
+                                tvNodata.visibility = View.GONE
                                 ll_footer.visibility = View.VISIBLE
                                 ll_Parts_list.visibility = View.VISIBLE
 
@@ -253,17 +229,17 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
                                         this@JobcardSparesSearchActivity,
                                         getLoansList
                                     )
-                                mViewPager.setOverScrollMode(View.OVER_SCROLL_NEVER);
+                                mViewPager.overScrollMode = View.OVER_SCROLL_NEVER
 
                                 mPageCount = mPartDetailsListArray!!.length().toString()
 
                                 if (mPageCount!!.length > 0) {
-                                    tvPagerCount!!.text = mPageCount!!
+                                    tvPagerCount.text = mPageCount!!
                                 }
                             } else {
                                 ll_search_image.visibility = View.VISIBLE
                                 ll_Parts_list.visibility = View.GONE
-                                tvNodata!!.visibility = View.VISIBLE
+                                tvNodata.visibility = View.VISIBLE
                                 ll_footer.visibility = View.GONE
                                 ll_search_options.visibility = View.VISIBLE
                             }
@@ -271,7 +247,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
                             ll_search_image.visibility = View.VISIBLE
                             ll_Parts_list.visibility = View.GONE
                             ll_footer.visibility = View.GONE
-                            tvNodata!!.visibility = View.VISIBLE
+                            tvNodata.visibility = View.VISIBLE
                             ll_search_options.visibility = View.VISIBLE
                         }
 
@@ -306,7 +282,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
         toolbar_title.text = "Add Spare"
 
         sv_scroll = findViewById(R.id.nest_scrollview)
-        sv_scroll.setFillViewport(true)
+        sv_scroll.isFillViewport = true
 
         ll_Parts_list = findViewById(R.id.ll_Parts_list)
         ll_footer = findViewById(R.id.ll_footer)
@@ -331,10 +307,10 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
 
             override fun onPageScrollStateChanged(state: Int) {
                 if (!scrollStarted && state == ViewPager.SCROLLBAR_POSITION_DEFAULT) {
-                    scrollStarted = true;
-                    checkDirection = true;
+                    scrollStarted = true
+                    checkDirection = true
                 } else {
-                    scrollStarted = false;
+                    scrollStarted = false
                 }
             }
 
@@ -368,7 +344,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
             }
 
             override fun onPageSelected(position: Int) {
-                mCurrentFragmentPosition = position;
+                mCurrentFragmentPosition = position
             }
 
         })
@@ -471,7 +447,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
         mValue_tax = data.qr_tax!!
         mValue_pid = data.qr_pid!!
 
-        mSparesQuantity = mValue_part_quantity
+//        mSparesQuantity = mValue_part_quantity
         AddSparesDialog()
     }
 
@@ -487,7 +463,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
         tv_spares_mrp = mDialogView.findViewById(R.id.tv_spares_mrp)
 
         sp_spares_jobid = mDialogView.findViewById(R.id.sp_spares_jobid)
-        tv_spares_discount_txt = mDialogView.findViewById(R.id.tv_spares_discount_txt)
+        tv_spares_quantity_txt = mDialogView.findViewById(R.id.tv_spares_quantity_txt)
         tv_spares_jobid_txt = mDialogView.findViewById(R.id.tv_spares_jobid_txt)
 
         bt_submit =
@@ -495,13 +471,15 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
         bt_cancel =
             mDialogView.findViewById(R.id.bt_cancel)
 
-        MandatoryDiscount(resources.getString(R.string.discount1))
+        MandatoryQuantity(resources.getString(R.string.qr_quantity))
         MandatoryJobid(resources.getString(R.string.job_id))
 
         tv_spares_OE_part_number.text = mValue_OE_num
         tv_spares_part_desc.text = mValue_part_desc
-        et_spares_quantity.setText(mValue_part_quantity)
+        et_spares_quantity.setText("")
+        et_spares_discount.setText("0")
         tv_spares_mrp.text = mValue_mrp
+        tv_spares_finalprice.text = mValue_mrp
 
         val mBuilder = AlertDialog.Builder(this@JobcardSparesSearchActivity)
             .setView(mDialogView)
@@ -694,7 +672,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
 
     }
 
-    private fun MandatoryDiscount(string: String) {
+    private fun MandatoryQuantity(string: String) {
 
         val colored = " *"
         val builder = SpannableStringBuilder()
@@ -708,7 +686,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_spares_discount_txt.setText(builder)
+        tv_spares_quantity_txt.text = builder
 
     }
 
@@ -726,7 +704,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_spares_jobid_txt.setText(builder)
+        tv_spares_jobid_txt.text = builder
 
     }
 
@@ -792,7 +770,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
                 mSparesDiscount = editable.toString().trim()
 
                 try {
-                    if (mValue_mrp.isNotEmpty() && mSparesDiscount.isNotEmpty() && mSparesQuantity.isNotEmpty()) {
+                    if (mValue_mrp.isNotEmpty() && mSparesQuantity.isNotEmpty()) {
 
                         val qty = mSparesQuantity.toDouble()
                         val mrp = mValue_mrp.toDouble()
@@ -801,7 +779,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
                         mSparesFinalPrice = (mValue - amount).toString()
                         tv_spares_finalprice.text = mSparesFinalPrice
                     }
-                }catch (e:Exception){
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
 

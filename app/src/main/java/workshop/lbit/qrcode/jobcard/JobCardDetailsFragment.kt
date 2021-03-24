@@ -16,8 +16,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.view.get
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import okhttp3.ResponseBody
 import org.json.JSONArray
@@ -157,14 +155,10 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
     internal var expandableButtonListener: ExpandableButton.ExpandableButtonListener? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         this.isVisibleToUser = isVisibleToUser
-        if (isVisibleToUser && isAdded()) {
+        if (isVisibleToUser && isAdded) {
             dict_data = JSONObject()
             val logindata = UserSession(requireContext()).getLoginDetails()
 
@@ -188,7 +182,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                 loadData()
 
             }
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -218,7 +212,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                 loadData()
 
             }
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -349,7 +343,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                             et_customer_pincode.setText(mCustomerPincode)
                         }
 
-                        if (mCustomerGSTIN.equals("null")) {
+                        if (!mCustomerGSTIN.equals("null")) {
                             et_customer_gstin.setText(mCustomerGSTIN)
                         }
 
@@ -382,7 +376,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                         }
 
                         if (!mCustomerCRN.equals("null")) {
-                            tv_customer_crn.setText(mCustomerCRN)
+                            tv_customer_crn.text = mCustomerCRN
                         }
 
                         if (!mCustomerPaymentType.equals("null") && mCustomerPaymentType.isNotEmpty()) {
@@ -980,6 +974,48 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                 }
             }
 
+        sp_customer_city.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    arg0: AdapterView<*>,
+                    view: View,
+                    arg2: Int,
+                    arg3: Long
+                ) {
+
+                    if (arg2 > 0) {
+                        mCustomerCity = sp_customer_city.selectedItem.toString()
+                    } else {
+                        mCustomerCity = ""
+                    }
+                }
+
+                override fun onNothingSelected(arg0: AdapterView<*>) {
+
+                }
+            }
+
+        sp_customer_state.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    arg0: AdapterView<*>,
+                    view: View,
+                    arg2: Int,
+                    arg3: Long
+                ) {
+
+                    if (arg2 > 0) {
+                        mCustomerState = sp_customer_state.selectedItem.toString()
+                    } else {
+                        mCustomerState = ""
+                    }
+                }
+
+                override fun onNothingSelected(arg0: AdapterView<*>) {
+
+                }
+            }
+
         sp_workshop_supervisor.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -1291,7 +1327,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_vehicle_reg.setText(builder)
+        tv_vehicle_reg.text = builder
 
     }
 
@@ -1308,7 +1344,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_vehicle_make.setText(builder);
+        tv_vehicle_make.text = builder
 
     }
 
@@ -1325,7 +1361,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_vehicle_model.setText(builder);
+        tv_vehicle_model.text = builder
 
     }
 
@@ -1342,7 +1378,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_vehicle_driver.setText(builder);
+        tv_vehicle_driver.text = builder
 
     }
 
@@ -1359,7 +1395,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_vehicle_driver_mobile.setText(builder);
+        tv_vehicle_driver_mobile.text = builder
 
     }
 
@@ -1376,7 +1412,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_customer_name.setText(builder)
+        tv_customer_name.text = builder
 
     }
 
@@ -1393,7 +1429,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_customer_mobile.setText(builder)
+        tv_customer_mobile.text = builder
 
     }
 
@@ -1410,7 +1446,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_customer_address.setText(builder)
+        tv_customer_address.text = builder
 
     }
 
@@ -1427,7 +1463,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_customer_paymentType.setText(builder)
+        tv_customer_paymentType.text = builder
 
     }
 
@@ -1444,7 +1480,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_customer_gst_applicable.setText(builder)
+        tv_customer_gst_applicable.text = builder
 
     }
 
@@ -1461,7 +1497,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_workshop_technician.setText(builder)
+        tv_workshop_technician.text = builder
 
     }
 
@@ -1478,7 +1514,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_workshop_supervisor.setText(builder)
+        tv_workshop_supervisor.text = builder
 
     }
 
@@ -1495,7 +1531,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_workshop_supervisor_mobile.setText(builder)
+        tv_workshop_supervisor_mobile.text = builder
 
     }
 

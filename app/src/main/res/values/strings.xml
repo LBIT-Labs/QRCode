@@ -33,6 +33,9 @@
     <string name="job_notes">Job Notes</string>
     <string name="add_service">Add Service</string>
     <string name="add_spare">Add Spare</string>
+    <string name="preview">Preview</string>
+    <string name="preview_invoice">Preview Invoice</string>
+    <string name="preview_text">Please review the Proforma before generating the Invoice</string>
 
     <!--Job Card Vehicle Details-->
     <string name="vehicle_reg">Registation Number</string>
@@ -126,6 +129,7 @@
     <string name="select">Select</string>
     <string name="no_data">No Data Found</string>
     <string name="confirm">Confirm</string>
+    <string name="proceed">Proceed</string>
     <string name="generate_estimate">Generate Estimate</string>
     <string name="edit">Edit</string>
     <string name="delet">Delete</string>

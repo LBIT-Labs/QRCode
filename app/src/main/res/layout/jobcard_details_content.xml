@@ -60,7 +60,7 @@
                 android:id="@+id/sp_vehicle_make"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp" />
+                android:padding="@dimen/_5sdp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -89,7 +89,7 @@
                 android:id="@+id/sp_vehicle_model"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp" />
+                android:padding="@dimen/_5sdp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -128,7 +128,7 @@
             android:background="@drawable/border_bg"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:padding="@dimen/_10sdp" />
+            android:padding="@dimen/_5sdp" />
 
     </LinearLayout>
 
@@ -155,7 +155,7 @@
             android:imeOptions="actionDone"
             android:inputType="number"
             android:maxLength="8"
-            android:padding="@dimen/_10sdp" />
+            android:padding="@dimen/_5sdp" />
 
     </LinearLayout>
 
@@ -183,7 +183,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/number_plat_colour_array"
-                android:padding="@dimen/_10sdp" />
+                android:padding="@dimen/_5sdp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -212,7 +212,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/mfg_array"
-                android:padding="@dimen/_10sdp" />
+                android:padding="@dimen/_5sdp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -239,7 +239,7 @@
             android:background="@drawable/border_bg"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:padding="@dimen/_10sdp" />
+            android:padding="@dimen/_5sdp" />
 
     </LinearLayout>
 
@@ -265,7 +265,7 @@
             android:background="@drawable/border_bg"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:padding="@dimen/_10sdp" />
+            android:padding="@dimen/_5sdp" />
 
     </LinearLayout>
 
@@ -293,7 +293,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/insurance_array"
-                android:padding="@dimen/_10sdp" />
+                android:padding="@dimen/_5sdp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -320,7 +320,7 @@
             android:background="@drawable/border_bg"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:padding="@dimen/_10sdp" />
+            android:padding="@dimen/_5sdp" />
 
     </LinearLayout>
 
@@ -347,7 +347,7 @@
             android:imeOptions="actionDone"
             android:inputType="number"
             android:maxLength="10"
-            android:padding="@dimen/_10sdp" />
+            android:padding="@dimen/_5sdp" />
 
     </LinearLayout>
 
@@ -374,7 +374,7 @@
             android:background="@drawable/border_bg"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:padding="@dimen/_10sdp" />
+            android:padding="@dimen/_5sdp" />
 
     </LinearLayout>
 
@@ -401,7 +401,7 @@
             android:imeOptions="actionDone"
             android:inputType="number"
             android:maxLength="10"
-            android:padding="@dimen/_10sdp" />
+            android:padding="@dimen/_5sdp" />
 
     </LinearLayout>
 
@@ -429,7 +429,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/insurance_array"
-                android:padding="@dimen/_10sdp" />
+                android:padding="@dimen/_5sdp" />
         </LinearLayout>
 
     </LinearLayout>

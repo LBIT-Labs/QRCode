@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
@@ -19,7 +18,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -33,15 +31,12 @@ import retrofit2.Callback
 import retrofit2.Response
 import workshop.lbit.qrcode.R
 import workshop.lbit.qrcode.Singleton.UserSession
-import workshop.lbit.qrcode.adapter.JobcardSparesDataAdapter
 import workshop.lbit.qrcode.adapter.VendorJobcardSparesDataAdapter
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
 import workshop.lbit.qrcode.data.JobcardData
 import workshop.lbit.qrcode.interfaces.JobCardListService
-import workshop.lbit.qrcode.ui.JobcardSparesSearchActivity
 import workshop.lbit.qrcode.utils.Constants
-import workshop.lbit.qrcode.utils.Utilities
 
 
 @SuppressLint("ValidFragment")
@@ -109,16 +104,12 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
     var mSparesTax: String = ""
     var mSparesHSN: String = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        this.isVisibleToUser = isVisibleToUser;
-        if (isVisibleToUser && isAdded()) {
+        this.isVisibleToUser = isVisibleToUser
+        if (isVisibleToUser && isAdded) {
             loadData()
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -126,7 +117,7 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
         super.onViewCreated(view, savedInstanceState)
         if (isVisibleToUser && (!isLoaded)) {
             loadData()
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -191,10 +182,10 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
 
             override fun onPageScrollStateChanged(state: Int) {
                 if (!scrollStarted && state == ViewPager.SCROLLBAR_POSITION_DEFAULT) {
-                    scrollStarted = true;
-                    checkDirection = true;
+                    scrollStarted = true
+                    checkDirection = true
                 } else {
-                    scrollStarted = false;
+                    scrollStarted = false
                 }
             }
 
@@ -233,7 +224,7 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
             }
 
             override fun onPageSelected(position: Int) {
-                mCurrentFragmentPosition = position;
+                mCurrentFragmentPosition = position
             }
 
         })
@@ -453,7 +444,7 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
         }
 
         if (mSparesFinalPrice.isNotEmpty()) {
-            tv_spares_finalprice.setText(mSparesFinalPrice)
+            tv_spares_finalprice.text = mSparesFinalPrice
         }
         if (!mSparesTax.equals("null") && mSparesTax.isNotEmpty()) {
             val list = resources.getStringArray(R.array.tax_array).asList()
@@ -481,21 +472,31 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
                     if (mSparesQuantity.isNotEmpty()) {
                         if (mSparesMrp.isNotEmpty()) {
                             if (mSparesHSN.isNotEmpty()) {
-                                if (mSparesTax.isNotEmpty()) {
-                                    if (mSparesDiscount.isNotEmpty()) {
-                                        if (status.isNotEmpty()) {
-                                            if (status.equals("edit")) {
-                                                SaveSpares(status, mSparePid)
+                                if ((mSparesHSN.length) > 4) {
+                                    if (mSparesTax.isNotEmpty()) {
+                                        if (mSparesDiscount.isNotEmpty()) {
+                                            if (status.isNotEmpty()) {
+                                                if (status.equals("edit")) {
+                                                    SaveSpares(status, mSparePid)
+                                                }
+                                            } else {
+                                                SaveSpares("", mSparePid)
+
                                             }
+
                                         } else {
-                                            SaveSpares("", mSparePid)
+                                            Toast.makeText(
+                                                requireContext(),
+                                                "Please Enter Discount",
+                                                Toast.LENGTH_LONG
+                                            ).show()
 
                                         }
 
                                     } else {
                                         Toast.makeText(
                                             requireContext(),
-                                            "Please Enter Discount",
+                                            "Please Enter Tax",
                                             Toast.LENGTH_LONG
                                         ).show()
 
@@ -504,7 +505,7 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
                                 } else {
                                     Toast.makeText(
                                         requireContext(),
-                                        "Please Enter Tax",
+                                        "HSN Value should be atleast 4 digits",
                                         Toast.LENGTH_LONG
                                     ).show()
 
@@ -566,7 +567,7 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_spares_discount_txt.setText(builder)
+        tv_spares_discount_txt.text = builder
 
     }
 
@@ -584,7 +585,7 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_spares_quantity_txt.setText(builder)
+        tv_spares_quantity_txt.text = builder
 
     }
 
@@ -602,7 +603,7 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_spares_OE_part_number_txt.setText(builder)
+        tv_spares_OE_part_number_txt.text = builder
 
     }
 
@@ -620,7 +621,7 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_spares_part_desc_txt.setText(builder)
+        tv_spares_part_desc_txt.text = builder
 
     }
 
@@ -638,7 +639,7 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_spares_mrp_txt.setText(builder)
+        tv_spares_mrp_txt.text = builder
 
     }
 
@@ -656,7 +657,7 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_spares_hsn_txt.setText(builder)
+        tv_spares_hsn_txt.text = builder
 
     }
 
@@ -674,7 +675,7 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_spares_tax_txt.setText(builder)
+        tv_spares_tax_txt.text = builder
 
     }
 
@@ -765,14 +766,7 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
                     mSparesHSN = mSparesHSN1
                 } else {
                     mSparesHSN = ""
-                    Toast.makeText(
-                        requireContext(),
-                        "Please enter atleast 4 digits",
-                        Toast.LENGTH_LONG
-                    ).show()
                 }
-
-
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}

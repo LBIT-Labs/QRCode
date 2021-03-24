@@ -47,41 +47,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:orientation="horizontal">
-
-            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:paddingLeft="@dimen/_20sdp"
-                android:text="@string/part_desc"
-                android:textColor="@color/qr_code_bg"
-                android:textSize="@dimen/_15sdp" />
-
-            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.1"
-                android:gravity="center"
-                android:text=":" />
-
-            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
-                android:id="@+id/tv_im_part_desc"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:paddingLeft="@dimen/_20sdp"
-                android:text=""
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_15sdp" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -109,6 +74,42 @@
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
                 android:id="@+id/tv_im_oe_part_desc"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="@dimen/_20sdp"
+                android:text="@string/part_desc"
+                android:textColor="@color/qr_code_bg"
+                android:textSize="@dimen/_15sdp" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:text=":" />
+
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
+                android:id="@+id/tv_im_part_desc"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

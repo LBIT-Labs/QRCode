@@ -5,15 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.viewpager.widget.PagerAdapter
 import workshop.lbit.qrcode.R
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
-import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
 import workshop.lbit.qrcode.data.JobcardData
-import workshop.lbit.qrcode.data.QrData
-import workshop.lbit.qrcode.interfaces.QrDataList
 
 
 class JobcardSummaryServicesDataAdapter(
@@ -30,6 +26,7 @@ class JobcardSummaryServicesDataAdapter(
     private lateinit var tv_service_discount: MyTextView_Roboto_Medium
     private lateinit var tv_service_finalprice: MyTextView_Roboto_Bold
     private lateinit var tv_service_jobid: MyTextView_Roboto_Bold
+    private lateinit var tv_service_technician: MyTextView_Roboto_Bold
 
 
     init {
@@ -47,7 +44,8 @@ class JobcardSummaryServicesDataAdapter(
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val itemView = layoutInflater.inflate(R.layout.jobcard_summary_service_data_row, container, false)
+        val itemView =
+            layoutInflater.inflate(R.layout.jobcard_summary_service_data_row, container, false)
 
         mJCData = mJobcardDataList[position]
 
@@ -57,12 +55,14 @@ class JobcardSummaryServicesDataAdapter(
         tv_service_discount = itemView.findViewById(R.id.tv_service_discount)
         tv_service_finalprice = itemView.findViewById(R.id.tv_service_finalPrice)
         tv_service_jobid = itemView.findViewById(R.id.tv_service_jobid)
+        tv_service_technician = itemView.findViewById(R.id.tv_service_technician)
 
         tv_service_service.text = mJCData.jc_service
         tv_service_cost.text = mJCData.jc_mrp
         tv_service_discount.text = mJCData.jc_dis
         tv_service_finalprice.text = mJCData.jc_final
         tv_service_jobid.text = mJCData.jc_job_id
+        tv_service_technician.text = mJCData.jc_live_tech
 
         container.addView(itemView)
 

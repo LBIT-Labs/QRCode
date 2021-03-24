@@ -5,14 +5,12 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.gson.Gson
@@ -23,10 +21,10 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import workshop.lbit.qrcode.MainActivity
 import workshop.lbit.qrcode.R
 import workshop.lbit.qrcode.Singleton.UserSession
-import workshop.lbit.qrcode.adapter.*
+import workshop.lbit.qrcode.adapter.VendorJobcardSummaryServicesDataAdapter
+import workshop.lbit.qrcode.adapter.VendorJobcardSummarySparesDataAdapter
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
@@ -92,16 +90,12 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
     private var mGPStatus: String = ""
     private var mGPAuthStatus: String = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        this.isVisibleToUser = isVisibleToUser;
-        if (isVisibleToUser && isAdded()) {
+        this.isVisibleToUser = isVisibleToUser
+        if (isVisibleToUser && isAdded) {
             loadData()
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -109,7 +103,7 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
         super.onViewCreated(view, savedInstanceState)
         if (isVisibleToUser && (!isLoaded)) {
             loadData()
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -138,19 +132,19 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
             e.printStackTrace()
         }
 
-        if(mGPStatus.isNotEmpty()){
+        if (mGPStatus.isNotEmpty()) {
             if (mGPStatus.equals("gatepass_generated")) {
 
-                if(mGPAuthStatus.equals("in")){
+                if (mGPAuthStatus.equals("in")) {
                     tv_generateEstimate.text = "Generate GatePass"
                     tv_generateEstimate.visibility = View.VISIBLE
 
-                }else{
+                } else {
                     tv_generateEstimate.visibility = View.INVISIBLE
 
                 }
             }
-        }else {
+        } else {
             tv_generateEstimate.visibility = View.VISIBLE
             tv_generateEstimate.text = "Generate GatePass"
 
@@ -209,10 +203,10 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
 
             override fun onPageScrollStateChanged(state: Int) {
                 if (!scrollStarted && state == ViewPager.SCROLLBAR_POSITION_DEFAULT) {
-                    scrollStarted = true;
-                    checkDirection = true;
+                    scrollStarted = true
+                    checkDirection = true
                 } else {
-                    scrollStarted = false;
+                    scrollStarted = false
                 }
             }
 
@@ -251,7 +245,7 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
             }
 
             override fun onPageSelected(position: Int) {
-                mCurrentFragmentPosition = position;
+                mCurrentFragmentPosition = position
             }
 
         })
@@ -260,10 +254,10 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
 
             override fun onPageScrollStateChanged(state: Int) {
                 if (!scrollStarted && state == ViewPager.SCROLLBAR_POSITION_DEFAULT) {
-                    scrollStarted = true;
-                    checkDirection = true;
+                    scrollStarted = true
+                    checkDirection = true
                 } else {
-                    scrollStarted = false;
+                    scrollStarted = false
                 }
             }
 
@@ -302,7 +296,7 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
             }
 
             override fun onPageSelected(position: Int) {
-                mCurrentFragmentPosition = position;
+                mCurrentFragmentPosition = position
             }
 
         })
@@ -467,8 +461,6 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
         } else if (i == R.id.tv_generateEstimate) {
 
             GenerateGatePass()
-
-
         }
 
     }
@@ -506,36 +498,34 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
                             Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(intent)
                     }
+                    mProgressDialog.dismiss()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
 
-                mProgressDialog.dismiss()
-            } catch (e: Exception)
-            {
-                e.printStackTrace()
             }
 
-        }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.e(
+                    "TAG",
+                    "onFailure() called with: call = [" + call.request()
+                        .url() + "], t = [" + t + "]",
+                    t
+                )
 
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-            Log.e(
-                "TAG",
-                "onFailure() called with: call = [" + call.request()
-                    .url() + "], t = [" + t + "]",
-                t
-            )
+                if (mProgressDialog.isShowing)
+                    mProgressDialog.dismiss()
+            }
+        })
 
-            if (mProgressDialog.isShowing)
-                mProgressDialog.dismiss()
-        }
-    })
-
-}
-
-companion object {
-
-    val TITLE = "Summary"
-
-    fun newInstance(): VendorJobcardSummaryFragment {
-        return VendorJobcardSummaryFragment()
     }
-}
+
+    companion object {
+
+        val TITLE = "Summary"
+
+        fun newInstance(): VendorJobcardSummaryFragment {
+            return VendorJobcardSummaryFragment()
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package workshop.lbit.qrcode.jobcard
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -26,7 +27,8 @@ import retrofit2.Response
 import workshop.lbit.qrcode.MainActivity
 import workshop.lbit.qrcode.R
 import workshop.lbit.qrcode.Singleton.UserSession
-import workshop.lbit.qrcode.adapter.*
+import workshop.lbit.qrcode.adapter.JobcardSummaryServicesDataAdapter
+import workshop.lbit.qrcode.adapter.JobcardSummarySparesDataAdapter
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
@@ -59,6 +61,8 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
     private var mJobCardServiceStatus: String = ""
     private var mTotalAmount: String = ""
     private var mCustomerMobile: String = ""
+    private var mInvoicePrevieURL: String = ""
+    private var mIsPreviewClicked: Boolean = false
     private lateinit var dict_data: JSONObject
     internal var mMobileNumber: String = ""
     private var sharedpreferences: SharedPreferences? = null
@@ -84,17 +88,14 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
     private val thresholdOffset = 0.5f
     private val thresholdOffsetPixels = 1
     private var mCurrentFragmentPosition = 0
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var mAlertDialog: AlertDialog
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        this.isVisibleToUser = isVisibleToUser;
-        if (isVisibleToUser && isAdded()) {
+        this.isVisibleToUser = isVisibleToUser
+        if (isVisibleToUser && isAdded) {
             loadData()
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -102,7 +103,7 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
         super.onViewCreated(view, savedInstanceState)
         if (isVisibleToUser && (!isLoaded)) {
             loadData()
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -137,10 +138,10 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
 
         } else if (mJobCardStatus.equals("Under Progress")) {
 
-            if(mJobCardServiceStatus.isNotEmpty() && mJobCardServiceStatus.equals("Start")){
+            if (mJobCardServiceStatus.isNotEmpty() && mJobCardServiceStatus.equals("Start")) {
                 tv_generateEstimate.text = "End Service"
 
-            }else if(mJobCardServiceStatus.isNotEmpty() && mJobCardServiceStatus.equals("End")){
+            } else if (mJobCardServiceStatus.isNotEmpty() && mJobCardServiceStatus.equals("End")) {
                 tv_generateEstimate.text = "Generate Invoice"
 
             }
@@ -198,10 +199,10 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
 
             override fun onPageScrollStateChanged(state: Int) {
                 if (!scrollStarted && state == ViewPager.SCROLLBAR_POSITION_DEFAULT) {
-                    scrollStarted = true;
-                    checkDirection = true;
+                    scrollStarted = true
+                    checkDirection = true
                 } else {
-                    scrollStarted = false;
+                    scrollStarted = false
                 }
             }
 
@@ -240,7 +241,7 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
             }
 
             override fun onPageSelected(position: Int) {
-                mCurrentFragmentPosition = position;
+                mCurrentFragmentPosition = position
             }
 
         })
@@ -249,10 +250,10 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
 
             override fun onPageScrollStateChanged(state: Int) {
                 if (!scrollStarted && state == ViewPager.SCROLLBAR_POSITION_DEFAULT) {
-                    scrollStarted = true;
-                    checkDirection = true;
+                    scrollStarted = true
+                    checkDirection = true
                 } else {
-                    scrollStarted = false;
+                    scrollStarted = false
                 }
             }
 
@@ -291,7 +292,7 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
             }
 
             override fun onPageSelected(position: Int) {
-                mCurrentFragmentPosition = position;
+                mCurrentFragmentPosition = position
             }
 
         })
@@ -322,6 +323,7 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
                         val sparejsonArray = jsonObject.getJSONArray("spare_details")
                         val servicejsonArray = jsonObject.getJSONArray("service_details")
                         mTotalAmount = jsonObject.getString("total_final")
+                        mInvoicePrevieURL = detailsjsonObject.getString("preview").toString()
 
 
                         val mCustomerName = detailsjsonObject.getString("customer").toString()
@@ -339,7 +341,7 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
                         tv_job_vehicleNumber.text = mvehicleReg
 
 
-                        if(sparejsonArray.length() > 0){
+                        if (sparejsonArray.length() > 0) {
                             val jobsdatalistSpares = gson!!.fromJson<ArrayList<JobcardData>>(
                                 sparejsonArray.toString(),
                                 object : TypeToken<ArrayList<JobcardData>>() {
@@ -355,11 +357,11 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
                                 tv_spare_size.text = "1 of " + mSparePageCount!!
                             }
 
-                        }else {
+                        } else {
                             ll_spares_added_details.visibility = View.GONE
                         }
 
-                        if(servicejsonArray.length() > 0 ){
+                        if (servicejsonArray.length() > 0) {
                             val jobsdatalistServices = gson!!.fromJson<ArrayList<JobcardData>>(
                                 servicejsonArray.toString(),
                                 object : TypeToken<ArrayList<JobcardData>>() {
@@ -379,7 +381,7 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
                             if (mServicePageCount!!.length > 0) {
                                 tv_service_size.text = "1 of " + mServicePageCount!!
                             }
-                        }else {
+                        } else {
                             ll_services_added_details.visibility = View.GONE
                         }
 
@@ -459,27 +461,78 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
 
         } else if (i == R.id.tv_generateEstimate) {
 
-            if(mJobCardStatus.isNotEmpty()){
+            if (mJobCardStatus.isNotEmpty()) {
                 if (mJobCardStatus.equals("Job Card")) {
                     GenerateEstimate("estimate")
                 } else if (mJobCardStatus.equals("Estimate")) {
                     GenerateEstimate("start")
                 } else if (mJobCardStatus.equals("Under Progress")) {
-                    if(mJobCardServiceStatus.isNotEmpty() && mJobCardServiceStatus.equals("Start")){
+                    if (mJobCardServiceStatus.isNotEmpty() && mJobCardServiceStatus.equals("Start")) {
                         GenerateEstimate("end")
 
-                    }else if(mJobCardServiceStatus.isNotEmpty() && mJobCardServiceStatus.equals("End")){
-                        GenerateEstimate("invoice")
-
+                    } else if (mJobCardServiceStatus.isNotEmpty() && mJobCardServiceStatus.equals("End")) {
+                        PreViewDialog()
                     }
                 }
-            }else {
+            } else {
                 GenerateEstimate("estimate")
 
             }
         }
 
     }
+
+    private fun PreViewDialog() {
+
+        val mDialogView = LayoutInflater.from(requireContext())
+            .inflate(R.layout.jobcard_invoice_preview_dialog, null)
+
+        val bt_submit =
+            mDialogView.findViewById(R.id.bt_submit) as MyTextView_Roboto_Bold
+        val bt_cancel =
+            mDialogView.findViewById(R.id.bt_cancel) as MyTextView_Roboto_Bold
+
+        val bt_preview =
+            mDialogView.findViewById(R.id.btn_preview) as MyTextView_Roboto_Bold
+
+        val mBuilder = AlertDialog.Builder(requireContext())
+            .setView(mDialogView)
+            .setTitle("")
+        mBuilder.setCancelable(false)
+        mAlertDialog = mBuilder.show()
+
+        bt_submit.setOnClickListener {
+
+            if (mIsPreviewClicked == true) {
+                mAlertDialog.dismiss()
+                GenerateEstimate("invoice")
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Please preview proforma before Generating the Invoice",
+                    Toast.LENGTH_LONG
+                ).show()
+
+            }
+        }
+
+        bt_preview.setOnClickListener {
+
+
+            mIsPreviewClicked = true
+
+            if (mInvoicePrevieURL.isNotEmpty()) {
+                val pdf_url = mInvoicePrevieURL
+
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(pdf_url))
+                startActivity(browserIntent)
+            }
+        }
+        bt_cancel.setOnClickListener {
+            mAlertDialog.dismiss()
+        }
+    }
+
 
     private fun GenerateEstimate(status: String) {
         val mProgressDialog = ProgressDialog(requireContext())
@@ -518,10 +571,18 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
 
                         if (mStatus.isNotEmpty()) {
 
-                            if(mStatus.equals("Service Started succefully")){
-                                Toast.makeText(requireContext(),"Service Stared succefully",Toast.LENGTH_LONG).show()
-                            }else if(mStatus.equals("Service ended succefully")){
-                                Toast.makeText(requireContext(),"Service ended succefully",Toast.LENGTH_LONG).show()
+                            if (mStatus.equals("Service Started succefully")) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Service Stared succefully",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            } else if (mStatus.equals("Service ended succefully")) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Service ended succefully",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
 
                             dict_data.put("JobCardCustID", "")
@@ -532,11 +593,11 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
                             UserSession(requireContext()).setLoginDetails(dict_data.toString())
 
                             val intent = Intent(requireContext(), MainActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                             startActivity(intent)
                         }
                     }
-
                     mProgressDialog.dismiss()
                 } catch (e: Exception) {
                     e.printStackTrace()

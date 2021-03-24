@@ -32,7 +32,7 @@
                 android:id="@+id/sp_workshop_technician"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp"
+                android:padding="@dimen/_5sdp"
                 android:entries="@array/technician_array"/>
         </LinearLayout>
     </LinearLayout>
@@ -61,7 +61,7 @@
                 android:id="@+id/sp_workshop_supervisor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp"
+                android:padding="@dimen/_5sdp"
                 android:entries="@array/supervisor_array"/>
         </LinearLayout>
 
@@ -90,7 +90,7 @@
             android:imeOptions="actionDone"
             android:inputType="number"
             android:maxLength="10"
-            android:padding="@dimen/_10sdp" />
+            android:padding="@dimen/_5sdp" />
     </LinearLayout>
 
 

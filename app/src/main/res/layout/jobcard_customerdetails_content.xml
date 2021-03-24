@@ -29,7 +29,7 @@
             android:background="@drawable/border_bg"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:padding="@dimen/_10sdp" />
+            android:padding="@dimen/_5sdp" />
     </LinearLayout>
 
     <LinearLayout
@@ -55,7 +55,7 @@
             android:imeOptions="actionDone"
             android:inputType="number"
             android:maxLength="10"
-            android:padding="@dimen/_10sdp" />
+            android:padding="@dimen/_5sdp" />
 
     </LinearLayout>
 
@@ -80,7 +80,7 @@
             android:background="@drawable/border_bg"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:padding="@dimen/_10sdp" />
+            android:padding="@dimen/_5sdp" />
     </LinearLayout>
 
     <LinearLayout
@@ -105,7 +105,7 @@
             android:background="@drawable/border_bg"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:padding="@dimen/_10sdp" />
+            android:padding="@dimen/_5sdp" />
 
     </LinearLayout>
 
@@ -186,7 +186,7 @@
             android:imeOptions="actionDone"
             android:inputType="number"
             android:maxLength="6"
-            android:padding="@dimen/_10sdp" />
+            android:padding="@dimen/_5sdp" />
 
 
     </LinearLayout>
@@ -211,7 +211,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/border_bg"
-            android:padding="@dimen/_10sdp"
+            android:padding="@dimen/_5sdp"
             android:textSize="@dimen/_15sdp" />
 
     </LinearLayout>
@@ -242,7 +242,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/payment_type_array"
-                android:padding="@dimen/_10sdp" />
+                android:padding="@dimen/_5sdp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -271,7 +271,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/gst_array"
-                android:padding="@dimen/_10sdp" />
+                android:padding="@dimen/_5sdp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -300,7 +300,8 @@
             android:imeOptions="actionDone"
             android:inputType="text"
             android:maxLength="15"
-            android:padding="@dimen/_10sdp" />
+            android:hint="Enter 15 digit GST here"
+            android:padding="@dimen/_5sdp" />
 
     </LinearLayout>
 </LinearLayout>

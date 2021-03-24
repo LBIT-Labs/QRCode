@@ -144,6 +144,10 @@ class JobcardData {
     @Expose
     var jc_live_invdate: String? = null
 
+    @SerializedName("tech")
+    @Expose
+    var jc_live_tech: String? = null
+
 
     @SerializedName("jobcard_date")
     @Expose
@@ -190,7 +194,7 @@ class JobcardData {
     var jc_live_gatepass_in_out_status: String? = null
 
 
-    constructor() {}
+    constructor()
     constructor(
 
         jc_nid: String?,
@@ -237,7 +241,8 @@ class JobcardData {
         jc_live_gatepass_no: String?,
         jc_live_gatepass_date: String?,
         jc_live_gatepass_status: String?,
-        jc_live_gatepass_in_out_status: String?
+        jc_live_gatepass_in_out_status: String?,
+        jc_live_tech: String?
 
     ) : super() {
 
@@ -286,5 +291,6 @@ class JobcardData {
         this.jc_live_gatepass_date = jc_live_gatepass_date
         this.jc_live_gatepass_status = jc_live_gatepass_status
         this.jc_live_gatepass_in_out_status = jc_live_gatepass_in_out_status
+        this.jc_live_tech = jc_live_tech
     }
 }

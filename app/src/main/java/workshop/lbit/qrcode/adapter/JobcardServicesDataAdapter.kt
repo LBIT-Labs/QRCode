@@ -5,14 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.viewpager.widget.PagerAdapter
 import workshop.lbit.qrcode.R
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
 import workshop.lbit.qrcode.data.JobcardData
 import workshop.lbit.qrcode.interfaces.JobCardListService
-import workshop.lbit.qrcode.jobcard.JobCardServiceFragment
 
 
 class JobcardServicesDataAdapter(
@@ -31,6 +29,7 @@ class JobcardServicesDataAdapter(
     lateinit var tv_discount: MyTextView_Roboto_Medium
     lateinit var tv_finalPrice: MyTextView_Roboto_Medium
     lateinit var tv_jobid: MyTextView_Roboto_Medium
+    lateinit var tv_technicianName: MyTextView_Roboto_Medium
     lateinit var tv_edit: MyTextView_Roboto_Regular
     lateinit var tv_delete: MyTextView_Roboto_Regular
 
@@ -60,24 +59,26 @@ class JobcardServicesDataAdapter(
         tv_edit = itemView.findViewById(R.id.tv_edit)
         tv_delete = itemView.findViewById(R.id.tv_delete)
         tv_jobid = itemView.findViewById(R.id.tv_jobid)
+        tv_technicianName = itemView.findViewById(R.id.tv_technicianName)
 
         tv_service.text = mJCData.jc_service_type
         tv_cost.text = mJCData.jc_service_mrp
         tv_discount.text = mJCData.jc_discount
         tv_finalPrice.text = mJCData.jc_final
         tv_jobid.text = mJCData.jc_job_id
+        tv_technicianName.text = mJCData.jc_live_tech
 
         container.addView(itemView)
 
 
         tv_edit.setOnClickListener {
             mJCData = mJobsList[position]
-            listener.onNavigate(mJCData, position,"edit")
+            listener.onNavigate(mJCData, position, "edit")
         }
 
         tv_delete.setOnClickListener {
             mJCData = mJobsList[position]
-            listener.onNavigate(mJCData, position,"delete")
+            listener.onNavigate(mJCData, position, "delete")
         }
         return itemView
     }

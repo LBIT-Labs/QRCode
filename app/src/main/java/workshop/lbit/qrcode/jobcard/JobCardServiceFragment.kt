@@ -53,9 +53,11 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
     lateinit var tv_service_finalprice: MyTextView_Roboto_Medium
     lateinit var tv_service_discount_txt: MyTextView_Roboto_Bold
     lateinit var tv_service_jobid_txt: MyTextView_Roboto_Bold
+    lateinit var tv_service_technician_txt: MyTextView_Roboto_Bold
     lateinit var tv_service_cost_txt: MyTextView_Roboto_Bold
     lateinit var tv_service_service_txt: MyTextView_Roboto_Bold
     lateinit var sp_service_jobid: Spinner
+    lateinit var sp_service_tech: Spinner
     lateinit var et_services_cost: EditText
     lateinit var et_services_discount: EditText
     private var vp_pager: ViewPager? = null
@@ -78,6 +80,7 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
     private var mServiceService = ""
     private var mServiceFinalPrice = ""
     private var mServiceJobid = ""
+    private var mServiceTech = ""
 
 
     private var mPageCount: String? = null
@@ -91,16 +94,12 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
     private var jobsList = java.util.ArrayList<String>()
     private var servicesDataList = java.util.ArrayList<JobcardData>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        this.isVisibleToUser = isVisibleToUser;
-        if (isVisibleToUser && isAdded()) {
+        this.isVisibleToUser = isVisibleToUser
+        if (isVisibleToUser && isAdded) {
             loadData()
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -108,7 +107,7 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
         super.onViewCreated(view, savedInstanceState)
         if (isVisibleToUser && (!isLoaded)) {
             loadData()
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -164,10 +163,10 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
 
             override fun onPageScrollStateChanged(state: Int) {
                 if (!scrollStarted && state == ViewPager.SCROLLBAR_POSITION_DEFAULT) {
-                    scrollStarted = true;
-                    checkDirection = true;
+                    scrollStarted = true
+                    checkDirection = true
                 } else {
-                    scrollStarted = false;
+                    scrollStarted = false
                 }
             }
 
@@ -206,7 +205,7 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
             }
 
             override fun onPageSelected(position: Int) {
-                mCurrentFragmentPosition = position;
+                mCurrentFragmentPosition = position
             }
 
         })
@@ -262,15 +261,17 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
         et_services_discount = mDialogView.findViewById(R.id.et_services_discount)
         tv_service_finalprice = mDialogView.findViewById(R.id.tv_service_finalprice)
         sp_service_jobid = mDialogView.findViewById(R.id.sp_service_jobid)
+        sp_service_tech = mDialogView.findViewById(R.id.sp_service_tech)
 
         tv_service_service_txt = mDialogView.findViewById(R.id.tv_service_service_txt)
         tv_service_cost_txt = mDialogView.findViewById(R.id.tv_service_cost_txt)
-        tv_service_discount_txt = mDialogView.findViewById(R.id.tv_service_discount_txt)
+//        tv_service_discount_txt = mDialogView.findViewById(R.id.tv_service_discount_txt)
         tv_service_jobid_txt = mDialogView.findViewById(R.id.tv_service_jobid_txt)
+        tv_service_technician_txt = mDialogView.findViewById(R.id.tv_service_technician_txt)
 
         MandatoryService(resources.getString(R.string.select_service))
         MandatoryCost(resources.getString(R.string.cost))
-        MandatoryDiscount(resources.getString(R.string.discount1))
+        MandatoryTech(resources.getString(R.string.technician_name))
         MandatoryJobId(resources.getString(R.string.job_id))
 
 
@@ -284,7 +285,7 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
             et_services_discount.setText(mServiceDiscount)
         }
         if (mServiceFinalPrice.isNotEmpty()) {
-            tv_service_finalprice.setText(mServiceFinalPrice)
+            tv_service_finalprice.text = mServiceFinalPrice
         }
         if (mServiceHours.isNotEmpty()) {
             et_services_hours.setText(mServiceHours)
@@ -298,6 +299,8 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
 
         getJObID()
 
+        setTech()
+
         getValues()
 
         bt_submit.setOnClickListener {
@@ -309,15 +312,24 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
 
                         if (mServiceJobid.isNotEmpty()) {
 
-                            if (status.isNotEmpty()) {
-                                if (status.equals("edit")) {
-                                    SaveService(status, mServicePid)
+                            if (mServiceTech.isNotEmpty()) {
+
+                                if (status.isNotEmpty()) {
+                                    if (status.equals("edit")) {
+                                        SaveService(status, mServicePid)
+                                    }
+                                } else {
+                                    SaveService("", "")
+
                                 }
+
                             } else {
-                                SaveService("", "")
-
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Please Select Technician",
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
-
                         } else {
                             Toast.makeText(
                                 requireContext(),
@@ -339,6 +351,21 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
         }
         bt_cancel.setOnClickListener {
             mAlertDialog.dismiss()
+        }
+
+    }
+
+    private fun setTech() {
+        if (mServiceTech.isNotEmpty()) {
+            val list = resources.getStringArray(R.array.technician_array).asList()
+            if (list.indexOf(mServiceTech) > -1) {
+                sp_service_tech.setSelection(
+                    list.indexOf(
+                        mServiceTech
+                    )
+                )
+
+            }
         }
 
     }
@@ -420,7 +447,7 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_service_jobid_txt.setText(builder)
+        tv_service_jobid_txt.text = builder
     }
 
     private fun MandatoryService(string: String) {
@@ -437,7 +464,7 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_service_service_txt.setText(builder)
+        tv_service_service_txt.text = builder
     }
 
     private fun MandatoryCost(string: String) {
@@ -454,10 +481,10 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_service_cost_txt.setText(builder)
+        tv_service_cost_txt.text = builder
     }
 
-    private fun MandatoryDiscount(string: String) {
+    private fun MandatoryTech(string: String) {
         val colored = " *"
         val builder = SpannableStringBuilder()
 
@@ -470,7 +497,7 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_service_discount_txt.setText(builder)
+        tv_service_technician_txt.text = builder
     }
 
     private fun SaveService(editType: String, pid: String) {
@@ -617,6 +644,27 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
                 }
             }
 
+        sp_service_tech.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    arg0: AdapterView<*>,
+                    view: View,
+                    arg2: Int,
+                    arg3: Long
+                ) {
+
+                    if (arg2 > 0) {
+                        mServiceTech = sp_service_tech.selectedItem.toString()
+                    } else {
+                        mServiceTech = ""
+                    }
+                }
+
+                override fun onNothingSelected(arg0: AdapterView<*>) {
+
+                }
+            }
+
         et_services_service.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
                 mServiceService = editable.toString().trim()
@@ -648,6 +696,9 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
                     val amount = mServiceCost.toLong() * mServiceDiscount.toLong() / 100
                     mServiceFinalPrice = (mServiceCost.toLong() - amount).toString()
                     tv_service_finalprice.text = mServiceFinalPrice
+                } else {
+                    tv_service_finalprice.text = mServiceCost
+
                 }
             }
 
@@ -757,6 +808,7 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
         mServiceHours = mJCData.jc_hours!!
         mServicePid = mJCData.jc_pid!!
         mServiceJobid = mJCData.jc_job_id!!
+        mServiceTech = mJCData.jc_live_tech!!
 
         if (status.equals("edit")) {
             AddJobsDialog(status)
@@ -795,11 +847,7 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
 
     fun getMandatoryTab(): Boolean {
 
-        if(servicesDataList.size > 0){
-            return true
-        }else {
-           return false
-        }
+        return servicesDataList.size > 0
     }
 
 }

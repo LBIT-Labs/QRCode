@@ -19,7 +19,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -68,7 +67,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
     lateinit var tv_spares_part_desc: MyTextView_Roboto_Medium
     lateinit var tv_spares_finalprice: MyTextView_Roboto_Medium
     lateinit var tv_spares_mrp: MyTextView_Roboto_Medium
-    lateinit var tv_spares_discount_txt: MyTextView_Roboto_Bold
+    lateinit var tv_spares_quantity_txt: MyTextView_Roboto_Bold
     lateinit var tv_spares_jobid_txt: MyTextView_Roboto_Bold
     lateinit var sp_spares_jobid: Spinner
 
@@ -107,16 +106,12 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
     private var jobsList = java.util.ArrayList<String>()
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        this.isVisibleToUser = isVisibleToUser;
-        if (isVisibleToUser && isAdded()) {
+        this.isVisibleToUser = isVisibleToUser
+        if (isVisibleToUser && isAdded) {
             loadData()
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -124,7 +119,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
         super.onViewCreated(view, savedInstanceState)
         if (isVisibleToUser && (!isLoaded)) {
             loadData()
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -187,10 +182,10 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
 
             override fun onPageScrollStateChanged(state: Int) {
                 if (!scrollStarted && state == ViewPager.SCROLLBAR_POSITION_DEFAULT) {
-                    scrollStarted = true;
-                    checkDirection = true;
+                    scrollStarted = true
+                    checkDirection = true
                 } else {
-                    scrollStarted = false;
+                    scrollStarted = false
                 }
             }
 
@@ -229,7 +224,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
             }
 
             override fun onPageSelected(position: Int) {
-                mCurrentFragmentPosition = position;
+                mCurrentFragmentPosition = position
             }
 
         })
@@ -397,32 +392,32 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
         tv_spares_finalprice = mDialogView.findViewById(R.id.tv_spares_finalprice)
         tv_spares_mrp = mDialogView.findViewById(R.id.tv_spares_mrp)
 
-        tv_spares_discount_txt = mDialogView.findViewById(R.id.tv_spares_discount_txt)
+        tv_spares_quantity_txt = mDialogView.findViewById(R.id.tv_spares_quantity_txt)
         tv_spares_jobid_txt = mDialogView.findViewById(R.id.tv_spares_jobid_txt)
         sp_spares_jobid = mDialogView.findViewById(R.id.sp_spares_jobid)
 
-        MandatoryDiscount(resources.getString(R.string.discount1))
+        MandatoryQuantity(resources.getString(R.string.qr_quantity))
         MandatoryJobid(resources.getString(R.string.job_id))
 
 
         if (mSparesOePart.isNotEmpty()) {
-            tv_spares_OE_part_number.setText(mSparesOePart)
+            tv_spares_OE_part_number.text = mSparesOePart
         }
         if (mSparesOePartDesc.isNotEmpty()) {
-            tv_spares_part_desc.setText(mSparesOePartDesc)
+            tv_spares_part_desc.text = mSparesOePartDesc
         }
         if (mSparesQuantity.isNotEmpty()) {
             et_spares_quantity.setText(mSparesQuantity)
         }
         if (mSparesMrp.isNotEmpty()) {
-            tv_spares_mrp.setText(mSparesMrp)
+            tv_spares_mrp.text = mSparesMrp
         }
         if (mSparesDiscount.isNotEmpty()) {
             et_spares_discount.setText(mSparesDiscount)
         }
 
         if (mSparesFinalPrice.isNotEmpty()) {
-            tv_spares_finalprice.setText(mSparesFinalPrice)
+            tv_spares_finalprice.text = mSparesFinalPrice
         }
         val mBuilder = AlertDialog.Builder(requireContext())
             .setView(mDialogView)
@@ -471,7 +466,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
 
     }
 
-    private fun MandatoryDiscount(string: String) {
+    private fun MandatoryQuantity(string: String) {
 
         val colored = " *"
         val builder = SpannableStringBuilder()
@@ -485,7 +480,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_spares_discount_txt.setText(builder)
+        tv_spares_quantity_txt.text = builder
 
     }
 
@@ -503,7 +498,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_spares_jobid_txt.setText(builder)
+        tv_spares_jobid_txt.text = builder
 
     }
 

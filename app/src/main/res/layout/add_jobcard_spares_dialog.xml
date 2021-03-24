@@ -100,6 +100,7 @@
                         android:orientation="vertical">
 
                         <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                            android:id="@+id/tv_spares_quantity_txt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/qr_quantity"
