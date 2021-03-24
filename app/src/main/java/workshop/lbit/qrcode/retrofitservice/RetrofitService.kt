@@ -2,7 +2,10 @@ package workshop.lbit.qrcode.retrofitservice
 
 import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.POST
 
 /**
  * Created by SUJITH on 19/10/2019
@@ -125,7 +128,8 @@ interface retrofit_qrcode {
         @Field("final") final: String,
         @Field("pid") pid: String,
         @Field("edit_type") editType: String,
-        @Field("job_id") job_id: String
+        @Field("job_id") job_id: String,
+        @Field("tech") tech: String
     ): Call<ResponseBody>
 
     @FormUrlEncoded

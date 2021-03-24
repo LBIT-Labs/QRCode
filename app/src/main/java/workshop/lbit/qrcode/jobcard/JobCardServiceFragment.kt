@@ -516,7 +516,8 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
             mServiceFinalPrice,
             pid,
             editType,
-            mServiceJobid
+            mServiceJobid,
+            mServiceTech
         )
             .enqueue(object :
                 Callback<ResponseBody> {
@@ -577,7 +578,8 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
             mServiceFinalPrice,
             pid,
             editType,
-            mServiceJobid
+            mServiceJobid,
+            mServiceTech
         )
             .enqueue(object :
                 Callback<ResponseBody> {
