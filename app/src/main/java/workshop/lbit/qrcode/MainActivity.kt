@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var tvheadername: MyTextView_Roboto_Regular? = null
     private var tvheaderMobile: MyTextView_Roboto_Regular? = null
     private var mMobileNumber: String = ""
+    private lateinit var dict_data: JSONObject
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val logindata = UserSession(this@MainActivity).getLoginDetails()
 
-        var dict_data = JSONObject()
+        dict_data = JSONObject()
         try {
             dict_data = JSONObject(logindata)
             mRole = dict_data.optString("role")
@@ -89,10 +90,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         )
         drawer!!.addDrawerListener(toggle)
         toggle.syncState()
-        supportActionBar!!.setTitle("")
+        supportActionBar!!.title = ""
 
-        navigationView = findViewById(R.id.nav_view) as NavigationView
-        toolbar_title = findViewById(R.id.toolbar_title) as TextView
+        navigationView = findViewById<NavigationView>(R.id.nav_view)
+        toolbar_title = findViewById<TextView>(R.id.toolbar_title)
         val headerview = navigationView!!.getHeaderView(0)
         val nav_Menu = navigationView!!.menu
         llProfileLayout = headerview.findViewById(R.id.llProfileLayout)
@@ -228,6 +229,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Logout()
         } else if (id == R.id.nav_Jobcard) {
 
+            dict_data.put("Screen", "New")
+            dict_data.put("JobCardCustID", "")
+            dict_data.put("CustomerMobile", "")
+            dict_data.put("status", "")
+            dict_data.put("service_status", "")
+            dict_data.put("screenType", "")
+            dict_data.put("CustomerName", "")
+            dict_data.put("RegNo", "")
+            dict_data.put("Make", "")
+            dict_data.put("Model", "")
+            UserSession(this@MainActivity).setLoginDetails(dict_data.toString())
+
             val i = Intent(this@MainActivity, JobCardFormActivity::class.java)
             startActivity(i)
             overridePendingTransition(R.anim.move_left_enter, R.anim.move_left_exit)
@@ -242,9 +255,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             overridePendingTransition(R.anim.move_left_enter, R.anim.move_left_exit)
             finish()
         } else if (id == R.id.nav_serviceHistory) {
-            Toast.makeText(this, "notifications", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "notifications", Toast.LENGTH_LONG).show()
 
         } else if (id == R.id.nav_vendorService) {
+
+            dict_data.put("VendorJobCardCustID", "")
+            dict_data.put("Vendor", "")
+            dict_data.put("VendorJobCardID", "")
+            dict_data.put("gatepass_status", "")
+            dict_data.put("gatepass_auth_status", "")
+            dict_data.put("CustomerName", "")
+            dict_data.put("CustomerMobile", "")
+            dict_data.put("RegNo", "")
+            dict_data.put("Screen", "New")
+            UserSession(this@MainActivity).setLoginDetails(dict_data.toString())
+
             val i = Intent(this@MainActivity, VendorJobcardActivity::class.java)
             startActivity(i)
             overridePendingTransition(R.anim.move_left_enter, R.anim.move_left_exit)

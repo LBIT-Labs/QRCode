@@ -5,15 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.viewpager.widget.PagerAdapter
 import workshop.lbit.qrcode.R
-import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
-import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
 import workshop.lbit.qrcode.data.JobcardData
-import workshop.lbit.qrcode.data.QrData
-import workshop.lbit.qrcode.interfaces.QrDataList
 
 
 class VendorJobcardSummaryServicesDataAdapter(
@@ -28,7 +23,7 @@ class VendorJobcardSummaryServicesDataAdapter(
     private lateinit var tv_service_service: MyTextView_Roboto_Medium
     private lateinit var tv_service_cost: MyTextView_Roboto_Medium
     private lateinit var tv_service_discount: MyTextView_Roboto_Medium
-    private lateinit var tv_service_finalprice: MyTextView_Roboto_Bold
+    private lateinit var tv_service_finalprice: MyTextView_Roboto_Medium
 
 
     init {

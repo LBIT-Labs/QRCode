@@ -34,7 +34,6 @@ import workshop.lbit.qrcode.adapter.LiveJobcardLiveRecordsDataAdapter
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
 import workshop.lbit.qrcode.data.JobcardData
 import workshop.lbit.qrcode.interfaces.JobCardList
-import workshop.lbit.qrcode.interfaces.JobCardListService
 import workshop.lbit.qrcode.ui.JobCardFormActivity
 import workshop.lbit.qrcode.utils.Constants
 
@@ -65,19 +64,15 @@ class LiveJobCardLiveRecordsFragment : Fragment(), View.OnClickListener, JobCard
     private val thresholdOffsetPixels = 1
     private var mCurrentFragmentPosition = 0
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        super.setUserVisibleHint(isVisibleToUser);
-        this.isVisibleToUser = isVisibleToUser;
-        if (isVisibleToUser && isAdded()) {
+        super.setUserVisibleHint(isVisibleToUser)
+        this.isVisibleToUser = isVisibleToUser
+        if (isVisibleToUser && isAdded) {
             et_search.setText("")
 
             loadData("")
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -88,7 +83,7 @@ class LiveJobCardLiveRecordsFragment : Fragment(), View.OnClickListener, JobCard
             et_search.setText("")
 
             loadData("")
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -131,7 +126,7 @@ class LiveJobCardLiveRecordsFragment : Fragment(), View.OnClickListener, JobCard
 
         }
 
-        et_search!!.addTextChangedListener(object : TextWatcher {
+        et_search.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
                 val text = editable.toString().trim()
 
@@ -172,10 +167,10 @@ class LiveJobCardLiveRecordsFragment : Fragment(), View.OnClickListener, JobCard
 
             override fun onPageScrollStateChanged(state: Int) {
                 if (!scrollStarted && state == ViewPager.SCROLLBAR_POSITION_DEFAULT) {
-                    scrollStarted = true;
-                    checkDirection = true;
+                    scrollStarted = true
+                    checkDirection = true
                 } else {
-                    scrollStarted = false;
+                    scrollStarted = false
                 }
             }
 
@@ -211,7 +206,7 @@ class LiveJobCardLiveRecordsFragment : Fragment(), View.OnClickListener, JobCard
             }
 
             override fun onPageSelected(position: Int) {
-                mCurrentFragmentPosition = position;
+                mCurrentFragmentPosition = position
             }
 
         })
@@ -294,7 +289,7 @@ class LiveJobCardLiveRecordsFragment : Fragment(), View.OnClickListener, JobCard
 
             Log.e("TAG", "onClick_Previous: " + vp_pager!!.currentItem)
             val mPrev = (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
-            tv_size!!.text = mPrev
+            tv_size.text = mPrev
 
 
         } else if (i == R.id.tvnext) {
@@ -302,7 +297,7 @@ class LiveJobCardLiveRecordsFragment : Fragment(), View.OnClickListener, JobCard
             vp_pager!!.setCurrentItem(getItemofviewpager(+1), true)
             Log.e("TAG", "onClick_Next: " + vp_pager!!.currentItem + 1)
             val mNext = (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
-            tv_size!!.text = mNext
+            tv_size.text = mNext
 
         }
     }
@@ -319,16 +314,22 @@ class LiveJobCardLiveRecordsFragment : Fragment(), View.OnClickListener, JobCard
 
     override fun onNavigate(mJCData: JobcardData, position: Int) {
 
-        if(mJCData.jc_live_jobcard_status!!.isNotEmpty() && !mJCData.jc_live_jobcard_status.equals("Invoiced")){
+        if(mJCData.jc_live_jobcard_status!!.isNotEmpty() && !mJCData.jc_live_jobcard_status.equals("Invoiced")) {
 
             dict_data.put("CustomerMobile", mJCData.jc_live_mobile)
             dict_data.put("JobCardCustID", mJCData.jc_nid)
             dict_data.put("status", mJCData.jc_live_jobcard_status)
             dict_data.put("service_status", mJCData.jc_live_service_status)
             dict_data.put("screenType", "LiveJobcard")
+            dict_data.put("CustomerName", mJCData.jc_live_customer)
+            dict_data.put("RegNo", mJCData.jc_live_reg)
+            dict_data.put("Make", mJCData.jc_live_make)
+            dict_data.put("Model", mJCData.jc_live_model)
+            dict_data.put("Screen", "Live")
             UserSession(requireContext()).setLoginDetails(dict_data.toString())
 
             val intent = Intent(requireContext(), JobCardFormActivity::class.java)
+            intent.putExtra("TAG", "4")
             startActivity(intent)
         }
 

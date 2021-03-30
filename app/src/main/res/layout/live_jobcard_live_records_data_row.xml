@@ -124,7 +124,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
@@ -162,7 +161,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
@@ -200,7 +198,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
@@ -239,7 +236,6 @@
             android:id="@+id/ll_live_invoiceNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
@@ -278,7 +274,6 @@
             android:id="@+id/ll_live_invoiceDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
@@ -317,7 +312,6 @@
             android:id="@+id/ll_live_invoiceAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
@@ -355,7 +349,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
@@ -394,7 +387,6 @@
             android:id="@+id/ll_live_estimateView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
@@ -433,7 +425,6 @@
             android:id="@+id/ll_live_invoiceView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium

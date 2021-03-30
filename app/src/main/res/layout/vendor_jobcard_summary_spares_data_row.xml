@@ -148,7 +148,7 @@
                 android:textColor="@color/qr_code_bg"
                 android:textSize="@dimen/_15sdp" />
 
-            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
                 android:id="@+id/tv_spare_mrp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

@@ -95,7 +95,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
     private var mSparesMrp = ""
     var mSparesDiscount: String = ""
     var mSparesQuantity: String = ""
-    var mSparesQuantityLatest: String = ""
+    var mSparesQuantityLatest: String = "0"
     var mSparesTotalQuantity: String = ""
     var mSparesFinalPrice: String = ""
     var mSparesPartGRN: String = ""
@@ -343,13 +343,69 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
         mSparesJobId = mJCData.jc_job_id!!
 
         if (status.equals("edit")) {
-            AddSparesDialog(status)
+
+            getPartDetails(mSparesOePart, mSparesOePartDesc, status)
 
         } else if (status.equals("delete")) {
 
             DeleteSpareDialog()
         }
     }
+
+    private fun getPartDetails(partNumber: String, mSparesOePartDesc: String, status: String) {
+        val mProgressDialog = ProgressDialog(requireContext())
+        mProgressDialog.isIndeterminate = true
+        mProgressDialog.setMessage("Loading...")
+        mProgressDialog.show()
+        Constants.qrCode_uat.GetSpareDetailsList(
+            mMobileNumber.toString(),
+            partNumber,
+            mSparesOePartDesc
+        )
+            .enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+
+                    try {
+
+                        val string = response.body()!!.string()
+                        Log.e("TAG", "DashBoard " + string)
+
+
+                        if (!string.equals("{}")) {
+                            val jsonObject = JSONObject(string)
+                            mSparesTotalQuantity = jsonObject.getString("available_qty").toString()
+                            AddSparesDialog(status)
+
+                        }
+
+                        if (mProgressDialog.isShowing)
+                            mProgressDialog.dismiss()
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                    mProgressDialog.dismiss()
+
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.e(
+                        "TAG",
+                        "onFailure() called with: call = [" + call.request()
+                            .url() + "], t = [" + t + "]", t
+                    )
+
+                    if (mProgressDialog.isShowing)
+                        mProgressDialog.dismiss()
+                }
+            })
+
+
+    }
+
 
     private fun DeleteSpareDialog() {
 
@@ -435,21 +491,23 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
             if (mSparesDiscount.isNotEmpty()) {
 
                 if (mSparesJobId.isNotEmpty()) {
+                    val mQuantity = mSparesQuantity.toInt() + mSparesTotalQuantity.toInt()
 
-                    if (mSparesQuantityLatest > mSparesTotalQuantity) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Quantity should not be greater than Available Quantity",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    } else {
-                        if (status.isNotEmpty()) {
-                            if (status.equals("edit")) {
-                                SaveSpares(status, mSparePid)
+                    if (mSparesQuantityLatest.isNotEmpty()) {
+                        if (mSparesQuantityLatest.toInt() > mQuantity) {
+                            Toast.makeText(
+                                requireContext(),
+                                "Quantity should not be greater than Available Quantity",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+                            if (status.isNotEmpty()) {
+                                if (status.equals("edit")) {
+                                    SaveSpares(status, mSparePid)
+                                }
                             }
                         }
                     }
-
                 } else {
                     Toast.makeText(requireContext(), "Please Select JobId", Toast.LENGTH_LONG)
                         .show()
@@ -592,21 +650,26 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
         et_spares_quantity.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
                 mSparesQuantityLatest = editable.toString().trim()
+                val mQuantity = mSparesQuantity.toInt() + mSparesTotalQuantity.toInt()
 
-                if (mSparesQuantity > mSparesTotalQuantity) {
-                    Toast.makeText(
-                        requireContext(), "Quantity should not be greater than Available Quantity",
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else {
-                    if (mSparesMrp.isNotEmpty() && mSparesDiscount.isNotEmpty() && mSparesQuantity.isNotEmpty()) {
+                if (mSparesQuantityLatest.isNotEmpty()) {
+                    if (mSparesQuantityLatest.toInt() > mQuantity) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Quantity should not be greater than Available Quantity",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        if (mSparesMrp.isNotEmpty() && mSparesDiscount.isNotEmpty() && mSparesQuantity.isNotEmpty()) {
 
-                        val mValue = mSparesMrp.toLong() * mSparesQuantity.toLong()
-                        val amount = mValue * mSparesDiscount.toLong() / 100
-                        mSparesFinalPrice = (mValue - amount).toString()
-                        tv_spares_finalprice.text = mSparesFinalPrice
+                            val mValue = mSparesMrp.toLong() * mSparesQuantityLatest.toLong()
+                            val amount = mValue * mSparesQuantityLatest.toLong() / 100
+                            mSparesFinalPrice = (mValue - amount).toString()
+                            tv_spares_finalprice.text = mSparesFinalPrice
+                        }
                     }
                 }
+
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -647,8 +710,8 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
             mSparesOePartDesc,
             mSparesTax,
             mSparesHSN,
-            mSparesQuantity,
             mSparesQuantityLatest,
+            mSparesQuantity,
             mSparesPartGRN,
             status,
             mSparesJobId,

@@ -2,7 +2,6 @@ package workshop.lbit.qrcode.vendorjobcard
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
@@ -15,13 +14,13 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import org.json.JSONException
 import org.json.JSONObject
-import workshop.lbit.qrcode.MainActivity
 import workshop.lbit.qrcode.R
 import workshop.lbit.qrcode.Singleton.UserSession
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
 import workshop.lbit.qrcode.fragments.VendorJobcardActivity
 import workshop.lbit.qrcode.jobcard.*
-import java.util.ArrayList
+import java.util.*
 
 class VendorJobCardFormActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -34,7 +33,17 @@ class VendorJobCardFormActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var next: MyTextView_Roboto_Bold
     private var currentPageIndex = 0
     var tagstr: String? = null
+    var screen: String = ""
+    var mCustomerName: String = ""
+    var mCustomerMobile: String = ""
+    var mCustomerReg: String = ""
+    var mJobcardNo: String = ""
 
+    private lateinit var ll_customer_details: LinearLayout
+    private lateinit var tv_customer_name: MyTextView_Roboto_Medium
+    private lateinit var tv_mobile: MyTextView_Roboto_Medium
+    private lateinit var tv_reg: MyTextView_Roboto_Medium
+    private lateinit var tv_jobcard_no: MyTextView_Roboto_Medium
 
     private lateinit var vendorJobCardDetailsFragment: VendorJobCardDetailsFragment
     private lateinit var vendorJobCardSparesFragment: VendorJobcardSparesFragment
@@ -44,18 +53,47 @@ class VendorJobCardFormActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vendor_jobcard_form)
-        getSupportActionBar()!!.hide()
+        supportActionBar!!.hide()
 
-        dict_data = JSONObject()
-        val logindata = UserSession(this@VendorJobCardFormActivity).getLoginDetails()
-
-        try {
-            dict_data = JSONObject(logindata)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
+        getLoginDetails()
 
         init()
+
+        tagstr = intent.getStringExtra("TAG")
+
+        if (tagstr != null) {
+
+            if (tagstr.equals("0")) {
+
+                mViewPager!!.currentItem = 0
+                currentPageIndex = 0
+            } else if (tagstr.equals("1")) {
+
+                mViewPager!!.currentItem = 1
+                currentPageIndex = 1
+            } else if (tagstr.equals("2")) {
+
+                mViewPager!!.currentItem = 2
+                currentPageIndex = 2
+            } else if (tagstr.equals("3")) {
+
+                mViewPager!!.currentItem = 3
+                currentPageIndex = 3
+            }
+
+        }
+
+        if (screen.isNotEmpty()) {
+            if (screen.equals("Live")) {
+                ll_customer_details.visibility = View.VISIBLE
+                tv_customer_name.text = mCustomerName
+                tv_mobile.text = mCustomerMobile
+                tv_reg.text = mCustomerReg
+                tv_jobcard_no.text = mJobcardNo
+            } else if (screen.equals("New")) {
+                ll_customer_details.visibility = View.GONE
+            }
+        }
 
         previous.setOnClickListener {
 
@@ -78,16 +116,31 @@ class VendorJobCardFormActivity : AppCompatActivity(), View.OnClickListener {
 
             if (moveToNextTab) {
 
-                if(currentPageIndex == 2){
-                    if(moveToNextMandatoryTab) {
+                if (currentPageIndex == 0) {
+                    getLoginDetails()
+
+                    ll_customer_details.visibility = View.VISIBLE
+                    tv_customer_name.text = mCustomerName
+                    tv_mobile.text = mCustomerMobile
+                    tv_reg.text = mCustomerReg
+                    tv_jobcard_no.text = mJobcardNo
+
+                }
+
+                if (currentPageIndex == 2) {
+                    if (moveToNextMandatoryTab) {
 
                         currentPageIndex++
                         mViewPager!!.currentItem = currentPageIndex
 
-                    }else {
-                        Toast.makeText(this@VendorJobCardFormActivity,"Please add atleast one Service to proceed",Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(
+                            this@VendorJobCardFormActivity,
+                            "Please add atleast one Service to proceed",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
-                }else {
+                } else {
                     currentPageIndex++
                     mViewPager!!.currentItem = currentPageIndex
                 }
@@ -95,10 +148,35 @@ class VendorJobCardFormActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private fun getLoginDetails() {
+
+        dict_data = JSONObject()
+        val logindata = UserSession(this@VendorJobCardFormActivity).getLoginDetails()
+
+        try {
+            dict_data = JSONObject(logindata)
+            mCustomerMobile = dict_data.optString("CustomerMobile")
+            screen = dict_data.optString("Screen")
+            mCustomerName = dict_data.optString("CustomerName")
+            mCustomerReg = dict_data.optString("RegNo")
+            mJobcardNo = dict_data.optString("VendorJobCardID")
+
+            Log.e("data", dict_data.toString())
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+    }
+
     private fun init() {
         toolbar_title = findViewById(R.id.toolbar_title)
         toolbar_title.text = "Vendor Job Card"
         tabLayout = findViewById(R.id.tabs)
+
+        ll_customer_details = findViewById(R.id.ll_customer_details)
+        tv_customer_name = findViewById(R.id.tv_customer_name)
+        tv_mobile = findViewById(R.id.tv_mobile)
+        tv_reg = findViewById(R.id.tv_reg)
+        tv_jobcard_no = findViewById(R.id.tv_jobcard_no)
 
         mViewPager = findViewById(R.id.jobcard_dashboard_pager)
 
@@ -119,15 +197,23 @@ class VendorJobCardFormActivity : AppCompatActivity(), View.OnClickListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when (tab.text) {
                     "Vehicle Details" -> {
+                        currentPageIndex = 0
                         next.visibility = View.VISIBLE
                         previous.visibility = View.INVISIBLE
                     }
-                    "Summary" -> {
-                        next.visibility = View.INVISIBLE
+                    "Spares" -> {
+                        currentPageIndex = 1
+                        next.visibility = View.VISIBLE
                         previous.visibility = View.VISIBLE
                     }
-                    else -> {
+                    "Services" -> {
+                        currentPageIndex = 2
                         next.visibility = View.VISIBLE
+                        previous.visibility = View.VISIBLE
+                    }
+                    "Summary" -> {
+                        currentPageIndex = 4
+                        next.visibility = View.INVISIBLE
                         previous.visibility = View.VISIBLE
                     }
                 }
@@ -135,10 +221,10 @@ class VendorJobCardFormActivity : AppCompatActivity(), View.OnClickListener {
         })
 
 
-        val tabStrip = tabLayout!!.getChildAt(0) as LinearLayout
-        for (i in 0 until tabStrip.childCount) {
-            tabStrip.getChildAt(i).setOnTouchListener { v, event -> true }
-        }
+//        val tabStrip = tabLayout!!.getChildAt(0) as LinearLayout
+//        for (i in 0 until tabStrip.childCount) {
+//            tabStrip.getChildAt(i).setOnTouchListener { v, event -> true }
+//        }
     }
 
 
@@ -197,6 +283,10 @@ class VendorJobCardFormActivity : AppCompatActivity(), View.OnClickListener {
         dict_data.put("VendorJobCardID", "")
         dict_data.put("gatepass_status", "")
         dict_data.put("gatepass_auth_status", "")
+        dict_data.put("CustomerName", "")
+        dict_data.put("CustomerMobile", "")
+        dict_data.put("RegNo", "")
+        dict_data.put("Screen", "")
         UserSession(this@VendorJobCardFormActivity).setLoginDetails(dict_data.toString())
 
         val intent = Intent(this@VendorJobCardFormActivity, VendorJobcardActivity::class.java)

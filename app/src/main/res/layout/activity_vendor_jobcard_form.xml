@@ -19,6 +19,7 @@
 
             <include layout="@layout/feedback_toolbar_header" />
 
+            <include layout="@layout/vendor_jobcard_customer_dettails" />
 
             <LinearLayout
                 android:layout_width="match_parent"

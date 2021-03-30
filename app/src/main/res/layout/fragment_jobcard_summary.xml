@@ -34,7 +34,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -176,7 +177,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="gone">
 
                                 <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
                                     android:layout_width="0dp"
@@ -236,7 +238,7 @@
                                     android:textColor="@color/qr_code_bg"
                                     android:textSize="@dimen/_15sdp" />
 
-                                <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+                                <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
                                     android:id="@+id/tv_job_technicianName"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
@@ -438,7 +440,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_20sdp"
             android:gravity="center"
             android:visibility="visible">
 
@@ -446,7 +447,6 @@
                 android:id="@+id/tv_generateEstimate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
                 android:background="@drawable/submit_bg"
                 android:gravity="center"
                 android:paddingLeft="@dimen/_30sdp"

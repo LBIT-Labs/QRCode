@@ -4,16 +4,17 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_vendor_jobcard_details.*
 import okhttp3.ResponseBody
 import org.json.JSONException
 import org.json.JSONObject
@@ -23,14 +24,13 @@ import retrofit2.Response
 import workshop.lbit.qrcode.R
 import workshop.lbit.qrcode.Singleton.UserSession
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
-import workshop.lbit.qrcode.jobcard.JobCardDetailsFragment
 import workshop.lbit.qrcode.utils.Constants
 import workshop.lbit.qrcode.utils.Utilities
 
 class VendorJobCardDetailsFragment : Fragment() {
 
     lateinit var sp_vendor_search_vendor: Spinner
-    lateinit var sp_vendor_search_jobid: Spinner
+    lateinit var et_reg_no: EditText
     lateinit var tv_vender_jobcard_number: MyTextView_Roboto_Medium
     lateinit var tv_vender_vehicle_number: MyTextView_Roboto_Medium
     lateinit var tv_vender_customer_name: MyTextView_Roboto_Medium
@@ -47,6 +47,7 @@ class VendorJobCardDetailsFragment : Fragment() {
     var mVendorNid: String = ""
     var mJobNumber: String = ""
     var mRegNo: String = ""
+    var mSearchRegNo: String = ""
     var mCustomerMobile: String = ""
     var mTechnician: String = ""
     private var isLoaded = false
@@ -59,18 +60,14 @@ class VendorJobCardDetailsFragment : Fragment() {
     private var mRole: String = ""
     private lateinit var dict_data: JSONObject
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         this.isVisibleToUser = isVisibleToUser
-        if (isVisibleToUser && isAdded()) {
+        if (isVisibleToUser && isAdded) {
 
             loadData()
 
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -80,20 +77,20 @@ class VendorJobCardDetailsFragment : Fragment() {
 
             loadData()
 
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
 
     private fun loadData() {
 
-        if(mVendorNid.isNotEmpty() && mVendor.isNotEmpty() && mJobCard.isNotEmpty()){
+        if (mVendorNid.isNotEmpty() && mVendor.isNotEmpty() && mJobCard.isNotEmpty()) {
 
             SetVendorAndJobCardID()
-        }else{
-            getVendorList()
+        } else {
+            getVendorList("")
 
-            getJObCardList()
+//            getJObCardList()
         }
 
 
@@ -101,11 +98,15 @@ class VendorJobCardDetailsFragment : Fragment() {
 
     private fun SetVendorAndJobCardID() {
 
-        getVendorList()
+        getVendorList("")
 
-        getJObCardList()
+//        getJObCardList()
 
-        getDetails()
+        if (mSearchRegNo.isNotEmpty()) {
+            et_reg_no.setText(mSearchRegNo)
+            getDetails(mSearchRegNo)
+
+        }
     }
 
     override fun onCreateView(
@@ -133,6 +134,7 @@ class VendorJobCardDetailsFragment : Fragment() {
             mVendorNid = dict_data.optString("VendorJobCardCustID")
             mVendor = dict_data.optString("Vendor")
             mJobCard = dict_data.optString("VendorJobCardID")
+            mSearchRegNo = dict_data.optString("RegNo")
 
             UserSession(requireContext()).setLoginDetails(dict_data.toString())
 
@@ -166,7 +168,7 @@ class VendorJobCardDetailsFragment : Fragment() {
                             dict_data.put("VendorJobCardID", "")
                             UserSession(requireContext()).setLoginDetails(dict_data.toString())
 
-                            getDetails()
+                            getDetails(mSearchRegNo)
                         }
                     } else {
                         mVendor = ""
@@ -178,46 +180,68 @@ class VendorJobCardDetailsFragment : Fragment() {
                 }
             }
 
-        sp_vendor_search_jobid.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    arg0: AdapterView<*>,
-                    view: View,
-                    arg2: Int,
-                    arg3: Long
-                ) {
+        et_reg_no.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(editable: Editable?) {
+                val text = editable.toString().trim()
 
-                    if (arg2 > 0) {
-                        mJobCard = sp_vendor_search_jobid.selectedItem.toString()
+                if (text.length == 10) {
 
-                        if (mJobCard.isNotEmpty() && mVendor.isNotEmpty()) {
-
-                            dict_data.put("VendorJobCardCustID", "")
-                            dict_data.put("Vendor", "")
-                            dict_data.put("VendorJobCardID", "")
-                            UserSession(requireContext()).setLoginDetails(dict_data.toString())
-
-                            getDetails()
-                        }
-                    } else {
-                        mJobCard = ""
-                    }
-                }
-
-                override fun onNothingSelected(arg0: AdapterView<*>) {
+                    getDetails(text)
 
                 }
+
             }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        })
+
+//        sp_vendor_search_jobid.onItemSelectedListener =
+//            object : AdapterView.OnItemSelectedListener {
+//                override fun onItemSelected(
+//                    arg0: AdapterView<*>,
+//                    view: View,
+//                    arg2: Int,
+//                    arg3: Long
+//                ) {
+//
+//                    if (arg2 > 0) {
+//                        mJobCard = sp_vendor_search_jobid.selectedItem.toString()
+//
+//                        if (mJobCard.isNotEmpty() && mVendor.isNotEmpty()) {
+//
+//                            dict_data.put("VendorJobCardCustID", "")
+//                            dict_data.put("Vendor", "")
+//                            dict_data.put("VendorJobCardID", "")
+//                            UserSession(requireContext()).setLoginDetails(dict_data.toString())
+//
+//                            getDetails(mSearchRegNo)
+//                        }
+//                    } else {
+//                        mJobCard = ""
+//                    }
+//                }
+//
+//                override fun onNothingSelected(arg0: AdapterView<*>) {
+//
+//                }
+//            }
 
     }
 
-    private fun getDetails() {
+    private fun getDetails(mSearchRegNo: String) {
 
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
         mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
-        Constants.qrCode_uat.getVendorDetails(mMobileNumber.toString(),mJobCard,"","job_details").enqueue(object :
+        Constants.qrCode_uat.getVendorDetails(
+            mMobileNumber.toString(),
+            mJobCard,
+            "",
+            "job_details",
+            mSearchRegNo
+        ).enqueue(object :
             Callback<ResponseBody> {
             override fun onResponse(
                 call: Call<ResponseBody>,
@@ -230,89 +254,31 @@ class VendorJobCardDetailsFragment : Fragment() {
                     Log.e("Details", string)
 
 
-                    val jsonObject = JSONObject(string)
-                    mVendorNid = jsonObject.getString("nid").toString()
-                    mCustomerName = jsonObject.getString("customer").toString()
-                    mJobNumber = jsonObject.getString("job").toString()
-                    mRegNo = jsonObject.getString("reg").toString()
-                    mCustomerMobile= jsonObject.getString("mobile").toString()
-                    mTechnician = jsonObject.getString("tech").toString()
+                    if (!string.equals("{}")) {
 
-                    tv_vender_jobcard_number.text = mJobNumber
-                    tv_vender_vehicle_number.text = mRegNo
-                    tv_vender_customer_name.text = mCustomerName
-                    tv_vender_customer_mobile.text = mCustomerMobile
-                    tv_vender_Technician_name.text = mTechnician
-                    tv_vender_service_start_time.text = ""
+                        val jsonObject = JSONObject(string)
+                        mVendorNid = jsonObject.getString("nid").toString()
+                        mCustomerName = jsonObject.getString("customer").toString()
+                        mJobNumber = jsonObject.getString("job").toString()
+                        mRegNo = jsonObject.getString("reg").toString()
+                        mCustomerMobile = jsonObject.getString("mobile").toString()
+                        mTechnician = jsonObject.getString("tech").toString()
 
-                    dict_data.put("VendorJobCardCustID", mVendorNid)
-                    dict_data.put("Vendor", mVendor)
-                    dict_data.put("VendorJobCardID", mJobCard)
-                    UserSession(requireContext()).setLoginDetails(dict_data.toString())
+                        tv_vender_jobcard_number.text = mJobNumber
+                        tv_vender_vehicle_number.text = mRegNo
+                        tv_vender_customer_name.text = mCustomerName
+                        tv_vender_customer_mobile.text = mCustomerMobile
+                        tv_vender_Technician_name.text = mTechnician
+                        tv_vender_service_start_time.text = ""
 
-
-                    mProgressDialog.dismiss()
-
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-
-            }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.e(
-                    "TAG",
-                    "onFailure() called with: call = [" + call.request()
-                        .url() + "], t = [" + t + "]",
-                    t
-                )
-
-                if (mProgressDialog.isShowing)
-                    mProgressDialog.dismiss()
-            }
-        })
-
-    }
-
-    private fun getJObCardList() {
-
-        val mProgressDialog = ProgressDialog(requireContext())
-        mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading...")
-        mProgressDialog.show()
-        Constants.qrCode_uat.getVendorDetails(mMobileNumber.toString(),"","","jobcard_id").enqueue(object :
-            Callback<ResponseBody> {
-            override fun onResponse(
-                call: Call<ResponseBody>,
-                response: Response<ResponseBody>
-            ) {
-
-                try {
-                    val string = response.body()!!.string()
-
-                    Log.e("Make", string)
-
-
-                    val list = ArrayList<String>()
-
-                    Log.e("Test", "Make_List: $string")
-
-                    mJonCardList = Utilities.getItemList(list, string)
-
-                    if (mJobCard.isNotEmpty()) {
-                        if (mJonCardList.indexOf(mJobCard) > -1) {
-                            sp_vendor_search_jobid.adapter = ArrayAdapter(
-                                requireContext(),
-                                android.R.layout.simple_spinner_dropdown_item,
-                                mJonCardList
-                            )
-                            sp_vendor_search_jobid.setSelection(mJonCardList.indexOf(mJobCard))
-                        }
-                    } else {
-                        sp_vendor_search_jobid.adapter = ArrayAdapter(
-                            requireContext(),
-                            android.R.layout.simple_spinner_dropdown_item, mJonCardList
-                        )
+                        dict_data.put("VendorJobCardCustID", mVendorNid)
+                        dict_data.put("Vendor", mVendor)
+                        dict_data.put("VendorJobCardID", mJobNumber)
+                        dict_data.put("CustomerName", mCustomerName)
+                        dict_data.put("RegNo", mRegNo)
+                        dict_data.put("CustomerMobile", mCustomerMobile)
+                        dict_data.put("Screen", "Live")
+                        UserSession(requireContext()).setLoginDetails(dict_data.toString())
                     }
                     mProgressDialog.dismiss()
 
@@ -334,74 +300,138 @@ class VendorJobCardDetailsFragment : Fragment() {
                     mProgressDialog.dismiss()
             }
         })
+
     }
 
-    private fun getVendorList() {
+//    private fun getJObCardList() {
+//
+//        val mProgressDialog = ProgressDialog(requireContext())
+//        mProgressDialog.isIndeterminate = true
+//        mProgressDialog.setMessage("Loading...")
+//        mProgressDialog.show()
+//        Constants.qrCode_uat.getVendorDetails(mMobileNumber.toString(),"","","jobcard_id").enqueue(object :
+//            Callback<ResponseBody> {
+//            override fun onResponse(
+//                call: Call<ResponseBody>,
+//                response: Response<ResponseBody>
+//            ) {
+//
+//                try {
+//                    val string = response.body()!!.string()
+//
+//                    Log.e("Make", string)
+//
+//
+//                    val list = ArrayList<String>()
+//
+//                    Log.e("Test", "Make_List: $string")
+//
+//                    mJonCardList = Utilities.getItemList(list, string)
+//
+//                    if (mJobCard.isNotEmpty()) {
+//                        if (mJonCardList.indexOf(mJobCard) > -1) {
+//                            sp_vendor_search_jobid.adapter = ArrayAdapter(
+//                                requireContext(),
+//                                android.R.layout.simple_spinner_dropdown_item,
+//                                mJonCardList
+//                            )
+//                            sp_vendor_search_jobid.setSelection(mJonCardList.indexOf(mJobCard))
+//                        }
+//                    } else {
+//                        sp_vendor_search_jobid.adapter = ArrayAdapter(
+//                            requireContext(),
+//                            android.R.layout.simple_spinner_dropdown_item, mJonCardList
+//                        )
+//                    }
+//                    mProgressDialog.dismiss()
+//
+//                } catch (e: Exception) {
+//                    e.printStackTrace()
+//                }
+//
+//            }
+//
+//            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+//                Log.e(
+//                    "TAG",
+//                    "onFailure() called with: call = [" + call.request()
+//                        .url() + "], t = [" + t + "]",
+//                    t
+//                )
+//
+//                if (mProgressDialog.isShowing)
+//                    mProgressDialog.dismiss()
+//            }
+//        })
+//    }
+
+    private fun getVendorList(reg: String) {
 
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
         mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
-        Constants.qrCode_uat.getVendorDetails(mMobileNumber.toString(),"","","vendor").enqueue(object :
-            Callback<ResponseBody> {
-            override fun onResponse(
-                call: Call<ResponseBody>,
-                response: Response<ResponseBody>
-            ) {
+        Constants.qrCode_uat.getVendorDetails(mMobileNumber.toString(), "", "", "vendor", reg)
+            .enqueue(object :
+                Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
 
-                try {
-                    val string = response.body()!!.string()
+                    try {
+                        val string = response.body()!!.string()
 
-                    Log.e("Make", string)
+                        Log.e("Make", string)
 
 
-                    val list = ArrayList<String>()
+                        val list = ArrayList<String>()
 
-                    Log.e("Test", "Make_List: $string")
+                        Log.e("Test", "Make_List: $string")
 
-                    mVendorList = Utilities.getItemList(list, string)
+                        mVendorList = Utilities.getItemList(list, string)
 
-                    if (mVendor.isNotEmpty()) {
-                        if (mVendorList.indexOf(mVendor) > -1) {
+                        if (mVendor.isNotEmpty()) {
+                            if (mVendorList.indexOf(mVendor) > -1) {
+                                sp_vendor_search_vendor.adapter = ArrayAdapter(
+                                    requireContext(),
+                                    android.R.layout.simple_spinner_dropdown_item,
+                                    mVendorList
+                                )
+                                sp_vendor_search_vendor.setSelection(mVendorList.indexOf(mVendor))
+                            }
+                        } else {
                             sp_vendor_search_vendor.adapter = ArrayAdapter(
                                 requireContext(),
-                                android.R.layout.simple_spinner_dropdown_item,
-                                mVendorList
+                                android.R.layout.simple_spinner_dropdown_item, mVendorList
                             )
-                            sp_vendor_search_vendor.setSelection(mVendorList.indexOf(mVendor))
                         }
-                    } else {
-                        sp_vendor_search_vendor.adapter = ArrayAdapter(
-                            requireContext(),
-                            android.R.layout.simple_spinner_dropdown_item, mVendorList
-                        )
+
+                        mProgressDialog.dismiss()
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
 
-                    mProgressDialog.dismiss()
-
-                } catch (e: Exception) {
-                    e.printStackTrace()
                 }
 
-            }
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.e(
+                        "TAG",
+                        "onFailure() called with: call = [" + call.request()
+                            .url() + "], t = [" + t + "]",
+                        t
+                    )
 
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.e(
-                    "TAG",
-                    "onFailure() called with: call = [" + call.request()
-                        .url() + "], t = [" + t + "]",
-                    t
-                )
-
-                if (mProgressDialog.isShowing)
-                    mProgressDialog.dismiss()
-            }
-        })
+                    if (mProgressDialog.isShowing)
+                        mProgressDialog.dismiss()
+                }
+            })
     }
 
     private fun init(v: View) {
         sp_vendor_search_vendor = v.findViewById(R.id.sp_vendor_search_vendor)
-        sp_vendor_search_jobid = v.findViewById(R.id.sp_vendor_search_jobid)
+        et_reg_no = v.findViewById(R.id.et_reg_no)
 
         tv_vender_jobcard_number = v.findViewById(R.id.tv_vender_jobcard_number)
         tv_vender_vehicle_number = v.findViewById(R.id.tv_vender_vehicle_number)

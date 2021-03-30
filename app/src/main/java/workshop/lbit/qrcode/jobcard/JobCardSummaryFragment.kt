@@ -50,7 +50,7 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
     lateinit var tv_service_previous: MyTextView_Roboto_Bold
     lateinit var tv_generateEstimate: MyTextView_Roboto_Regular
 
-    lateinit var tv_job_technicianName: MyTextView_Roboto_Bold
+    lateinit var tv_job_technicianName: MyTextView_Roboto_Medium
     lateinit var tv_job_jobcardNo: MyTextView_Roboto_Medium
     lateinit var tv_job_jobcardDate: MyTextView_Roboto_Medium
     lateinit var tv_job_vehicleNumber: MyTextView_Roboto_Medium
@@ -61,6 +61,8 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
     private var mJobCardServiceStatus: String = ""
     private var mTotalAmount: String = ""
     private var mCustomerMobile: String = ""
+    private var mJobsList: String = "0"
+    private var mServicesList: String = "0"
     private var mInvoicePrevieURL: String = ""
     private var mIsPreviewClicked: Boolean = false
     private lateinit var dict_data: JSONObject
@@ -89,6 +91,9 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
     private val thresholdOffsetPixels = 1
     private var mCurrentFragmentPosition = 0
     private lateinit var mAlertDialog: AlertDialog
+
+    var qr_scan_verified: Boolean = false
+
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
@@ -143,6 +148,7 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
 
             } else if (mJobCardServiceStatus.isNotEmpty() && mJobCardServiceStatus.equals("End")) {
                 tv_generateEstimate.text = "Generate Invoice"
+                tv_generateEstimate.visibility = View.GONE
 
             }
         }
@@ -332,6 +338,8 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
                         val mJobcardDate = detailsjsonObject.getString("jobcard_date").toString()
                         val mtechnician = detailsjsonObject.getString("tech").toString()
                         val mvehicleReg = detailsjsonObject.getString("reg").toString()
+                        mJobsList = detailsjsonObject.getString("no_of_jobs").toString()
+                        mServicesList = detailsjsonObject.getString("no_of_services").toString()
 
                         tv_summary_customerName.text = mCustomerName
                         tv_summary_customerMobile.text = mCustomerMobile
@@ -340,6 +348,16 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
                         tv_job_technicianName.text = mtechnician
                         tv_job_vehicleNumber.text = mvehicleReg
 
+                        if (sparejsonArray.length() > 0) {
+
+                            for (i in 0 until sparejsonArray.length()) {
+                                val jsonObject = sparejsonArray.getJSONObject(i)
+
+                                val qr_scan_status =
+                                    jsonObject.getString("qr_scan_status").toString()
+                                qr_scan_verified = qr_scan_status.equals("Verified")
+                            }
+                        }
 
                         if (sparejsonArray.length() > 0) {
                             val jobsdatalistSpares = gson!!.fromJson<ArrayList<JobcardData>>(
@@ -463,15 +481,53 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
 
             if (mJobCardStatus.isNotEmpty()) {
                 if (mJobCardStatus.equals("Job Card")) {
-                    GenerateEstimate("estimate")
+                    if (mJobsList.isNotEmpty()) {
+                        if (mJobsList.toInt() > 0) {
+                            if (mServicesList.isNotEmpty()) {
+                                if (mServicesList.toInt() > 0) {
+                                    GenerateEstimate("estimate")
+
+                                } else {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Please Add Atleast one Service to Proceed",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                            }
+                        } else {
+
+                            Toast.makeText(
+                                requireContext(),
+                                "Please Add Atleast one Job to Proceed",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
                 } else if (mJobCardStatus.equals("Estimate")) {
                     GenerateEstimate("start")
                 } else if (mJobCardStatus.equals("Under Progress")) {
                     if (mJobCardServiceStatus.isNotEmpty() && mJobCardServiceStatus.equals("Start")) {
                         GenerateEstimate("end")
 
-                    } else if (mJobCardServiceStatus.isNotEmpty() && mJobCardServiceStatus.equals("End")) {
-                        PreViewDialog()
+//                    } else if (mJobCardServiceStatus.isNotEmpty() && mJobCardServiceStatus.equals("End")) {
+//
+//                        if (mSparePageCount!!.isEmpty()) {
+//                            PreViewDialog()
+//
+//                        } else {
+//                            if (qr_scan_verified == true) {
+//                                PreViewDialog()
+//
+//                            } else {
+//                                Toast.makeText(
+//                                    requireContext(),
+//                                    "Please Scan Spares before generating the Invoice",
+//                                    Toast.LENGTH_LONG
+//                                ).show()
+//                            }
+//                        }
+
                     }
                 }
             } else {
@@ -590,6 +646,10 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
                             dict_data.put("status", "")
                             dict_data.put("service_status", "")
                             dict_data.put("screenType", "")
+                            dict_data.put("CustomerName", "")
+                            dict_data.put("RegNo", "")
+                            dict_data.put("Make", "")
+                            dict_data.put("Model", "")
                             UserSession(requireContext()).setLoginDetails(dict_data.toString())
 
                             val intent = Intent(requireContext(), MainActivity::class.java)

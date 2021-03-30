@@ -31,11 +31,12 @@ class VendorJobcardActivity : AppCompatActivity(), View.OnClickListener {
     private var viewPagerAdapter: VendorJobcardAdapter? = null
     lateinit var toolbar_title: MyTextView_Roboto_Bold
 
+    private lateinit var dict_data: JSONObject
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.vendor_jobcard_dashboard_fragment)
-        getSupportActionBar()!!.hide()
+        supportActionBar!!.hide()
 
         sharedpreferences = getSharedPreferences(
             Constants.PREFS_NAME,
@@ -47,7 +48,7 @@ class VendorJobcardActivity : AppCompatActivity(), View.OnClickListener {
 
         val logindata = UserSession(this@VendorJobcardActivity).getLoginDetails()
 
-        var dict_data = JSONObject()
+        dict_data = JSONObject()
         try {
             dict_data = JSONObject(logindata)
             mRole = dict_data.optString("role")
@@ -88,6 +89,17 @@ class VendorJobcardActivity : AppCompatActivity(), View.OnClickListener {
         if (i == R.id.backtoolbar) {
             onBackPressed()
         } else if (i == R.id.ll_add_vendor) {
+            dict_data.put("VendorJobCardCustID", "")
+            dict_data.put("Vendor", "")
+            dict_data.put("VendorJobCardID", "")
+            dict_data.put("gatepass_status", "")
+            dict_data.put("gatepass_auth_status", "")
+            dict_data.put("CustomerName", "")
+            dict_data.put("CustomerMobile", "")
+            dict_data.put("RegNo", "")
+            dict_data.put("Screen", "New")
+            UserSession(this@VendorJobcardActivity).setLoginDetails(dict_data.toString())
+
             val intent = Intent(this@VendorJobcardActivity, VendorJobCardFormActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.move_left_enter, R.anim.move_left_exit)

@@ -8,6 +8,7 @@
     <string name="powered_by">Powered By LBIT</string>
     <string name="search_part">Search OE Part # / Description</string>
     <string name="make">Make</string>
+    <string name="vehicle">Vehicle</string>
     <string name="part_category">Part Category</string>
     <string name="part_desc">Part Description</string>
     <string name="reg_no">Registration No.</string>
@@ -274,6 +275,7 @@
     <!--Qr Scanning Request-->
     <string name="s_no">S No</string>
     <string name="customer_name">Customer Name</string>
+    <string name="customer1">Customer</string>
     <string name="technician_name">Technician Name</string>
     <string name="service_start_time">Service Start Time</string>
     <string name="technician_mobile">Technician Mobile</string>

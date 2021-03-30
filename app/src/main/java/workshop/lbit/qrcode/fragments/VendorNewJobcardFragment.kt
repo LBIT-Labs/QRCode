@@ -326,9 +326,15 @@ class VendorNewJobcardFragment : Fragment(), View.OnClickListener, JobCardList {
             dict_data.put("VendorJobCardID", mJCData.jc_live_jobcard_id)
             dict_data.put("gatepass_status", mJCData.jc_live_gatepass_status)
             dict_data.put("gatepass_auth_status", mJCData.jc_live_gatepass_in_out_status)
+            dict_data.put("CustomerName", mJCData.jc_live_customer)
+            dict_data.put("RegNo", mJCData.jc_live_reg)
+            dict_data.put("CustomerMobile", mJCData.jc_live_mobile)
+            dict_data.put("Screen", "Live")
+
             UserSession(requireContext()).setLoginDetails(dict_data.toString())
 
             val intent = Intent(requireContext(), VendorJobCardFormActivity::class.java)
+            intent.putExtra("TAG", "3")
             startActivity(intent)
         }
 

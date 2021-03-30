@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.gson.Gson
@@ -48,7 +49,7 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
     lateinit var tv_generateEstimate: MyTextView_Roboto_Regular
 
     lateinit var tv_job_technicianName: MyTextView_Roboto_Bold
-    lateinit var tv_job_totalAmount: MyTextView_Roboto_Bold
+    lateinit var tv_job_totalAmount: MyTextView_Roboto_Medium
     lateinit var tv_job_jobcardNo: MyTextView_Roboto_Medium
     lateinit var tv_job_jobcardDate: MyTextView_Roboto_Medium
     lateinit var tv_job_vehicleNumber: MyTextView_Roboto_Medium
@@ -89,6 +90,7 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
     private var mJobcardID: String = ""
     private var mGPStatus: String = ""
     private var mGPAuthStatus: String = ""
+    private var mServiceList: String = "0"
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
@@ -327,6 +329,7 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
                         val sparejsonArray = jsonObject.getJSONArray("spares")
                         val servicejsonArray = jsonObject.getJSONArray("services")
                         mTotalAmount = jsonObject.getString("total_final")
+                        mServiceList = jsonObject.getString("no_of_services").toString()
 
 
                         val mCustomerName = detailsjsonObject.getString("customer").toString()
@@ -460,7 +463,18 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
 
         } else if (i == R.id.tv_generateEstimate) {
 
-            GenerateGatePass()
+            if (mServiceList.isNotEmpty()) {
+                if (mServiceList.toInt() > 0) {
+                    GenerateGatePass()
+                } else {
+
+                    Toast.makeText(
+                        requireContext(),
+                        "Please Add Atleast one Service to Proceed",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
         }
 
     }
@@ -491,6 +505,9 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
                         dict_data.put("VendorJobCardID", "")
                         dict_data.put("gatepass_status", "")
                         dict_data.put("gatepass_auth_status", "")
+                        dict_data.put("CustomerName", "")
+                        dict_data.put("CustomerMobile", "")
+                        dict_data.put("RegNo", "")
                         UserSession(requireContext()).setLoginDetails(dict_data.toString())
 
                         val intent = Intent(requireContext(), VendorJobcardActivity::class.java)

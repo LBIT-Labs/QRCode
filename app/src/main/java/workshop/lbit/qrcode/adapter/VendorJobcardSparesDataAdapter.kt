@@ -11,7 +11,6 @@ import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
 import workshop.lbit.qrcode.data.JobcardData
 import workshop.lbit.qrcode.interfaces.JobCardListService
-import workshop.lbit.qrcode.jobcard.JobCardSparesFragment
 
 
 class VendorJobcardSparesDataAdapter(

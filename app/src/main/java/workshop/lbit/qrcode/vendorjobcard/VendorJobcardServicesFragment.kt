@@ -30,14 +30,12 @@ import retrofit2.Callback
 import retrofit2.Response
 import workshop.lbit.qrcode.R
 import workshop.lbit.qrcode.Singleton.UserSession
-import workshop.lbit.qrcode.adapter.JobcardServicesDataAdapter
 import workshop.lbit.qrcode.adapter.VendorJobcardServicesDataAdapter
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
 import workshop.lbit.qrcode.data.JobcardData
 import workshop.lbit.qrcode.interfaces.JobCardListService
 import workshop.lbit.qrcode.utils.Constants
-import workshop.lbit.qrcode.utils.Utilities
 
 
 @SuppressLint("ValidFragment")
@@ -96,16 +94,12 @@ class VendorJobcardServicesFragment @SuppressLint("ValidFragment") constructor()
     private val thresholdOffsetPixels = 1
     private var mCurrentFragmentPosition = 0
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        this.isVisibleToUser = isVisibleToUser;
-        if (isVisibleToUser && isAdded()) {
+        this.isVisibleToUser = isVisibleToUser
+        if (isVisibleToUser && isAdded) {
             loadData()
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -113,7 +107,7 @@ class VendorJobcardServicesFragment @SuppressLint("ValidFragment") constructor()
         super.onViewCreated(view, savedInstanceState)
         if (isVisibleToUser && (!isLoaded)) {
             loadData()
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -177,10 +171,10 @@ class VendorJobcardServicesFragment @SuppressLint("ValidFragment") constructor()
 
             override fun onPageScrollStateChanged(state: Int) {
                 if (!scrollStarted && state == ViewPager.SCROLLBAR_POSITION_DEFAULT) {
-                    scrollStarted = true;
-                    checkDirection = true;
+                    scrollStarted = true
+                    checkDirection = true
                 } else {
-                    scrollStarted = false;
+                    scrollStarted = false
                 }
             }
 
@@ -219,7 +213,7 @@ class VendorJobcardServicesFragment @SuppressLint("ValidFragment") constructor()
             }
 
             override fun onPageSelected(position: Int) {
-                mCurrentFragmentPosition = position;
+                mCurrentFragmentPosition = position
             }
 
         })
@@ -293,7 +287,7 @@ class VendorJobcardServicesFragment @SuppressLint("ValidFragment") constructor()
             et_services_discount.setText(mServiceDiscount)
         }
         if (mServiceFinalPrice.isNotEmpty()) {
-            tv_service_finalprice.setText(mServiceFinalPrice)
+            tv_service_finalprice.text = mServiceFinalPrice
         }
 
         val mBuilder = AlertDialog.Builder(requireContext())
@@ -352,7 +346,7 @@ class VendorJobcardServicesFragment @SuppressLint("ValidFragment") constructor()
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_service_service_txt.setText(builder)
+        tv_service_service_txt.text = builder
     }
 
     private fun MandatoryCost(string: String) {
@@ -369,7 +363,7 @@ class VendorJobcardServicesFragment @SuppressLint("ValidFragment") constructor()
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_service_cost_txt.setText(builder)
+        tv_service_cost_txt.text = builder
     }
 
     private fun MandatoryDiscount(string: String) {
@@ -385,7 +379,7 @@ class VendorJobcardServicesFragment @SuppressLint("ValidFragment") constructor()
             ForegroundColorSpan(Color.RED), start, end,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        tv_service_discount_txt.setText(builder)
+        tv_service_discount_txt.text = builder
     }
 
     private fun SaveService(editType: String, pid: String) {
@@ -626,12 +620,7 @@ class VendorJobcardServicesFragment @SuppressLint("ValidFragment") constructor()
 
     fun getMandatoryTab(): Boolean {
 
-        if (servicesdatalist.size > 0) {
-            return true
-
-        }else{
-            return false
-        }
+        return servicesdatalist.size > 0
     }
 
 }

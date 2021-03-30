@@ -18,9 +18,9 @@ import workshop.lbit.qrcode.MainActivity
 import workshop.lbit.qrcode.R
 import workshop.lbit.qrcode.Singleton.UserSession
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
 import workshop.lbit.qrcode.jobcard.*
-import workshop.lbit.qrcode.jobcard.JobCardJobsFragment.Companion.newInstance
-import java.util.ArrayList
+import java.util.*
 
 class JobCardFormActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -28,12 +28,22 @@ class JobCardFormActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var toolbar_title: MyTextView_Roboto_Bold
     private var tabLayout: TabLayout? = null
     private var mViewPager: ViewPager? = null
+    private lateinit var ll_customer_details: LinearLayout
+    private lateinit var tv_customer_name: MyTextView_Roboto_Medium
+    private lateinit var tv_mobile: MyTextView_Roboto_Medium
+    private lateinit var tv_reg: MyTextView_Roboto_Medium
+    private lateinit var tv_vehicle: MyTextView_Roboto_Medium
 
     lateinit var previous: MyTextView_Roboto_Bold
     lateinit var next: MyTextView_Roboto_Bold
     private var currentPageIndex = 0
     var tagstr: String? = null
-
+    var screen: String = ""
+    var mCustomerName: String = ""
+    var mCustomerMobile: String = ""
+    var mCustomerReg: String = ""
+    var mMake: String = ""
+    var mModel: String = ""
 
     private lateinit var jobCardDetailsFragment: JobCardDetailsFragment
     private lateinit var jobCardJobsFragment: JobCardJobsFragment
@@ -41,35 +51,55 @@ class JobCardFormActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var jobCardServiceFragment: JobCardServiceFragment
     private lateinit var jobCardSummaryFragment: JobCardSummaryFragment
 
-    var tabsuccess: Boolean = false
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jobcard_form)
-        getSupportActionBar()!!.hide()
+        supportActionBar!!.hide()
 
-        dict_data = JSONObject()
-        val logindata = UserSession(this@JobCardFormActivity).getLoginDetails()
-
-        try {
-            dict_data = JSONObject(logindata)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
+        getLoginDetails()
 
         init()
 
         tagstr = intent.getStringExtra("TAG")
+//        screen = intent.getStringExtra("Screen")
 
         if (tagstr != null) {
 
-            if (tagstr.equals("1")) {
+            if (tagstr.equals("0")) {
 
-                mViewPager!!.setCurrentItem(2)
+                mViewPager!!.currentItem = 0
+                currentPageIndex = 0
+            } else if (tagstr.equals("1")) {
+
+                mViewPager!!.currentItem = 1
+                currentPageIndex = 1
+            } else if (tagstr.equals("2")) {
+
+                mViewPager!!.currentItem = 2
                 currentPageIndex = 2
+            } else if (tagstr.equals("3")) {
+
+                mViewPager!!.currentItem = 3
+                currentPageIndex = 3
+            } else if (tagstr.equals("4")) {
+
+                mViewPager!!.currentItem = 4
+                currentPageIndex = 4
             }
 
+        }
+
+        if (screen.isNotEmpty()) {
+            if (screen.equals("Live")) {
+                ll_customer_details.visibility = View.VISIBLE
+                tv_customer_name.text = mCustomerName
+                tv_mobile.text = mCustomerMobile
+                tv_reg.text = mCustomerReg
+                tv_vehicle.text = mMake + " " + mModel
+            } else if (screen.equals("New")) {
+                ll_customer_details.visibility = View.GONE
+            }
         }
         previous.setOnClickListener {
 
@@ -79,12 +109,14 @@ class JobCardFormActivity : AppCompatActivity(), View.OnClickListener {
         }
         next.setOnClickListener {
             val moveToNextTab = when (currentPageIndex) {
-                0 -> jobCardDetailsFragment.allRequiredDataAvailable()
+                0 -> {
+                    jobCardDetailsFragment.allRequiredDataAvailable()
+                }
 
                 else -> true
             }
 
-            if(moveToNextTab){
+            if (moveToNextTab) {
                 when (currentPageIndex) {
                     0 -> jobCardDetailsFragment.Save()
                 }
@@ -98,28 +130,42 @@ class JobCardFormActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             if (moveToNextTab) {
+                if (currentPageIndex == 0) {
+                    getLoginDetails()
 
-                if(currentPageIndex == 1){
-                    if(moveToNextMandatoryTab){
+                    ll_customer_details.visibility = View.VISIBLE
+                    tv_customer_name.text = mCustomerName
+                    tv_mobile.text = mCustomerMobile
+                    tv_reg.text = mCustomerReg
+                    tv_vehicle.text = mMake + " " + mModel
+
+                }
+
+                if (currentPageIndex == 1) {
+                    if (moveToNextMandatoryTab) {
                         currentPageIndex++
                         mViewPager!!.currentItem = currentPageIndex
 
-                    }else {
-                        Toast.makeText(this@JobCardFormActivity,"Please add atleast one Job to proceed",
-                            Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(
+                            this@JobCardFormActivity, "Please add atleast one Job to proceed",
+                            Toast.LENGTH_LONG
+                        ).show()
 
                     }
-                }else if(currentPageIndex == 3){
-                    if(moveToNextMandatoryTab){
+                } else if (currentPageIndex == 3) {
+                    if (moveToNextMandatoryTab) {
                         currentPageIndex++
                         mViewPager!!.currentItem = currentPageIndex
 
-                    }else {
-                        Toast.makeText(this@JobCardFormActivity,"Please add atleast one Service to proceed",
-                            Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(
+                            this@JobCardFormActivity, "Please add atleast one Service to proceed",
+                            Toast.LENGTH_LONG
+                        ).show()
 
                     }
-                }else {
+                } else {
                     currentPageIndex++
                     mViewPager!!.currentItem = currentPageIndex
                 }
@@ -128,12 +174,35 @@ class JobCardFormActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    private fun getLoginDetails() {
+
+        dict_data = JSONObject()
+        val logindata = UserSession(this@JobCardFormActivity).getLoginDetails()
+
+        try {
+            dict_data = JSONObject(logindata)
+            mCustomerMobile = dict_data.optString("CustomerMobile")
+            screen = dict_data.optString("Screen")
+            mCustomerName = dict_data.optString("CustomerName")
+            mCustomerReg = dict_data.optString("RegNo")
+            mMake = dict_data.optString("Make")
+            mModel = dict_data.optString("Model")
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+    }
+
     private fun init() {
         toolbar_title = findViewById(R.id.toolbar_title)
         toolbar_title.text = "Job Card"
         tabLayout = findViewById(R.id.tabs)
 
         mViewPager = findViewById(R.id.jobcard_dashboard_pager)
+        ll_customer_details = findViewById(R.id.ll_customer_details)
+        tv_customer_name = findViewById(R.id.tv_customer_name)
+        tv_mobile = findViewById(R.id.tv_mobile)
+        tv_reg = findViewById(R.id.tv_reg)
+        tv_vehicle = findViewById(R.id.tv_vehicle)
 
         tabLayout!!.isEnabled = false
 
@@ -152,15 +221,28 @@ class JobCardFormActivity : AppCompatActivity(), View.OnClickListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when (tab.text) {
                     "Details" -> {
+                        currentPageIndex = 0
                         next.visibility = View.VISIBLE
                         previous.visibility = View.INVISIBLE
                     }
-                    "Summary" -> {
-                        next.visibility = View.INVISIBLE
+                    "Jobs" -> {
+                        currentPageIndex = 1
+                        next.visibility = View.VISIBLE
                         previous.visibility = View.VISIBLE
                     }
-                    else -> {
+                    "Spares" -> {
+                        currentPageIndex = 2
                         next.visibility = View.VISIBLE
+                        previous.visibility = View.VISIBLE
+                    }
+                    "Services" -> {
+                        currentPageIndex = 3
+                        next.visibility = View.VISIBLE
+                        previous.visibility = View.VISIBLE
+                    }
+                    "Summary" -> {
+                        currentPageIndex = 4
+                        next.visibility = View.INVISIBLE
                         previous.visibility = View.VISIBLE
                     }
                 }
@@ -168,10 +250,10 @@ class JobCardFormActivity : AppCompatActivity(), View.OnClickListener {
         })
 
 
-        val tabStrip = tabLayout!!.getChildAt(0) as LinearLayout
-        for (i in 0 until tabStrip.childCount) {
-            tabStrip.getChildAt(i).setOnTouchListener { v, event -> true }
-        }
+        /* val tabStrip = tabLayout!!.getChildAt(0) as LinearLayout
+         for (i in 0 until tabStrip.childCount) {
+             tabStrip.getChildAt(i).setOnTouchListener { v, event -> true }
+         }*/
     }
 
 
@@ -232,6 +314,11 @@ class JobCardFormActivity : AppCompatActivity(), View.OnClickListener {
         dict_data.put("status", "")
         dict_data.put("service_status", "")
         dict_data.put("screenType", "")
+        dict_data.put("CustomerName", "")
+        dict_data.put("RegNo", "")
+        dict_data.put("Make", "")
+        dict_data.put("Model", "")
+        dict_data.put("Screen", "")
         UserSession(this@JobCardFormActivity).setLoginDetails(dict_data.toString())
 
         val intent = Intent(this@JobCardFormActivity, MainActivity::class.java)

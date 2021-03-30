@@ -5,21 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.viewpager.widget.PagerAdapter
 import workshop.lbit.qrcode.R
-import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
-import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
 import workshop.lbit.qrcode.data.JobcardData
-import workshop.lbit.qrcode.data.QrData
-import workshop.lbit.qrcode.interfaces.QrDataList
 
 
 class JobcardSummarySparesDataAdapter(
     internal var mContext: Context,
     internal var mJobcardDataList: List<JobcardData>
-    ) : PagerAdapter() {
+) : PagerAdapter() {
 
     internal var layoutInflater: LayoutInflater
 
@@ -28,8 +23,10 @@ class JobcardSummarySparesDataAdapter(
     private lateinit var tv_spare_ppsPartNo: MyTextView_Roboto_Medium
     private lateinit var tv_spare_partDesc: MyTextView_Roboto_Medium
     private lateinit var tv_spare_quantity: MyTextView_Roboto_Medium
-    private lateinit var tv_spare_mrp: MyTextView_Roboto_Bold
-    private lateinit var tv_spare_jobid: MyTextView_Roboto_Bold
+    private lateinit var tv_spare_mrp: MyTextView_Roboto_Medium
+    private lateinit var tv_spare_finalprice: MyTextView_Roboto_Medium
+    private lateinit var tv_spare_jobid: MyTextView_Roboto_Medium
+    private lateinit var tv_spare_discount: MyTextView_Roboto_Medium
 
 
     init {
@@ -47,7 +44,8 @@ class JobcardSummarySparesDataAdapter(
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val itemView = layoutInflater.inflate(R.layout.jobcard_summary_spares_data_row, container, false)
+        val itemView =
+            layoutInflater.inflate(R.layout.jobcard_summary_spares_data_row, container, false)
 
         mJCData = mJobcardDataList[position]
 
@@ -55,12 +53,16 @@ class JobcardSummarySparesDataAdapter(
         tv_spare_partDesc = itemView.findViewById(R.id.tv_spare_partDesc)
         tv_spare_quantity = itemView.findViewById(R.id.tv_spare_quantity)
         tv_spare_mrp = itemView.findViewById(R.id.tv_spare_mrp)
+        tv_spare_finalprice = itemView.findViewById(R.id.tv_spare_finalprice)
+        tv_spare_discount = itemView.findViewById(R.id.tv_spare_discount)
         tv_spare_jobid = itemView.findViewById(R.id.tv_spare_jobid)
 
         tv_spare_ppsPartNo.text = mJCData.jc_oepart
         tv_spare_partDesc.text = mJCData.jc_spare
         tv_spare_quantity.text = mJCData.jc_qty
-        tv_spare_mrp.text = mJCData.jc_final
+        tv_spare_mrp.text = mJCData.jc_mrp
+        tv_spare_finalprice.text = mJCData.jc_final
+        tv_spare_discount.text = mJCData.jc_discount
         tv_spare_jobid.text = mJCData.jc_job_id
 
         container.addView(itemView)

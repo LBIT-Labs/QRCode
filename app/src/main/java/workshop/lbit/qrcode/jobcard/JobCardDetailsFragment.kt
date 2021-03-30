@@ -49,12 +49,14 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     lateinit var tv_customer_address: MyTextView_Roboto_Bold
     lateinit var tv_customer_paymentType: MyTextView_Roboto_Bold
     lateinit var tv_customer_gst_applicable: MyTextView_Roboto_Bold
+    lateinit var tv_customer_pincode_txt: MyTextView_Roboto_Bold
 
     lateinit var tv_workshop_supervisor_mobile: MyTextView_Roboto_Bold
     lateinit var tv_workshop_supervisor: MyTextView_Roboto_Bold
     lateinit var tv_workshop_technician: MyTextView_Roboto_Bold
 
     lateinit var et_search: EditText
+    lateinit var ll_search: LinearLayout
     lateinit var eb_jabcard_vehicleDetails: ExpandableButton
 
     /*Vehicle Details*/
@@ -115,6 +117,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     var mCustomerEmail: String = ""
     var mJObCardNid: String = ""
     var mJObCardScreen: String = ""
+    var screen: String = ""
     var mCustomerAddress: String = ""
     var mCustomerPincode: String = ""
     var mCustomerGSTIN: String = ""
@@ -168,10 +171,20 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                 mCustomerMobile = dict_data.optString("CustomerMobile")
                 mJObCardNid = dict_data.optString("JobCardCustID")
                 mJObCardScreen = dict_data.optString("screenType")
+                screen = dict_data.optString("Screen")
 
 
             } catch (e: JSONException) {
                 e.printStackTrace()
+            }
+
+            if (screen.isNotEmpty()) {
+                if (screen.equals("Live")) {
+                    ll_search.visibility = View.GONE
+
+                } else if (screen.equals("New")) {
+                    ll_search.visibility = View.VISIBLE
+                }
             }
 
             if (mCustomerMobile.isNotEmpty() && mJObCardNid.isNotEmpty()) {
@@ -198,12 +211,20 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                 mCustomerMobile = dict_data.optString("CustomerMobile")
                 mJObCardNid = dict_data.optString("JobCardCustID")
                 mJObCardScreen = dict_data.optString("screenType")
-
+                screen = dict_data.optString("Screen")
 
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
 
+            if (screen.isNotEmpty()) {
+                if (screen.equals("Live")) {
+                    ll_search.visibility = View.GONE
+
+                } else if (screen.equals("New")) {
+                    ll_search.visibility = View.VISIBLE
+                }
+            }
             if (mCustomerMobile.isNotEmpty() && mJObCardNid.isNotEmpty()) {
 
                 getDetailsWithMobile(mCustomerMobile, mJObCardNid)
@@ -253,6 +274,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
         MandatoryCustomerAddress(resources.getString(R.string.address))
         MandatoryCustomerPaymentType(resources.getString(R.string.payment_type))
         MandatoryCustomerGST(resources.getString(R.string.gst))
+        MandatoryPincode(resources.getString(R.string.pincode))
 
         MandatoryTechnician(resources.getString(R.string.technician))
         MandatorySupervisor(resources.getString(R.string.supervisor))
@@ -937,9 +959,9 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
                     if (arg2 > 0) {
                         mCustomerGSTApplicable = sp_customer_gst_applicable.selectedItem.toString()
-                        if(mCustomerGSTApplicable.equals("No")){
+                        if (mCustomerGSTApplicable.equals("No")) {
                             ll_gstin.visibility = View.GONE
-                        }else{
+                        } else {
                             ll_gstin.visibility = View.VISIBLE
 
                         }
@@ -1062,7 +1084,6 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                     val matcher = pattern.matcher(mVehicleRegNumber)
                     if (matcher.matches()) {
 
-//                        et_vehicle_reg_number.setText(mVehicleRegNumber)
                     } else {
 
                         Toast.makeText(
@@ -1272,7 +1293,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                     } else {
                         Toast.makeText(
                             requireContext(),
-                            "Invalid Registation Number, Please Re-enter Register Number",
+                            "Invalid GSTIN Number, Please Re-enter GSTIN Number",
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -1501,6 +1522,23 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
     }
 
+    private fun MandatoryPincode(reg: String) {
+        val colored = " *"
+        val builder = SpannableStringBuilder()
+
+        builder.append(reg)
+        val start: Int = builder.length
+        builder.append(colored)
+        val end: Int = builder.length
+
+        builder.setSpan(
+            ForegroundColorSpan(Color.RED), start, end,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        tv_customer_pincode_txt.text = builder
+
+    }
+
     private fun MandatorySupervisor(reg: String) {
         val colored = " *"
         val builder = SpannableStringBuilder()
@@ -1537,6 +1575,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
     fun init(v: View) {
 
+        ll_search = v.findViewById(R.id.ll_search)
         et_search = v.findViewById(R.id.et_search)
         eb_jabcard_vehicleDetails = v.findViewById(R.id.eb_jabcard_vehicleDetails)
 
@@ -1552,6 +1591,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
         tv_customer_address = v.findViewById(R.id.tv_customer_address)
         tv_customer_paymentType = v.findViewById(R.id.tv_customer_paymentType)
         tv_customer_gst_applicable = v.findViewById(R.id.tv_customer_gst_applicable)
+        tv_customer_pincode_txt = v.findViewById(R.id.tv_customer_pincode_txt)
 
         tv_workshop_technician = v.findViewById(R.id.tv_workshop_technician)
         tv_workshop_supervisor = v.findViewById(R.id.tv_workshop_supervisor)
@@ -1605,9 +1645,14 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
     fun Save() {
 
-        if(mJObCardScreen.isEmpty()){
+        if (mJObCardScreen.isEmpty()) {
 
             dict_data.put("JobCardCustID", "")
+            dict_data.put("CustomerMobile", mCustomerMobile)
+            dict_data.put("CustomerName", mCustomerName)
+            dict_data.put("RegNo", mVehicleRegNumber)
+            dict_data.put("Make", mVehicleMake)
+            dict_data.put("Model", mVehicleModel)
             UserSession(requireContext()).setLoginDetails(dict_data.toString())
         }
 
@@ -1617,6 +1662,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
         mProgressDialog.show()
         Constants.qrCode_uat.SaveJobCardVehicleDetails(
             mMobileNumber.toString(),
+            mJObCardNid,
             mVehicleRegNumber,
             mVehicleMake,
             mVehicleModel,
@@ -1697,7 +1743,6 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                         var mCustId1 = mCustId.substring(0, mCustId.length - 1)
 
                         dict_data.put("JobCardCustID", mCustId1)
-                        dict_data.put("CustomerMobile", mCustomerMobile)
                         UserSession(requireContext()).setLoginDetails(dict_data.toString())
 
                         Toast.makeText(
@@ -1810,6 +1855,16 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             return false
         }
 
+        if (mCustomerPincode.isEmpty()) {
+
+            Toast.makeText(
+                requireContext(),
+                "Please Enter Pincode in Customer Details",
+                Toast.LENGTH_LONG
+            ).show()
+            return false
+        }
+
         if (mCustomerPaymentType.isEmpty()) {
 
             Toast.makeText(
@@ -1857,6 +1912,42 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                 Toast.LENGTH_LONG
             ).show()
             return false
+        }
+
+        if (mCustomerGSTIN.isNotEmpty()) {
+            if (mCustomerGSTIN.length == 15) {
+                val pattern =
+                    Pattern.compile("[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[A-Z]{1}[0-9]{1}")
+                val matcher = pattern.matcher(mCustomerGSTIN)
+                if (matcher.matches()) {
+                    return true
+
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Invalid GSTIN Number, Please Re-enter GSTIN Number",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return false
+                }
+            }
+        }
+        if (mVehicleRegNumber.isNotEmpty()) {
+            if (mVehicleRegNumber.length == 10) {
+                val pattern = Pattern.compile("[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}")
+                val matcher = pattern.matcher(mVehicleRegNumber)
+                if (matcher.matches()) {
+                    return true
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Invalid Registation Number, Please Re-enter Register Number",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return false
+
+                }
+            }
         }
 
         return true

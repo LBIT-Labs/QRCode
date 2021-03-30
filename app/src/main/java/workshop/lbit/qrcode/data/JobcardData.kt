@@ -165,6 +165,10 @@ class JobcardData {
     @Expose
     var jc_live_make: String? = null
 
+    @SerializedName("model")
+    @Expose
+    var jc_live_model: String? = null
+
     @SerializedName("vendor")
     @Expose
     var jc_live_vendor: String? = null
@@ -234,6 +238,7 @@ class JobcardData {
         jc_live_inv_num: String?,
         jc_live_inv_amt: String?,
         jc_live_make: String?,
+        jc_live_model: String?,
         jc_live_vendor: String?,
         jc_live_vendor_id: String?,
         jc_live_status: String?,
@@ -283,6 +288,7 @@ class JobcardData {
         this.jc_live_inv_num = jc_live_inv_num
         this.jc_live_inv_amt = jc_live_inv_amt
         this.jc_live_make = jc_live_make
+        this.jc_live_model = jc_live_model
         this.jc_live_vendor = jc_live_vendor
         this.jc_live_vendor_id = jc_live_vendor_id
         this.jc_live_status = jc_live_status

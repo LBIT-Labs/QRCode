@@ -633,10 +633,11 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
                             mProgressDialog.dismiss()
                             mAlertDialog.dismiss()
 
-//                            dict_data.put("screenType", "SpareSearch")
-//                            UserSession(this@JobcardSparesSearchActivity).setLoginDetails(dict_data.toString())
-//
-//                            Log.d("User Data", dict_data.toString())
+
+                            dict_data.put("Screen", "Live")
+                            UserSession(this@JobcardSparesSearchActivity).setLoginDetails(dict_data.toString())
+                            Log.d("User Data", dict_data.toString())
+
                             val intent = Intent(
                                 this@JobcardSparesSearchActivity,
                                 JobCardFormActivity::class.java
@@ -647,7 +648,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
                                 R.anim.move_right_enter,
                                 R.anim.move_right_exit
                             )
-                            intent.putExtra("TAG", "1")
+                            intent.putExtra("TAG", "2")
                             startActivity(intent)
                             finish()
                         }

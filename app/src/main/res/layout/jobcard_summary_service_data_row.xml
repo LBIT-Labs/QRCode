@@ -125,7 +125,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
@@ -148,7 +147,7 @@
                 android:textColor="@color/qr_code_bg"
                 android:textSize="@dimen/_13sdp" />
 
-            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
                 android:id="@+id/tv_service_finalPrice"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -163,7 +162,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
@@ -186,7 +184,7 @@
                 android:textColor="@color/qr_code_bg"
                 android:textSize="@dimen/_13sdp" />
 
-            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
                 android:id="@+id/tv_service_jobid"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -201,7 +199,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
@@ -224,7 +221,7 @@
                 android:textColor="@color/qr_code_bg"
                 android:textSize="@dimen/_13sdp" />
 
-            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
                 android:id="@+id/tv_service_technician"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

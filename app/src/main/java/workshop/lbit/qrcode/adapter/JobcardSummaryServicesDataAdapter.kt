@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.viewpager.widget.PagerAdapter
 import workshop.lbit.qrcode.R
-import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
 import workshop.lbit.qrcode.data.JobcardData
 
@@ -24,9 +23,9 @@ class JobcardSummaryServicesDataAdapter(
     private lateinit var tv_service_service: MyTextView_Roboto_Medium
     private lateinit var tv_service_cost: MyTextView_Roboto_Medium
     private lateinit var tv_service_discount: MyTextView_Roboto_Medium
-    private lateinit var tv_service_finalprice: MyTextView_Roboto_Bold
-    private lateinit var tv_service_jobid: MyTextView_Roboto_Bold
-    private lateinit var tv_service_technician: MyTextView_Roboto_Bold
+    private lateinit var tv_service_finalprice: MyTextView_Roboto_Medium
+    private lateinit var tv_service_jobid: MyTextView_Roboto_Medium
+    private lateinit var tv_service_technician: MyTextView_Roboto_Medium
 
 
     init {

@@ -88,7 +88,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
@@ -126,7 +125,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
@@ -164,7 +162,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
@@ -202,7 +199,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
@@ -240,10 +236,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_margin="@dimen/_10sdp"
             android:gravity="center"
             android:orientation="horizontal"
             android:visibility="visible">
@@ -252,10 +245,10 @@
                 android:id="@+id/tv_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
                 android:background="@drawable/submit_bg"
                 android:drawableLeft="@drawable/icon_edit_white"
                 android:drawablePadding="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_10sdp"
                 android:gravity="center"
                 android:paddingLeft="@dimen/_30sdp"
                 android:paddingTop="@dimen/_10sdp"
@@ -269,9 +262,9 @@
                 android:id="@+id/tv_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
                 android:background="@drawable/submit_bg"
                 android:drawableLeft="@drawable/icon_delete_white"
+                android:layout_marginLeft="@dimen/_10sdp"
                 android:drawablePadding="@dimen/_5sdp"
                 android:gravity="center"
                 android:paddingLeft="@dimen/_30sdp"

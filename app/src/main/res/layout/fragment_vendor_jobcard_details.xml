@@ -42,23 +42,33 @@
         <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/search_jobid"
+            android:text="@string/reg_no"
             android:textColor="@color/qr_code_bg"
             android:textSize="@dimen/_15sdp" />
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/et_reg_no"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/border_bg">
+            android:background="@drawable/border_bg"
+            android:inputType="text"
+            android:maxLength="10"
+            android:padding="@dimen/_5sdp" />
 
-            <Spinner
-                android:id="@+id/sp_vendor_search_jobid"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:padding="@dimen/_10sdp" />
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="@dimen/_5sdp"-->
+        <!--            android:background="@drawable/border_bg">-->
 
-        </LinearLayout>
+        <!--            <Spinner-->
+        <!--                android:id="@+id/sp_vendor_search_jobid"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="40dp"-->
+        <!--                android:padding="@dimen/_10sdp" />-->
+
+        <!--        </LinearLayout>-->
 
     </LinearLayout>
 
@@ -73,8 +83,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="@dimen/_5sdp">
+            android:layout_margin="@dimen/_5sdp"
+            android:orientation="horizontal">
 
             <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
                 android:layout_width="0dp"

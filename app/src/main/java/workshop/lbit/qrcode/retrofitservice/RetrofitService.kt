@@ -170,7 +170,7 @@ interface retrofit_qrcode {
         @Field("mrp") mrp: String,
         @Field("edit_type") edit: String
 
-        ): Call<ResponseBody>
+    ): Call<ResponseBody>
 
     @FormUrlEncoded
     @POST("/vendor-services-save")
@@ -187,7 +187,7 @@ interface retrofit_qrcode {
         @Field("final") final: String
 
 
-        ): Call<ResponseBody>
+    ): Call<ResponseBody>
 
     @FormUrlEncoded
     @POST("/retrieve-services")
@@ -270,7 +270,8 @@ interface retrofit_qrcode {
         @Field("user_mobile") user_mobile: String,
         @Field("jobcard_id") jobcard_id: String,
         @Field("nid") nid: String,
-        @Field("type") type: String
+        @Field("type") type: String,
+        @Field("reg") reg: String
     ): Call<ResponseBody>
 
     @FormUrlEncoded
@@ -300,7 +301,16 @@ interface retrofit_qrcode {
     @POST("/spare-search")
     fun GetSpareDetailsList(
         @Field("user_mobile") part: String,
-        @Field("search") partCategory: String): Call<ResponseBody>
+        @Field("search") partCategory: String
+    ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("/edit-search")
+    fun GetSpareDetailsList(
+        @Field("user_mobile") mobile: String,
+        @Field("oepart") oepart: String,
+        @Field("part_desc") part_desc: String
+    ): Call<ResponseBody>
 
     @FormUrlEncoded
     @POST("/history-requests")
@@ -333,7 +343,7 @@ interface retrofit_qrcode {
     ): Call<ResponseBody>
 
 
- @FormUrlEncoded
+    @FormUrlEncoded
     @POST("/pics-upload")
     fun QrReturnableGatepassAllow(
         @Field("user_mobile") mobile: String,
@@ -398,6 +408,7 @@ interface retrofit_qrcode {
     @POST("/vehicle-details")
     fun SaveJobCardVehicleDetails(
         @Field("user_mobile") user_mobile: String,
+        @Field("nid") nid: String,
         @Field("reg_num") reg_num: String,
         @Field("make") make: String,
         @Field("model") model: String,
@@ -427,7 +438,7 @@ interface retrofit_qrcode {
         @Field("tech") tech: String,
         @Field("supervisor") supervisor: String,
         @Field("sup_mob") sup_mob: String
-        ): Call<ResponseBody>
+    ): Call<ResponseBody>
 
 
     /*SC List Names*/
