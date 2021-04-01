@@ -166,7 +166,11 @@ class QrData {
     @Expose
     var qr_tax: String? = null
 
-    constructor() {}
+    @SerializedName("jobcard_id")
+    @Expose
+    var qr_jobcard_id: String? = null
+
+    constructor()
 
     /**
      *
@@ -216,7 +220,8 @@ class QrData {
         qr_oe_part: String?,
         qr_part_desc: String?,
         qr_available_qty: String?,
-        qr_tax: String?
+        qr_tax: String?,
+        qr_jobcard_id: String?
 
     ) : super() {
 
@@ -259,6 +264,7 @@ class QrData {
         this.qr_part_desc = qr_part_desc
         this.qr_available_qty = qr_available_qty
         this.qr_tax = qr_tax
+        this.qr_jobcard_id = qr_jobcard_id
     }
 
 }

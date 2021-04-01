@@ -14,7 +14,8 @@ import workshop.lbit.qrcode.data.QrData
 class QrScanningHistoryListAdapter(
     private val mContext: Context,
     internal var qrScanningHistoryList: List<QrData>,
-    var mRole: String
+    var mRole: String,
+    var mGatePassType: String
 ) : RecyclerView.Adapter<QrScanningHistoryListAdapter.MyViewHolder>() {
 
     internal lateinit var mData: QrData
@@ -26,6 +27,7 @@ class QrScanningHistoryListAdapter(
         var qr_his_qty: MyTextView_Roboto_Medium
         var qr_his_date: MyTextView_Roboto_Medium
         var qr_his_invoice: MyTextView_Roboto_Medium
+        var qr_his_jobcard: MyTextView_Roboto_Medium
 
         init {
             qr_his_sno = view.findViewById(R.id.qr_his_sno)
@@ -34,6 +36,7 @@ class QrScanningHistoryListAdapter(
             qr_his_qty = view.findViewById(R.id.qr_his_qty)
             qr_his_date = view.findViewById(R.id.qr_his_date)
             qr_his_invoice = view.findViewById(R.id.qr_his_invoice)
+            qr_his_jobcard = view.findViewById(R.id.qr_his_jobcard)
 
             if (mRole.equals("stores") || mRole.equals("counter")) {
                 qr_his_invoice.visibility = View.GONE
@@ -42,11 +45,22 @@ class QrScanningHistoryListAdapter(
                 qr_his_invoice.visibility = View.GONE
                 qr_his_ref.visibility = View.VISIBLE
                 qr_his_date.visibility = View.VISIBLE
-            }else {
+            } else {
                 qr_his_invoice.visibility = View.VISIBLE
                 qr_his_ref.visibility = View.GONE
                 qr_his_date.visibility = View.VISIBLE
 
+            }
+
+
+            if (mGatePassType.isNotEmpty()) {
+                if (mGatePassType.equals("CounterSale")) {
+                    qr_his_qty.visibility = View.VISIBLE
+                    qr_his_jobcard.visibility = View.GONE
+                } else if (mGatePassType.equals("Jobcard")) {
+                    qr_his_qty.visibility = View.GONE
+                    qr_his_jobcard.visibility = View.VISIBLE
+                }
             }
         }
     }
@@ -63,11 +77,12 @@ class QrScanningHistoryListAdapter(
 
         mData = qrScanningHistoryList[position]
 
-        if(mRole.equals("wh_security")){
+        if(mRole.equals("wh_security")) {
 
             holder.qr_his_sno.text = mData.qr_s_no
             holder.qr_his_custName.text = mData.qr_gate_pass_no
-            holder.qr_his_custName.setPaintFlags(holder.qr_his_custName.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
+            holder.qr_his_custName.paintFlags =
+                holder.qr_his_custName.paintFlags or Paint.UNDERLINE_TEXT_FLAG
             holder.qr_his_ref.text = mData.qr_quantity
             holder.qr_his_qty.text = mData.qr_gross_weight
             holder.qr_his_invoice.text = mData.qr_quantity
@@ -80,6 +95,7 @@ class QrScanningHistoryListAdapter(
             holder.qr_his_qty.text = mData.qr_quantity
             holder.qr_his_date.text = mData.qr_date
             holder.qr_his_invoice.text = mData.qr_invoice_number
+            holder.qr_his_jobcard.text = mData.qr_jobcard_id
         }
 
     }

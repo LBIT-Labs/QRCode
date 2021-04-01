@@ -197,6 +197,18 @@ class JobcardData {
     @Expose
     var jc_live_gatepass_in_out_status: String? = null
 
+    @SerializedName("type")
+    @Expose
+    var jc_live_type: String? = null
+
+    @SerializedName("field_gatepass_status")
+    @Expose
+    var jc_live_field_gatepass_status: String? = null
+
+    @SerializedName("qr_scan_status")
+    @Expose
+    var jc_live_qr_scan_status: String? = null
+
 
     constructor()
     constructor(
@@ -247,7 +259,10 @@ class JobcardData {
         jc_live_gatepass_date: String?,
         jc_live_gatepass_status: String?,
         jc_live_gatepass_in_out_status: String?,
-        jc_live_tech: String?
+        jc_live_tech: String?,
+        jc_live_type: String?,
+        jc_live_field_gatepass_status: String?,
+        jc_live_qr_scan_status: String?
 
     ) : super() {
 
@@ -298,5 +313,8 @@ class JobcardData {
         this.jc_live_gatepass_status = jc_live_gatepass_status
         this.jc_live_gatepass_in_out_status = jc_live_gatepass_in_out_status
         this.jc_live_tech = jc_live_tech
+        this.jc_live_type = jc_live_type
+        this.jc_live_field_gatepass_status = jc_live_field_gatepass_status
+        this.jc_live_qr_scan_status = jc_live_qr_scan_status
     }
 }

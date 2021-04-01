@@ -105,6 +105,27 @@ interface retrofit_qrcode {
     ): Call<ResponseBody>
 
     @FormUrlEncoded
+    @POST("/filters-data")
+    fun GetFiltersData(
+        @Field("status") status: String,
+        @Field("job_type") search: String,
+        @Field("type") type: String
+    ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("/filters-data")
+    fun VerifyMobile(
+        @Field("status") status: String,
+        @Field("custmobile") search: String
+    ): Call<ResponseBody>
+
+    @FormUrlEncoded
+    @POST("/location-spokes")
+    fun GetLocation(
+        @Field("user_mobile") status: String
+    ): Call<ResponseBody>
+
+    @FormUrlEncoded
     @POST("/services-save")
     fun SaveJObCard(
         @Field("nid") nid: String,
@@ -285,7 +306,8 @@ interface retrofit_qrcode {
     @POST("/vehicle-search")
     fun getDetails(
         @Field("cust_mobile") mobile: String,
-        @Field("nid") nid: String
+        @Field("nid") nid: String,
+        @Field("reg") reg: String
     ): Call<ResponseBody>
 
 

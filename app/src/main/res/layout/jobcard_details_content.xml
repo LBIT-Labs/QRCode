@@ -22,18 +22,35 @@
             android:textColor="@color/qr_code_bg"
             android:textSize="@dimen/_15sdp" />
 
-        <EditText
-            android:id="@+id/et_vehicle_reg_number"
+        <!--        <EditText-->
+        <!--            android:id="@+id/et_vehicle_reg_number"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_marginTop="@dimen/_5sdp"-->
+        <!--            android:background="@drawable/border_bg"-->
+        <!--            android:hint="AB10SP1220"-->
+        <!--            android:imeOptions="actionDone"-->
+        <!--            android:inputType="textCapCharacters"-->
+        <!--            android:maxLength="10"-->
+        <!--            android:padding="@dimen/_10sdp"-->
+        <!--            android:textAllCaps="true" />-->
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/border_bg"
-            android:hint="AB10SP1220"
-            android:imeOptions="actionDone"
-            android:inputType="textCapCharacters"
-            android:maxLength="10"
-            android:padding="@dimen/_10sdp"
-            android:textAllCaps="true" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_bg">
+
+            <AutoCompleteTextView
+                android:id="@+id/av_reg"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:hint="Enter Here"
+                android:padding="@dimen/_10sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_20sdp" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -107,18 +124,6 @@
             android:textColor="@color/qr_code_bg"
             android:textSize="@dimen/_15sdp" />
 
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="40dp"-->
-        <!--            android:layout_marginTop="@dimen/_10sdp"-->
-        <!--            android:background="@drawable/border_bg">-->
-
-        <!--            <Spinner-->
-        <!--                android:id="@+id/sp_vehicle_variant"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:padding="@dimen/_10sdp" />-->
-        <!--        </LinearLayout>-->
 
         <EditText
             android:id="@+id/et_vehicle_variant"
@@ -405,34 +410,34 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
-        android:orientation="vertical">
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="@dimen/_10sdp"-->
+    <!--        android:orientation="vertical">-->
 
-        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/location"
-            android:textColor="@color/qr_code_bg"
-            android:textSize="@dimen/_15sdp" />
+    <!--        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="@string/location"-->
+    <!--            android:textColor="@color/qr_code_bg"-->
+    <!--            android:textSize="@dimen/_15sdp" />-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/border_bg">
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="40dp"-->
+    <!--            android:layout_marginTop="@dimen/_5sdp"-->
+    <!--            android:background="@drawable/border_bg">-->
 
-            <Spinner
-                android:id="@+id/sp_vehicle_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/insurance_array"
-                android:padding="@dimen/_5sdp" />
-        </LinearLayout>
+    <!--            <Spinner-->
+    <!--                android:id="@+id/sp_vehicle_location"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:entries="@array/insurance_array"-->
+    <!--                android:padding="@dimen/_5sdp" />-->
+    <!--        </LinearLayout>-->
 
-    </LinearLayout>
+    <!--    </LinearLayout>-->
 
 
 </LinearLayout>

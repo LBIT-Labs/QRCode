@@ -75,7 +75,18 @@
                             android:padding="10dp"
                             android:text=""
                             android:textColor="@android:color/black"
-                            android:visibility="gone"/>
+                            android:visibility="gone" />
+
+                        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                            android:id="@+id/qr_req_jobcard"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.2"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text=""
+                            android:textColor="@android:color/black"
+                            android:visibility="gone" />
 
                         <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
                             android:id="@+id/qr_req_qty"

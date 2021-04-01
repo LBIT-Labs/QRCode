@@ -472,7 +472,7 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
                     if (mSparesQuantity.isNotEmpty()) {
                         if (mSparesMrp.isNotEmpty()) {
                             if (mSparesHSN.isNotEmpty()) {
-                                if ((mSparesHSN.length) > 4) {
+                                if (mSparesHSN.length >= 4) {
                                     if (mSparesTax.isNotEmpty()) {
                                         if (mSparesDiscount.isNotEmpty()) {
                                             if (status.isNotEmpty()) {
@@ -710,14 +710,19 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
             override fun afterTextChanged(editable: Editable?) {
                 mSparesQuantity = editable.toString().trim()
 
-                if (mSparesMrp.isNotEmpty() && mSparesDiscount.isNotEmpty() && mSparesQuantity.isNotEmpty()) {
-                    val qty = mSparesQuantity.toDouble()
-                    val mrp = mSparesMrp.toDouble()
-                    val mValue = mrp * qty.toInt()
-                    val amount = mValue * mSparesDiscount.toLong() / 100
-                    mSparesFinalPrice = (mValue - amount).toString()
-                    tv_spares_finalprice.text = mSparesFinalPrice
+                if (mSparesQuantity.toInt() > 0) {
+                    if (mSparesMrp.isNotEmpty() && mSparesDiscount.isNotEmpty() && mSparesQuantity.isNotEmpty()) {
+                        val qty = mSparesQuantity.toDouble()
+                        val mrp = mSparesMrp.toDouble()
+                        val mValue = mrp * qty.toInt()
+                        val amount = mValue * mSparesDiscount.toLong() / 100
+                        mSparesFinalPrice = (mValue - amount).toString()
+                        tv_spares_finalprice.text = mSparesFinalPrice
+                    }
+                } else {
+                    et_spares_quantity.setText("")
                 }
+
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -762,7 +767,7 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
             override fun afterTextChanged(editable: Editable?) {
                 val mSparesHSN1 = editable.toString().trim()
 
-                if (mSparesHSN1.length > 4) {
+                if (mSparesHSN1.length >= 4) {
                     mSparesHSN = mSparesHSN1
                 } else {
                     mSparesHSN = ""

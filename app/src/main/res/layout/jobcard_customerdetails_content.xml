@@ -7,30 +7,6 @@
     android:background="@color/db_box_bg"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
-        android:orientation="vertical">
-
-        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
-            android:id="@+id/tv_customer_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/customer_name"
-            android:textColor="@color/qr_code_bg"
-            android:textSize="@dimen/_15sdp" />
-
-        <EditText
-            android:id="@+id/et_customer_name"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/border_bg"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            android:padding="@dimen/_5sdp" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,6 +33,31 @@
             android:maxLength="10"
             android:padding="@dimen/_5sdp" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:id="@+id/tv_customer_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/customer_name"
+            android:textColor="@color/qr_code_bg"
+            android:textSize="@dimen/_15sdp" />
+
+        <EditText
+            android:id="@+id/et_customer_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/border_bg"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:padding="@dimen/_5sdp" />
     </LinearLayout>
 
     <LinearLayout
@@ -122,18 +123,25 @@
             android:textColor="@color/qr_code_bg"
             android:textSize="@dimen/_15sdp" />
 
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_height="wrap_content"
             android:background="@drawable/border_bg">
 
-            <Spinner
-                android:id="@+id/sp_customer_city"
+            <AutoCompleteTextView
+                android:id="@+id/av_city"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_5sdp" />
+                android:layout_height="40dp"
+                android:background="@null"
+                android:hint="Enter Here"
+                android:padding="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_20sdp" />
         </LinearLayout>
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -151,16 +159,21 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_height="wrap_content"
             android:background="@drawable/border_bg">
 
-            <Spinner
-                android:id="@+id/sp_customer_state"
+            <AutoCompleteTextView
+                android:id="@+id/av_state"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_5sdp" />
+                android:layout_height="40dp"
+                android:background="@null"
+                android:hint="Enter Here"
+                android:padding="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_20sdp" />
         </LinearLayout>
+
 
     </LinearLayout>
 
@@ -193,10 +206,12 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_crn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
             android:layout_width="match_parent"
@@ -232,19 +247,15 @@
             android:textSize="@dimen/_15sdp" />
 
 
-        <LinearLayout
+        <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+            android:id="@+id/tv_customer_paymentType_value"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/border_bg">
-
-            <Spinner
-                android:id="@+id/sp_customer_payment_type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/payment_type_array"
-                android:padding="@dimen/_5sdp" />
-        </LinearLayout>
+            android:background="@drawable/border_bg"
+            android:padding="@dimen/_5sdp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/_15sdp" />
     </LinearLayout>
 
     <LinearLayout
@@ -298,10 +309,10 @@
             android:layout_height="40dp"
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/border_bg"
+            android:hint="Enter 15 digit GST here"
             android:imeOptions="actionDone"
             android:inputType="text"
             android:maxLength="15"
-            android:hint="Enter 15 digit GST here"
             android:padding="@dimen/_5sdp" />
 
     </LinearLayout>

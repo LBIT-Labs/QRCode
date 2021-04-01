@@ -8,16 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.viewpager.widget.PagerAdapter
 import workshop.lbit.qrcode.R
-import workshop.lbit.qrcode.Singleton.UserSession
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
-import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
 import workshop.lbit.qrcode.data.JobcardData
 import workshop.lbit.qrcode.interfaces.JobCardList
-import workshop.lbit.qrcode.interfaces.JobCardListService
-import workshop.lbit.qrcode.jobcard.JobCardServiceFragment
 
 
 class LiveJobcardLiveRecordsDataAdapter(
@@ -103,22 +98,23 @@ class LiveJobcardLiveRecordsDataAdapter(
 //        tv_live_estimateView.text = mJCData.jc_live_estimate_view
 //        tv_live_inviceView.text = mJCData.jc_live_invoice_view
 
-        if(mJCData.jc_live_estimate_view!!.isNotEmpty()){
+        if (mJCData.jc_live_estimate_view!!.isNotEmpty()) {
             tv_live_estimateView.text = "Click Here to View"
         }
 
-        if(mJCData.jc_live_invoice_view!!.isNotEmpty()){
+        if (mJCData.jc_live_invoice_view!!.isNotEmpty()) {
             tv_live_inviceView.text = "Click Here to View"
         }
 
-        tv_live_estimateView.setPaintFlags(tv_live_estimateView.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
+        tv_live_estimateView.paintFlags =
+            tv_live_estimateView.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         tv_live_estimateView.setTextColor(mContext.resources.getColor(R.color.yellow))
-        tv_live_inviceView.setPaintFlags(tv_live_inviceView.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
+        tv_live_inviceView.paintFlags = tv_live_inviceView.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         tv_live_inviceView.setTextColor(mContext.resources.getColor(R.color.yellow))
 
         if (mJCData.jc_live_jobcard_status.equals("Job Card")) {
 
-            tv_live_status.setPaintFlags(tv_live_status.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
+            tv_live_status.paintFlags = tv_live_status.paintFlags or Paint.UNDERLINE_TEXT_FLAG
             tv_live_status.setTextColor(mContext.resources.getColor(R.color.yellow))
 
             ll_live_invoiceNo.visibility = View.GONE
@@ -129,10 +125,10 @@ class LiveJobcardLiveRecordsDataAdapter(
 
         } else if (mJCData.jc_live_jobcard_status.equals("Estimate") || mJCData.jc_live_jobcard_status.equals(
                 "Under Progress"
-            )
+            ) || mJCData.jc_live_jobcard_status.equals("Invoice Pending")
         ) {
 
-            tv_live_status.setPaintFlags(tv_live_status.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
+            tv_live_status.paintFlags = tv_live_status.paintFlags or Paint.UNDERLINE_TEXT_FLAG
             tv_live_status.setTextColor(mContext.resources.getColor(R.color.yellow))
 
             ll_live_invoiceNo.visibility = View.GONE
@@ -141,7 +137,7 @@ class LiveJobcardLiveRecordsDataAdapter(
             ll_live_invoiceView.visibility = View.GONE
             ll_live_estimateView.visibility = View.VISIBLE
 
-        }else if (mJCData.jc_live_jobcard_status.equals("Invoiced")) {
+        } else if (mJCData.jc_live_jobcard_status.equals("Invoiced")) {
             ll_live_invoiceNo.visibility = View.VISIBLE
             ll_live_invoiceDate.visibility = View.VISIBLE
             ll_live_invoiceAmount.visibility = View.VISIBLE

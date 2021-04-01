@@ -14,12 +14,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <LinearLayout
                 android:id="@+id/ll_gatepassType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_margin="@dimen/_10sdp"
+                android:orientation="horizontal"
                 android:visibility="visible">
 
                 <LinearLayout
@@ -146,6 +147,17 @@
                                 android:gravity="center"
                                 android:padding="10dp"
                                 android:text="@string/invoice"
+                                android:textColor="@android:color/white"
+                                android:visibility="gone" />
+
+                            <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
+                                android:id="@+id/qr_req_jobcardId"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.2"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="@string/jobcard"
                                 android:textColor="@android:color/white"
                                 android:visibility="gone" />
 

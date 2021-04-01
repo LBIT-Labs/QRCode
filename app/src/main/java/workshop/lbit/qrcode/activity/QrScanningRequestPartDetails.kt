@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.google.zxing.integration.android.IntentIntegrator
@@ -97,7 +96,7 @@ class QrScanningRequestPartDetails : AppCompatActivity(), View.OnClickListener, 
     private var qrValidationCount: String? = null
     private var mManualQr: String? = null
 
-    private val TAG = QrScanningRequestPartDetails::class.java!!.getName()
+    private val TAG = QrScanningRequestPartDetails::class.java.name
 
     lateinit var qr_match_icon: ImageView
     lateinit var qr_unmatch_icon: ImageView
@@ -153,7 +152,7 @@ class QrScanningRequestPartDetails : AppCompatActivity(), View.OnClickListener, 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.qr_scanning_request_part_details)
-        getSupportActionBar()!!.hide();
+        supportActionBar!!.hide()
 
         qr_req_nid_value = intent.getStringExtra("nid")
         qr_req_custName_value = intent.getStringExtra("cust_name")
@@ -293,10 +292,10 @@ class QrScanningRequestPartDetails : AppCompatActivity(), View.OnClickListener, 
 
             override fun onPageScrollStateChanged(state: Int) {
                 if (!scrollStarted && state == ViewPager.SCROLLBAR_POSITION_DEFAULT) {
-                    scrollStarted = true;
-                    checkDirection = true;
+                    scrollStarted = true
+                    checkDirection = true
                 } else {
-                    scrollStarted = false;
+                    scrollStarted = false
                 }
             }
 
@@ -307,7 +306,7 @@ class QrScanningRequestPartDetails : AppCompatActivity(), View.OnClickListener, 
             ) {
 
                 if (thresholdOffset > positionOffset && positionOffsetPixels > thresholdOffsetPixels) {
-                    Log.i(TAG, "going left");
+                    Log.i(TAG, "going left")
 
 
                     Log.e(TAG, "onClick_Previous: " + (mViewPager!!.currentItem - 1))
@@ -321,7 +320,7 @@ class QrScanningRequestPartDetails : AppCompatActivity(), View.OnClickListener, 
                 } else {
 
                     val mNext = (mViewPager!!.currentItem + 1).toString() + " of " + mPageCount
-                    Log.i(TAG, mNext);
+                    Log.i(TAG, mNext)
                     if (!mNext.equals("0")) {
                         tvPagerCount.text = mNext
                     }
@@ -330,7 +329,7 @@ class QrScanningRequestPartDetails : AppCompatActivity(), View.OnClickListener, 
             }
 
             override fun onPageSelected(position: Int) {
-                mCurrentFragmentPosition = position;
+                mCurrentFragmentPosition = position
             }
 
         })
@@ -400,7 +399,7 @@ class QrScanningRequestPartDetails : AppCompatActivity(), View.OnClickListener, 
                             } else {
                                 llViewpaer!!.visibility = View.GONE
                                 tvNodata!!.visibility = View.VISIBLE
-                                layout_footer!!.visibility = View.GONE
+                                layout_footer.visibility = View.GONE
                                 mProgressDialog.dismiss()
 
                             }
@@ -487,7 +486,7 @@ class QrScanningRequestPartDetails : AppCompatActivity(), View.OnClickListener, 
                                 } else {
                                     llViewpaer!!.visibility = View.GONE
                                     tvNodata!!.visibility = View.VISIBLE
-                                    layout_footer!!.visibility = View.GONE
+                                    layout_footer.visibility = View.GONE
                                     mProgressDialog.dismiss()
 
                                 }
@@ -518,7 +517,7 @@ class QrScanningRequestPartDetails : AppCompatActivity(), View.OnClickListener, 
     private fun GetQrRequestPartDetailsListWHG(mobile: String, nid: String) {
         val mProgressDialog = ProgressDialog(this@QrScanningRequestPartDetails)
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Box Loading...")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Log.e("Box Invoice", nid)
         Constants.qrCode_uat_wh.QrRequestBoxListWHG(
@@ -579,7 +578,7 @@ class QrScanningRequestPartDetails : AppCompatActivity(), View.OnClickListener, 
                                     llViewpaer!!.visibility = View.GONE
                                     llRecyclerView!!.visibility = View.GONE
                                     tvNodata!!.visibility = View.VISIBLE
-                                    layout_footer!!.visibility = View.GONE
+                                    layout_footer.visibility = View.GONE
                                     mProgressDialog.dismiss()
 
                                 }
@@ -846,7 +845,7 @@ class QrScanningRequestPartDetails : AppCompatActivity(), View.OnClickListener, 
                 qrValue = result.contents
 
                 if (mRole.equals("wh_security")) {
-                    if (qrValue!!.contains(qr_part_box_value!!)) {
+                    if (qrValue!!.contains(qr_part_box_value)) {
 
                         for (i in 0 until qrPartDataList!!.size) {
 
@@ -998,19 +997,19 @@ class QrScanningRequestPartDetails : AppCompatActivity(), View.OnClickListener, 
         if (qrValidation.equals("Verified")) {
             qr_match_icon.visibility = View.VISIBLE
             qr_unmatch_icon.visibility = View.GONE
-            qr_part_confirm_btn.setText("Confirm")
+            qr_part_confirm_btn.text = "Confirm"
 
         } else {
             qr_match_icon.visibility = View.GONE
             qr_unmatch_icon.visibility = View.VISIBLE
-            qr_part_confirm_btn.setText("Back")
+            qr_part_confirm_btn.text = "Back"
 
 
         }
         val mBuilder = AlertDialog.Builder(this@QrScanningRequestPartDetails)
             .setView(mDialogView)
             .setTitle("")
-        mBuilder.setCancelable(false);
+        mBuilder.setCancelable(false)
         val mAlertDialog = mBuilder.show()
 
 
@@ -1101,7 +1100,7 @@ class QrScanningRequestPartDetails : AppCompatActivity(), View.OnClickListener, 
         mProgressDialog.show()
         mProgressDialog.setMessage("Loading...")
         Constants.qrCode_uat_wh.SaveQrVerifiedValueWH(
-            qr_part_pid_value!!,
+            qr_part_pid_value,
             qrValidationCount!!,
             Constants.WH_User,
             Constants.WH_pwd
@@ -1152,9 +1151,9 @@ class QrScanningRequestPartDetails : AppCompatActivity(), View.OnClickListener, 
         val mProgressDialog = ProgressDialog(this@QrScanningRequestPartDetails)
         mProgressDialog.isIndeterminate = true
         mProgressDialog.show()
-        mProgressDialog.setMessage("Dialog Loading...")
+        mProgressDialog.setMessage("Loading...")
         Constants.qrCode_uat_wh.SaveQrVerifiedValueWHG(
-            qr_part_pid_value!!,
+            qr_part_pid_value,
             qrValidationCount!!,
             Constants.WH_User,
             Constants.WH_pwd,

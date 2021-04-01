@@ -3,6 +3,7 @@ package workshop.lbit.qrcode.vendorjobcard
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,9 +11,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.EditText
+import android.widget.AutoCompleteTextView
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import okhttp3.ResponseBody
@@ -30,7 +32,7 @@ import workshop.lbit.qrcode.utils.Utilities
 class VendorJobCardDetailsFragment : Fragment() {
 
     lateinit var sp_vendor_search_vendor: Spinner
-    lateinit var et_reg_no: EditText
+    lateinit var av_reg: AutoCompleteTextView
     lateinit var tv_vender_jobcard_number: MyTextView_Roboto_Medium
     lateinit var tv_vender_vehicle_number: MyTextView_Roboto_Medium
     lateinit var tv_vender_customer_name: MyTextView_Roboto_Medium
@@ -52,6 +54,7 @@ class VendorJobCardDetailsFragment : Fragment() {
     var mTechnician: String = ""
     private var isLoaded = false
     private var isVisibleToUser = false
+    private var regList = java.util.ArrayList<String>()
 
     internal var mMobileNumber: String? = null
     private var sharedpreferences: SharedPreferences? = null
@@ -90,7 +93,7 @@ class VendorJobCardDetailsFragment : Fragment() {
         } else {
             getVendorList("")
 
-//            getJObCardList()
+            GetRegNo()
         }
 
 
@@ -100,14 +103,86 @@ class VendorJobCardDetailsFragment : Fragment() {
 
         getVendorList("")
 
-//        getJObCardList()
 
         if (mSearchRegNo.isNotEmpty()) {
-            et_reg_no.setText(mSearchRegNo)
+            GetRegNo()
+
             getDetails(mSearchRegNo)
 
         }
     }
+
+    private fun GetRegNo() {
+        val mProgressDialog = ProgressDialog(requireContext())
+        mProgressDialog.isIndeterminate = true
+        mProgressDialog.setMessage("Loading...")
+        mProgressDialog.show()
+        Constants.qrCode_uat.GetFiltersData("reg", "", "vendor")
+            .enqueue(object :
+                Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+
+                    try {
+                        val string = response.body()!!.string()
+                        Log.d("Reg", string)
+
+                        if (!string.equals("{}")) {
+
+                            val mStates = ArrayList<String>()
+                            regList = Utilities.getItemList(mStates, string)
+
+                            if (mSearchRegNo.isNotEmpty()) {
+                                if (regList.indexOf(mSearchRegNo) > -1) {
+                                    val adapter: ArrayAdapter<String> = ArrayAdapter(
+                                        requireContext(),
+                                        android.R.layout.select_dialog_item,
+                                        regList
+                                    )
+                                    av_reg.setAdapter(adapter)
+                                    av_reg.setText(mSearchRegNo)
+                                    av_reg.threshold = 1
+                                    av_reg.setTextColor(Color.BLACK)
+                                } else {
+                                    av_reg.setText(mSearchRegNo)
+                                }
+                            } else {
+                                val adapter: ArrayAdapter<String> = ArrayAdapter(
+                                    requireContext(),
+                                    android.R.layout.select_dialog_item, regList
+                                )
+                                av_reg.threshold = 1
+                                av_reg.setAdapter(adapter)
+                                av_reg.setTextColor(Color.BLACK)
+                            }
+                        }
+
+
+                        mProgressDialog.dismiss()
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.e(
+                        "TAG",
+                        "onFailure() called with: call = [" + call.request()
+                            .url() + "], t = [" + t + "]",
+                        t
+                    )
+
+                    if (mProgressDialog.isShowing)
+                        mProgressDialog.dismiss()
+                }
+            })
+
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -180,7 +255,17 @@ class VendorJobCardDetailsFragment : Fragment() {
                 }
             }
 
-        et_reg_no.addTextChangedListener(object : TextWatcher {
+        av_reg.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                mSearchRegNo = parent.getItemAtPosition(position).toString()
+                hideKeyboard()
+                av_reg.clearFocus()
+
+                getDetails(mSearchRegNo)
+
+            }
+
+        av_reg.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
                 val text = editable.toString().trim()
 
@@ -229,6 +314,15 @@ class VendorJobCardDetailsFragment : Fragment() {
 
     }
 
+    private fun hideKeyboard() {
+        val view = requireActivity().currentFocus
+        view?.let { v ->
+            val imm =
+                activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.let { it.hideSoftInputFromWindow(v.windowToken, 0) }
+        }
+    }
+
     private fun getDetails(mSearchRegNo: String) {
 
         val mProgressDialog = ProgressDialog(requireContext())
@@ -251,7 +345,7 @@ class VendorJobCardDetailsFragment : Fragment() {
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("Details", string)
+                    Log.e("Details", mJobCard + " " + mSearchRegNo + "" + string)
 
 
                     if (!string.equals("{}")) {
@@ -431,7 +525,7 @@ class VendorJobCardDetailsFragment : Fragment() {
 
     private fun init(v: View) {
         sp_vendor_search_vendor = v.findViewById(R.id.sp_vendor_search_vendor)
-        et_reg_no = v.findViewById(R.id.et_reg_no)
+        av_reg = v.findViewById(R.id.av_reg)
 
         tv_vender_jobcard_number = v.findViewById(R.id.tv_vender_jobcard_number)
         tv_vender_vehicle_number = v.findViewById(R.id.tv_vender_vehicle_number)

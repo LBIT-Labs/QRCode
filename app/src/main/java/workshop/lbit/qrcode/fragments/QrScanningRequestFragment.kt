@@ -51,6 +51,7 @@ class QrScanningRequestFragment @SuppressLint("ValidFragment") constructor() : F
     private var qr_req_ref: MyTextView_Roboto_Medium? = null
     private var qr_req_qty: MyTextView_Roboto_Medium? = null
     private var qr_req_custName: MyTextView_Roboto_Medium? = null
+    private var qr_req_jobcardId: MyTextView_Roboto_Medium? = null
     private var gson: Gson? = null
     var jsonObject: JSONArray = (JSONArray())
     private lateinit var qrScanningAdapter: QrScanningRequestListAdapter
@@ -63,17 +64,13 @@ class QrScanningRequestFragment @SuppressLint("ValidFragment") constructor() : F
     internal lateinit var ll_gatepassType: LinearLayout
     internal lateinit var rb_jobcard: RadioButton
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        super.setUserVisibleHint(isVisibleToUser);
-        this.isVisibleToUser = isVisibleToUser;
-        if (isVisibleToUser && isAdded()) {
+        super.setUserVisibleHint(isVisibleToUser)
+        this.isVisibleToUser = isVisibleToUser
+        if (isVisibleToUser && isAdded) {
             loadData()
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -81,7 +78,7 @@ class QrScanningRequestFragment @SuppressLint("ValidFragment") constructor() : F
         super.onViewCreated(view, savedInstanceState)
         if (isVisibleToUser && (!isLoaded)) {
             loadData()
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -184,10 +181,14 @@ class QrScanningRequestFragment @SuppressLint("ValidFragment") constructor() : F
             if (value.equals("Counter Sale")) {
 
                 mGatePassType = "CounterSale"
+                qr_req_jobcardId!!.visibility = View.GONE
+                qr_req_qty!!.visibility = View.VISIBLE
                 GetQrRequestList(mMobileNumber!!)
 
             } else if (value.equals("JobCard")) {
                 mGatePassType = "Jobcard"
+                qr_req_jobcardId!!.visibility = View.VISIBLE
+                qr_req_qty!!.visibility = View.GONE
 
                 GetQrRequestListGatepass(mMobileNumber!!)
 
@@ -226,6 +227,7 @@ class QrScanningRequestFragment @SuppressLint("ValidFragment") constructor() : F
         qr_req_ref = view.findViewById(R.id.qr_req_ref)
         qr_req_qty = view.findViewById(R.id.qr_req_qty)
         qr_req_custName = view.findViewById(R.id.qr_req_custName)
+        qr_req_jobcardId = view.findViewById(R.id.qr_req_jobcardId)
         gson = Gson()
 
         val layoutManager = LinearLayoutManager(requireContext())

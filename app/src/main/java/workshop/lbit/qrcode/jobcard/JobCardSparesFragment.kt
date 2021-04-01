@@ -264,7 +264,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
 
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading... get")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.GetJobcardData(mJobCardCustID, "spares").enqueue(object :
             Callback<ResponseBody> {
@@ -507,6 +507,14 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
                                 }
                             }
                         }
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Please Enter Quantity to proceed",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+
                     }
                 } else {
                     Toast.makeText(requireContext(), "Please Select JobId", Toast.LENGTH_LONG)
@@ -519,6 +527,13 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
             }
         }
         bt_cancel.setOnClickListener {
+
+            mSparesQuantityLatest = ""
+            mSparesQuantity = ""
+            mSparesDiscount = ""
+            mSparesMrp = ""
+            mSparesFinalPrice = ""
+
             mAlertDialog.dismiss()
         }
 
@@ -653,21 +668,26 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
                 val mQuantity = mSparesQuantity.toInt() + mSparesTotalQuantity.toInt()
 
                 if (mSparesQuantityLatest.isNotEmpty()) {
-                    if (mSparesQuantityLatest.toInt() > mQuantity) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Quantity should not be greater than Available Quantity",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    } else {
-                        if (mSparesMrp.isNotEmpty() && mSparesDiscount.isNotEmpty() && mSparesQuantity.isNotEmpty()) {
+                    if (mSparesQuantityLatest.toInt() > 0) {
+                        if (mSparesQuantityLatest.toInt() > mQuantity) {
+                            Toast.makeText(
+                                requireContext(),
+                                "Quantity should not be greater than Available Quantity",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+                            if (mSparesMrp.isNotEmpty() && mSparesDiscount.isNotEmpty() && mSparesQuantity.isNotEmpty()) {
 
-                            val mValue = mSparesMrp.toLong() * mSparesQuantityLatest.toLong()
-                            val amount = mValue * mSparesQuantityLatest.toLong() / 100
-                            mSparesFinalPrice = (mValue - amount).toString()
-                            tv_spares_finalprice.text = mSparesFinalPrice
+                                val mValue = mSparesMrp.toLong() * mSparesQuantityLatest.toLong()
+                                val amount = mValue * mSparesQuantityLatest.toLong() / 100
+                                mSparesFinalPrice = (mValue - amount).toString()
+                                tv_spares_finalprice.text = mSparesFinalPrice
+                            }
                         }
+                    } else {
+                        et_spares_quantity.setText("")
                     }
+
                 }
 
             }
@@ -699,7 +719,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
 
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading... Save")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.SaveJobCardSpares(
             mMobileNumber.toString(),
@@ -761,7 +781,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
 
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading... Save")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.SaveJobCardSpares(
             mMobileNumber.toString(),

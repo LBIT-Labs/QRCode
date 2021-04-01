@@ -158,6 +158,17 @@
                                 android:visibility="gone" />
 
                             <TextView
+                                android:id="@+id/qr_req_jobcardId"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.2"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="@string/invoice"
+                                android:textColor="@android:color/white"
+                                android:visibility="gone" />
+
+                            <TextView
                                 android:id="@+id/qr_req_qty"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"

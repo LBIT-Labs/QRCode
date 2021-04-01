@@ -53,6 +53,7 @@ class QrScanningGatepassDetails : AppCompatActivity(), View.OnClickListener {
     private lateinit var ll_image: LinearLayout
     private lateinit var ll_vendorName: LinearLayout
     private lateinit var ll_capture_image: LinearLayout
+    private lateinit var ll_receiptno: LinearLayout
     private lateinit var tv_capture_image: MyTextView_Montserrat_Regular
     private lateinit var tv_gp_vendorName: MyTextView_Roboto_Regular
     private lateinit var tv_gp_regNo: MyTextView_Roboto_Regular
@@ -60,6 +61,8 @@ class QrScanningGatepassDetails : AppCompatActivity(), View.OnClickListener {
     private lateinit var tv_gp_technicianName: MyTextView_Roboto_Regular
     private lateinit var tv_gp_Mobile: MyTextView_Roboto_Regular
     private lateinit var tv_gp_jobcard_no: MyTextView_Roboto_Regular
+    private lateinit var tv_gp_payment_type: MyTextView_Roboto_Regular
+    private lateinit var tv_gp_receipt_no: MyTextView_Roboto_Regular
     private lateinit var tv_gp_submit: MyTextView_Roboto_Regular
     private lateinit var ivCaptureImage: ImageView
     private val CAMERA = 1
@@ -75,7 +78,7 @@ class QrScanningGatepassDetails : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qrscanning_gatepass)
-        getSupportActionBar()!!.hide();
+        supportActionBar!!.hide()
 
         qr_req_nid_value = intent.getStringExtra("nid")
 
@@ -223,6 +226,8 @@ class QrScanningGatepassDetails : AppCompatActivity(), View.OnClickListener {
                         mGatepassStatus = jsonObject.getString("gatepass_status").toString()
                         mGatepassType = jsonObject.getString("gatepass_type").toString()
                         val mVendor = jsonObject.getString("vendor").toString()
+                        val mPayment_type = jsonObject.getString("payment_type").toString()
+                        val mReceiptNo = jsonObject.getString("receipt_no").toString()
 
 
                         tv_gp_vendorName.text = "Vendor : " + mVendor
@@ -231,6 +236,17 @@ class QrScanningGatepassDetails : AppCompatActivity(), View.OnClickListener {
                         tv_gp_technicianName.text = mTechnician
                         tv_gp_Mobile.text = mCustomerMobile
                         tv_gp_jobcard_no.text = mJobCardNo
+                        tv_gp_payment_type.text = mPayment_type
+                        tv_gp_receipt_no.text = mReceiptNo
+
+                        if (mPayment_type.isNotEmpty()) {
+                            if (mPayment_type.equals("Cash")) {
+                                ll_receiptno.visibility = View.VISIBLE
+                            } else {
+                                ll_receiptno.visibility = View.GONE
+
+                            }
+                        }
 
                         if (mGatepassType.isNotEmpty()) {
                             if (mGatepassType.equals("Non Returnable")) {
@@ -277,7 +293,7 @@ class QrScanningGatepassDetails : AppCompatActivity(), View.OnClickListener {
 
     private fun focusOnView() {
         Handler().post(Runnable {
-            sv_scrollview.scrollTo(0, ll_image.getTop())
+            sv_scrollview.scrollTo(0, ll_image.top)
         })
     }
 
@@ -372,8 +388,8 @@ class QrScanningGatepassDetails : AppCompatActivity(), View.OnClickListener {
                             .into(ivCaptureImage)
 
                         ll_image.requestFocus()
-                        sv_scrollview.requestFocus(View.FOCUS_UP);
-                        sv_scrollview.scrollTo(0, 4);
+                        sv_scrollview.requestFocus(View.FOCUS_UP)
+                        sv_scrollview.scrollTo(0, 4)
                         focusOnView()
 
                         val bytes = File(path).readBytes()
@@ -412,30 +428,30 @@ class QrScanningGatepassDetails : AppCompatActivity(), View.OnClickListener {
 
             val f = File(
                 wallpaperDirectory, ((Calendar.getInstance()
-                    .getTimeInMillis()).toString() + ".jpg")
+                    .timeInMillis).toString() + ".jpg")
             )
 
 
             if (!f.exists()) {
-                f.getParentFile().mkdirs();
+                f.parentFile.mkdirs()
 
-                f.createNewFile();
-                Log.e("TAG", "File Created");
+                f.createNewFile()
+                Log.e("TAG", "File Created")
             }
 
-            Log.d("File Name", f.getName())
+            Log.d("File Name", f.name)
 
             val fo = FileOutputStream(f)
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(
                 this@QrScanningGatepassDetails,
-                arrayOf(f.getPath()),
+                arrayOf(f.path),
                 arrayOf("image/jpeg"), null
             )
             fo.close()
-            Log.d("TAG", "File Saved::--->" + f.getAbsolutePath())
+            Log.d("TAG", "File Saved::--->" + f.absolutePath)
 
-            return f.getAbsolutePath()
+            return f.absolutePath
         } catch (e1: IOException) {
             e1.printStackTrace()
         }
@@ -448,6 +464,7 @@ class QrScanningGatepassDetails : AppCompatActivity(), View.OnClickListener {
         ll_image = findViewById(R.id.ll_image)
         ll_vendorName = findViewById(R.id.ll_vendorName)
         ll_capture_image = findViewById(R.id.ll_capture_image)
+        ll_receiptno = findViewById(R.id.ll_receiptno)
         sv_scrollview = findViewById(R.id.sv_scrollview)
         tv_capture_image = findViewById(R.id.tv_capture_image)
         ivCaptureImage = findViewById(R.id.ivCaptureImage)
@@ -457,6 +474,8 @@ class QrScanningGatepassDetails : AppCompatActivity(), View.OnClickListener {
         tv_gp_technicianName = findViewById(R.id.tv_gp_technicianName)
         tv_gp_Mobile = findViewById(R.id.tv_gp_Mobile)
         tv_gp_jobcard_no = findViewById(R.id.tv_gp_jobcard_no)
+        tv_gp_payment_type = findViewById(R.id.tv_gp_payment_type)
+        tv_gp_receipt_no = findViewById(R.id.tv_gp_receipt_no)
         tv_gp_submit = findViewById(R.id.tv_gp_submit)
     }
 

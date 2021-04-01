@@ -46,29 +46,23 @@
             android:textColor="@color/qr_code_bg"
             android:textSize="@dimen/_15sdp" />
 
-        <EditText
-            android:id="@+id/et_reg_no"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/border_bg"
-            android:inputType="text"
-            android:maxLength="10"
-            android:padding="@dimen/_5sdp" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_bg">
 
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="@dimen/_5sdp"-->
-        <!--            android:background="@drawable/border_bg">-->
+            <AutoCompleteTextView
+                android:id="@+id/av_reg"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:hint="Enter Here"
+                android:padding="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/_20sdp" />
+        </LinearLayout>
 
-        <!--            <Spinner-->
-        <!--                android:id="@+id/sp_vendor_search_jobid"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="40dp"-->
-        <!--                android:padding="@dimen/_10sdp" />-->
-
-        <!--        </LinearLayout>-->
 
     </LinearLayout>
 

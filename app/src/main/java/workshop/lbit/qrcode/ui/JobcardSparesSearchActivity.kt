@@ -597,7 +597,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
 
         val mProgressDialog = ProgressDialog(this@JobcardSparesSearchActivity)
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading... Save")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.SaveJobCardSpares(
             mMobileNumber.toString(),
@@ -736,29 +736,36 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
             override fun afterTextChanged(editable: Editable?) {
                 mSparesQuantity = editable.toString().trim()
 
-                if(mSparesQuantity.isNotEmpty()){
+                if (mSparesQuantity.isNotEmpty()) {
 
-                    try {
-                        if (mSparesQuantity.toDouble() > mValue_part_quantity.toInt().toDouble()) {
-                            Toast.makeText(
-                                this@JobcardSparesSearchActivity,
-                                "Quantity should not be greater than Available Quantity",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        } else {
-                            if (mValue_mrp.isNotEmpty() && mSparesDiscount.isNotEmpty() && mSparesQuantity.isNotEmpty()) {
+                    if (mSparesQuantity.toInt() > 0) {
+                        try {
+                            if (mSparesQuantity.toDouble() > mValue_part_quantity.toInt()
+                                    .toDouble()
+                            ) {
+                                Toast.makeText(
+                                    this@JobcardSparesSearchActivity,
+                                    "Quantity should not be greater than Available Quantity",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            } else {
+                                if (mValue_mrp.isNotEmpty() && mSparesDiscount.isNotEmpty() && mSparesQuantity.isNotEmpty()) {
 
-                                val qty = mSparesQuantity.toDouble()
-                                val mrp = mValue_mrp.toDouble()
-                                val mValue = mrp * qty.toInt()
-                                val amount = mValue * mSparesDiscount.toLong() / 100
-                                mSparesFinalPrice = (mValue - amount).toString()
-                                tv_spares_finalprice.text = mSparesFinalPrice
+                                    val qty = mSparesQuantity.toDouble()
+                                    val mrp = mValue_mrp.toDouble()
+                                    val mValue = mrp * qty.toInt()
+                                    val amount = mValue * mSparesDiscount.toLong() / 100
+                                    mSparesFinalPrice = (mValue - amount).toString()
+                                    tv_spares_finalprice.text = mSparesFinalPrice
+                                }
                             }
+                        } catch (e: java.lang.Exception) {
+                            e.printStackTrace()
                         }
-                    }catch (e:java.lang.Exception){
-                        e.printStackTrace()
+                    } else {
+                        et_spares_quantity.setText("")
                     }
+
                 }
             }
 
@@ -795,7 +802,7 @@ class JobcardSparesSearchActivity : AppCompatActivity(), View.OnClickListener, Q
         val intent = Intent(this@JobcardSparesSearchActivity, JobCardFormActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         overridePendingTransition(R.anim.move_right_enter, R.anim.move_right_exit)
-        intent.putExtra("TAG", "1")
+        intent.putExtra("TAG", "2")
         startActivity(intent)
         finish()
     }

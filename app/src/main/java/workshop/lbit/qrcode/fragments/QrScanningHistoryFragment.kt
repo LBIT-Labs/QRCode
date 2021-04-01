@@ -31,7 +31,6 @@ import retrofit2.Response
 import workshop.lbit.qrcode.R
 import workshop.lbit.qrcode.Singleton.UserSession
 import workshop.lbit.qrcode.adapter.QrScanningHistoryListAdapter
-import workshop.lbit.qrcode.adapter.QrScanningRequestListAdapter
 import workshop.lbit.qrcode.customfonts.MyTextView_Montserrat_Regular
 import workshop.lbit.qrcode.data.QrData
 import workshop.lbit.qrcode.utils.Constants
@@ -51,6 +50,7 @@ class QrScanningHistoryFragment @SuppressLint("ValidFragment") constructor() : F
     private var qr_req_date: TextView? = null
     private var qr_req_custName: TextView? = null
     private var qr_req_qty: TextView? = null
+    private var qr_req_jobcardId: TextView? = null
     private var gson: Gson? = null
     var jsonObject: JSONArray = (JSONArray())
     private var tvNodata: MyTextView_Montserrat_Regular? = null
@@ -66,25 +66,21 @@ class QrScanningHistoryFragment @SuppressLint("ValidFragment") constructor() : F
     internal lateinit var rb_jobcard: RadioButton
     private var mGatePassType: String = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        super.setUserVisibleHint(isVisibleToUser);
-        this.isVisibleToUser = isVisibleToUser;
-        if (isVisibleToUser && isAdded()) {
-            loadData();
-            isLoaded = true;
+        super.setUserVisibleHint(isVisibleToUser)
+        this.isVisibleToUser = isVisibleToUser
+        if (isVisibleToUser && isAdded) {
+            loadData()
+            isLoaded = true
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (isVisibleToUser && (!isLoaded)) {
-            loadData();
-            isLoaded = true;
+            loadData()
+            isLoaded = true
         }
     }
 
@@ -187,16 +183,20 @@ class QrScanningHistoryFragment @SuppressLint("ValidFragment") constructor() : F
 
 
             if (value.equals("Counter Sale")) {
-
+                qr_req_jobcardId!!.visibility = View.GONE
+                qr_req_qty!!.visibility = View.VISIBLE
                 mGatePassType = "CounterSale"
                 GetQrHistoryList(mMobileNumber!!)
 
             } else if (value.equals("JobCard")) {
                 mGatePassType = "Jobcard"
-
+                qr_req_jobcardId!!.visibility = View.VISIBLE
+                qr_req_qty!!.visibility = View.GONE
                 GetQrHistoryListGatepass(mMobileNumber!!)
 
             }
+
+
         }
 
         return v
@@ -216,6 +216,7 @@ class QrScanningHistoryFragment @SuppressLint("ValidFragment") constructor() : F
         qr_req_date = view.findViewById(R.id.qr_req_date)
         qr_req_custName = view.findViewById(R.id.qr_req_custName)
         qr_req_qty = view.findViewById(R.id.qr_req_qty)
+        qr_req_jobcardId = view.findViewById(R.id.qr_req_jobcardId)
         tvNodata = view.findViewById(R.id.tvNodata)
         gson = Gson()
 
@@ -259,7 +260,12 @@ class QrScanningHistoryFragment @SuppressLint("ValidFragment") constructor() : F
                             }.type
                         )
                         qrScanningAdapter =
-                            QrScanningHistoryListAdapter(requireContext(), saledatalist, mRole)
+                            QrScanningHistoryListAdapter(
+                                requireContext(),
+                                saledatalist,
+                                mRole,
+                                mGatePassType
+                            )
                         mRecyclerView!!.adapter = qrScanningAdapter
 
                     } else {
@@ -314,7 +320,12 @@ class QrScanningHistoryFragment @SuppressLint("ValidFragment") constructor() : F
                             }.type
                         )
                         qrScanningAdapter =
-                            QrScanningHistoryListAdapter(requireContext(), saledatalist, mRole)
+                            QrScanningHistoryListAdapter(
+                                requireContext(),
+                                saledatalist,
+                                mRole,
+                                mGatePassType
+                            )
                         mRecyclerView!!.adapter = qrScanningAdapter
 
                     } else {
@@ -378,7 +389,12 @@ class QrScanningHistoryFragment @SuppressLint("ValidFragment") constructor() : F
                             }.type
                         )
                         qrScanningAdapter =
-                            QrScanningHistoryListAdapter(requireContext(), saledatalist, mRole)
+                            QrScanningHistoryListAdapter(
+                                requireContext(),
+                                saledatalist,
+                                mRole,
+                                mGatePassType
+                            )
                         mRecyclerView!!.adapter = qrScanningAdapter
 
                     } else {
@@ -439,7 +455,12 @@ class QrScanningHistoryFragment @SuppressLint("ValidFragment") constructor() : F
                             }.type
                         )
                         qrScanningAdapter =
-                            QrScanningHistoryListAdapter(requireContext(), saledatalist, mRole)
+                            QrScanningHistoryListAdapter(
+                                requireContext(),
+                                saledatalist,
+                                mRole,
+                                mGatePassType
+                            )
                         mRecyclerView!!.adapter = qrScanningAdapter
 
                     } else {

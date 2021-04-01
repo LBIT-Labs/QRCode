@@ -3,6 +3,7 @@ package workshop.lbit.qrcode.jobcard
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.ProgressDialog
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -14,6 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
@@ -51,7 +53,7 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
     lateinit var tv_jobs_jobId: MyTextView_Roboto_Medium
     lateinit var tv_job_txt: MyTextView_Roboto_Bold
     lateinit var tv_jobcategory_txt: MyTextView_Roboto_Bold
-    lateinit var sp_jobs_job: Spinner
+    lateinit var av_job: AutoCompleteTextView
     lateinit var sp_jobs_jobCategory: Spinner
     private var vp_pager: ViewPager? = null
     private var tv_previous: MyTextView_Roboto_Bold? = null
@@ -154,7 +156,7 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
     private fun getJobsList() {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading... get")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.GetJobcardData(mJobCardCustID, "jobs").enqueue(object :
             Callback<ResponseBody> {
@@ -208,6 +210,11 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
                     mProgressDialog.dismiss()
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadData()
     }
 
     fun init(v: View) {
@@ -277,27 +284,25 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
 
     }
 
+    private fun hideKeyboard() {
+        val view = requireActivity().currentFocus
+        view?.let { v ->
+            val imm =
+                activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.let { it.hideSoftInputFromWindow(v.windowToken, 0) }
+        }
+    }
+
     private fun getValues() {
 
-        sp_jobs_job.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    arg0: AdapterView<*>,
-                    view: View, arg2: Int, arg3: Long
-                ) {
+        av_job.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                mJob = parent.getItemAtPosition(position).toString()
+                hideKeyboard()
+                av_job.clearFocus()
 
-                    if (arg2 > 0) {
-                        mJob = sp_jobs_job.selectedItem.toString()
+                getJObID(mJob)
 
-                        getJObID(mJob)
-                    } else {
-                        mJob = ""
-                    }
-                }
-
-                override fun onNothingSelected(arg0: AdapterView<*>) {
-
-                }
             }
 
         sp_jobs_jobCategory.onItemSelectedListener =
@@ -427,7 +432,7 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
         et_jobs_wrokshop_notes = mDialogView.findViewById(R.id.et_jobs_wrokshop_notes)
         et_jobs_customer_notes = mDialogView.findViewById(R.id.et_jobs_customer_notes)
         sp_jobs_jobCategory = mDialogView.findViewById(R.id.sp_jobs_jobCategory)
-        sp_jobs_job = mDialogView.findViewById(R.id.sp_jobs_job)
+        av_job = mDialogView.findViewById(R.id.av_job)
         tv_jobs_jobId = mDialogView.findViewById(R.id.tv_jobs_jobId)
 
         tv_jobcategory_txt = mDialogView.findViewById(R.id.tv_jobcategory_txt)
@@ -546,7 +551,7 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
 
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading... Save")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.SaveJObCard(
             mJobCardCustID,
@@ -619,10 +624,13 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
 
                         list = Utilities.getItemList(list, string)
 
-                        sp_jobs_job.adapter = ArrayAdapter(
+                        val adapter: ArrayAdapter<String> = ArrayAdapter(
                             requireContext(),
-                            android.R.layout.simple_spinner_dropdown_item, list
+                            android.R.layout.select_dialog_item, list
                         )
+                        av_job.threshold = 1
+                        av_job.setAdapter(adapter)
+                        av_job.setTextColor(Color.BLACK)
 
                         mProgressDialog.dismiss()
 

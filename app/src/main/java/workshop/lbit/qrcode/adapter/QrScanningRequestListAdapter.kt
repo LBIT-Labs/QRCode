@@ -30,6 +30,7 @@ class QrScanningRequestListAdapter(
         var qr_req_ref: MyTextView_Roboto_Medium
         var qr_req_qty: MyTextView_Roboto_Medium
         var qr_req_invoice: MyTextView_Roboto_Medium
+        var qr_req_jobcard: MyTextView_Roboto_Medium
 
         init {
             qr_req_sno = view.findViewById(R.id.qr_req_sno)
@@ -37,6 +38,7 @@ class QrScanningRequestListAdapter(
             qr_req_ref = view.findViewById(R.id.qr_req_ref)
             qr_req_qty = view.findViewById(R.id.qr_req_qty)
             qr_req_invoice = view.findViewById(R.id.qr_req_invoice)
+            qr_req_jobcard = view.findViewById(R.id.qr_req_jobcard)
 
             if (mRole.equals("stores")) {
                 qr_req_invoice.visibility = View.GONE
@@ -50,6 +52,16 @@ class QrScanningRequestListAdapter(
             } else {
                 qr_req_invoice.visibility = View.VISIBLE
                 qr_req_ref.visibility = View.GONE
+            }
+
+            if (mGatePassType.isNotEmpty()) {
+                if (mGatePassType.equals("CounterSale")) {
+                    qr_req_qty.visibility = View.VISIBLE
+                    qr_req_jobcard.visibility = View.GONE
+                } else if (mGatePassType.equals("Jobcard")) {
+                    qr_req_qty.visibility = View.GONE
+                    qr_req_jobcard.visibility = View.VISIBLE
+                }
             }
         }
     }
@@ -71,7 +83,8 @@ class QrScanningRequestListAdapter(
 
             holder.qr_req_sno.text = mData.qr_s_no
             holder.qr_req_custName.text = mData.qr_gate_pass_no
-            holder.qr_req_custName.setPaintFlags(holder.qr_req_custName.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
+            holder.qr_req_custName.paintFlags =
+                holder.qr_req_custName.paintFlags or Paint.UNDERLINE_TEXT_FLAG
             holder.qr_req_ref.text = mData.qr_quantity
             holder.qr_req_qty.text = mData.qr_gross_weight
             holder.qr_req_invoice.text = mData.qr_quantity
@@ -79,11 +92,15 @@ class QrScanningRequestListAdapter(
         } else {
             holder.qr_req_sno.text = mData.qr_s_no
             holder.qr_req_custName.text = mData.qr_customerName
-            holder.qr_req_custName.setPaintFlags(holder.qr_req_custName.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
+            holder.qr_req_custName.paintFlags =
+                holder.qr_req_custName.paintFlags or Paint.UNDERLINE_TEXT_FLAG
             holder.qr_req_ref.text = mData.qr_ref_id
             holder.qr_req_qty.text = mData.qr_quantity
             holder.qr_req_invoice.text = mData.qr_invoice_number
+            holder.qr_req_jobcard.text = mData.qr_jobcard_id
+
         }
+
 
         holder.qr_req_custName.setOnClickListener(View.OnClickListener {
             mData = qrScanningRequestList[position]

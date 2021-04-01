@@ -1,23 +1,16 @@
 package workshop.lbit.qrcode.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Paint
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.viewpager.widget.PagerAdapter
 import workshop.lbit.qrcode.R
-import workshop.lbit.qrcode.Singleton.UserSession
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Medium
-import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Regular
 import workshop.lbit.qrcode.data.JobcardData
 import workshop.lbit.qrcode.interfaces.JobCardList
-import workshop.lbit.qrcode.interfaces.JobCardListService
-import workshop.lbit.qrcode.jobcard.JobCardServiceFragment
 
 
 class VendorJobcardNewRecordsDataAdapter(
@@ -124,7 +117,8 @@ class VendorJobcardNewRecordsDataAdapter(
 
         if (mJCData.jc_live_status.equals("Job Card") || mJCData.jc_live_status.equals("Estimate") || mJCData.jc_live_status.equals("Under Progress")) {
 
-            tv_live_jobcardStatus.setPaintFlags(tv_live_jobcardStatus.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
+            tv_live_jobcardStatus.paintFlags =
+                tv_live_jobcardStatus.paintFlags or Paint.UNDERLINE_TEXT_FLAG
             tv_live_jobcardStatus.setTextColor(mContext.resources.getColor(R.color.yellow))
 
         }
@@ -135,7 +129,15 @@ class VendorJobcardNewRecordsDataAdapter(
         tv_live_jobcardStatus.setOnClickListener {
             mJCData = mJobsList[position]
 
-            listener.onNavigate(mJCData, position)
+
+            if (mJCData.jc_live_status.equals("Job Card") || mJCData.jc_live_status.equals("Estimate") || mJCData.jc_live_status.equals(
+                    "Under Progress"
+                )
+            ) {
+
+                listener.onNavigate(mJCData, position)
+
+            }
 
         }
 

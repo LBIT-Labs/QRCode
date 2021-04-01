@@ -349,7 +349,16 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
                 Toast.makeText(requireContext(), "Please Enter Service", Toast.LENGTH_LONG).show()
             }
         }
+
         bt_cancel.setOnClickListener {
+
+            mServiceCost = ""
+            mServiceService = ""
+            mServiceHours = ""
+            mServiceDiscount = ""
+            mServiceFinalPrice = ""
+            mServiceJobid = ""
+
             mAlertDialog.dismiss()
         }
 
@@ -504,7 +513,7 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
 
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading... Save")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.SaveJobcardService(
             mJobCardCustID,
@@ -566,7 +575,7 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
 
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading... Save")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.SaveJobcardService(
             mJobCardCustID,
@@ -729,7 +738,7 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun getServicesList() {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading... get")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.GetJobcardData(mJobCardCustID, "services").enqueue(object :
             Callback<ResponseBody> {

@@ -380,8 +380,6 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
                                 }.type
                             )
 
-
-
                             vp_serviepager!!.adapter = VendorJobcardSummaryServicesDataAdapter(
                                 requireContext(),
                                 jobsdatalistServices

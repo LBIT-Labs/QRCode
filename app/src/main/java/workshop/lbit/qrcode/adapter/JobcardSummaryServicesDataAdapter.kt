@@ -26,6 +26,9 @@ class JobcardSummaryServicesDataAdapter(
     private lateinit var tv_service_finalprice: MyTextView_Roboto_Medium
     private lateinit var tv_service_jobid: MyTextView_Roboto_Medium
     private lateinit var tv_service_technician: MyTextView_Roboto_Medium
+    private lateinit var tv_service_source: MyTextView_Roboto_Medium
+    private lateinit var tv_service_gatepass_status: MyTextView_Roboto_Medium
+    private lateinit var ll_gatepassStatus: LinearLayout
 
 
     init {
@@ -55,6 +58,9 @@ class JobcardSummaryServicesDataAdapter(
         tv_service_finalprice = itemView.findViewById(R.id.tv_service_finalPrice)
         tv_service_jobid = itemView.findViewById(R.id.tv_service_jobid)
         tv_service_technician = itemView.findViewById(R.id.tv_service_technician)
+        tv_service_source = itemView.findViewById(R.id.tv_service_source)
+        tv_service_gatepass_status = itemView.findViewById(R.id.tv_service_gatepass_status)
+        ll_gatepassStatus = itemView.findViewById(R.id.ll_gatepassStatus)
 
         tv_service_service.text = mJCData.jc_service
         tv_service_cost.text = mJCData.jc_mrp
@@ -62,6 +68,44 @@ class JobcardSummaryServicesDataAdapter(
         tv_service_finalprice.text = mJCData.jc_final
         tv_service_jobid.text = mJCData.jc_job_id
         tv_service_technician.text = mJCData.jc_live_tech
+
+
+        if (mJCData.jc_live_type!!.isNotEmpty()) {
+            if (mJCData.jc_live_type.equals("inhouse")) {
+                tv_service_source.text = "In-House"
+
+            } else {
+                tv_service_source.text = "Out-House"
+
+            }
+        } else {
+            tv_service_source.text = "Out-House"
+
+        }
+
+        if (mJCData.jc_live_field_gatepass_status!!.isNotEmpty()) {
+            if (mJCData.jc_live_field_gatepass_status.equals("in")) {
+                tv_service_gatepass_status.text = "Closed"
+
+            } else {
+                tv_service_gatepass_status.text = "Open"
+
+            }
+        } else {
+            tv_service_gatepass_status.text = "Open"
+
+        }
+
+        if (mJCData.jc_live_type!!.isNotEmpty()) {
+            if (mJCData.jc_live_type.equals("inhouse")) {
+                ll_gatepassStatus.visibility = View.GONE
+            } else {
+                ll_gatepassStatus.visibility = View.VISIBLE
+            }
+        } else {
+            ll_gatepassStatus.visibility = View.GONE
+
+        }
 
         container.addView(itemView)
 

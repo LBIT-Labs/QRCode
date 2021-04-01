@@ -79,6 +79,8 @@
     <string name="gatepass_counter">Counter Sale</string>
     <string name="gatepass_type">Gatepass Type</string>
     <string name="job_id">Job ID</string>
+    <string name="scan_status">Scan Status</string>
+    <string name="source">Source</string>
     <string name="cust_notes">Customer Notes</string>
     <string name="workshop_notes">Workshop Notes</string>
     <string name="notes">Notes</string>
@@ -280,6 +282,8 @@
     <string name="service_start_time">Service Start Time</string>
     <string name="technician_mobile">Technician Mobile</string>
     <string name="jobcard_no">JobCard No</string>
+    <string name="receipt_no">Receipt No</string>
+    <string name="jobcard">JobCard</string>
     <string name="reference">Reference#</string>
     <string name="invoice">Invoice#</string>
     <string name="invoice_number">Invoice Number</string>

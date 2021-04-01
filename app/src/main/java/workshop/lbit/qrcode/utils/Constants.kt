@@ -17,7 +17,9 @@ object Constants {
 //    val QRCODE_URL_WH = "https://multibrand.lbit.co.in"
 
     val QRCODE_URL_WS = "http://13.233.31.10:9065"
-    val QRCODE_URL_WH = "http://13.233.31.10:9057"
+    val QRCODE_URL_WH = "http://13.233.31.10:9065"
+
+//    val QRCODE_URL_WH = "http://13.233.31.10:9057"
 
     val PREOWNED_PROD_URL = "http://13.233.31.10:9020/"
     val PHP_URL = "http://13.127.220.54:1213/"
@@ -39,13 +41,13 @@ object Constants {
         .baseUrl(QRCODE_URL_WS)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
-        .build().create<retrofit_qrcode>(retrofit_qrcode::class.java!!)
+        .build().create<retrofit_qrcode>(retrofit_qrcode::class.java)
 
     val qrCode_uat_wh = Retrofit.Builder()
         .baseUrl(QRCODE_URL_WH)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
-        .build().create<retrofit_qrcode>(retrofit_qrcode::class.java!!)
+        .build().create<retrofit_qrcode>(retrofit_qrcode::class.java)
 
 
 
