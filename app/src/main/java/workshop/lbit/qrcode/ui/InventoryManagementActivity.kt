@@ -8,7 +8,6 @@ import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
@@ -50,6 +49,7 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
     internal lateinit var tv_submit: TextView
     internal lateinit var list: ArrayList<String>
     private var mPartsList: ArrayList<String>? = null
+    internal lateinit var iv_close: ImageView
 
     private var mPartDetailsListArray: JSONArray? = null
     private var gson: Gson? = null
@@ -73,24 +73,31 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inventory_management)
-        getSupportActionBar()!!.hide();
+        supportActionBar!!.hide()
 
         init()
 
+        iv_close.setOnClickListener {
+            mPartDesc = ""
+            et_search_part.setText("")
+            tvNodata!!.visibility = View.VISIBLE
+            ll_footer.visibility = View.GONE
+            ll_Parts_list.visibility = View.GONE
+        }
 
         GetIMMake()
+
         GetIMCategoty()
 
         tv_submit.setOnClickListener {
 
             getPartDetails()
-
-
         }
+
         et_search_part.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
                 val text = editable.toString().trim()
-                if (text.length >= 4) {
+                if (text.length == 4) {
                     GetIMPartDesc(text)
 
                 }
@@ -105,11 +112,8 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 mPartDesc = parent.getItemAtPosition(position).toString()
                 et_search_part.setText(mPartDesc)
-                et_search_part.setSelection(et_search_part.text.length)
-
-                val `in`: InputMethodManager =
-                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                `in`.hideSoftInputFromWindow(view.windowToken, 0)
+                hideKeyboard()
+                et_search_part.clearFocus()
 
             }
 
@@ -148,7 +152,7 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
 
     private fun focusOnView() {
         Handler().post(Runnable {
-            sv_scroll.scrollTo(0, ll_search_image.getTop())
+            sv_scroll.scrollTo(0, ll_search_image.top)
         })
     }
 
@@ -178,8 +182,8 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
 
                                 et_search_part.clearFocus()
                                 ll_search_image.requestFocus()
-                                sv_scroll.requestFocus(View.FOCUS_UP);
-                                sv_scroll.scrollTo(0, 4);
+                                sv_scroll.requestFocus(View.FOCUS_UP)
+                                sv_scroll.scrollTo(0, 4)
                                 focusOnView()
 
                                 ll_search_image.visibility = View.VISIBLE
@@ -193,18 +197,18 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
                                     object : TypeToken<List<QrData>>() {
                                     }.type
                                 )
-                                mViewPager!!.adapter =
+                                mViewPager.adapter =
                                     Qr_Inventory_Management_adapter(
                                         this@InventoryManagementActivity,
                                         this@InventoryManagementActivity,
                                         getLoansList
                                     )
-                                mViewPager.setOverScrollMode(View.OVER_SCROLL_NEVER);
+                                mViewPager.overScrollMode = View.OVER_SCROLL_NEVER
 
                                 mPageCount = mPartDetailsListArray!!.length().toString()
 
                                 if (mPageCount!!.length > 0) {
-                                    tvPagerCount!!.text = mPageCount!!
+                                    tvPagerCount.text = mPageCount!!
                                 }
                             } else {
                                 ll_search_image.visibility = View.VISIBLE
@@ -415,7 +419,8 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
 
     fun init() {
         sv_scroll = findViewById(R.id.nest_scrollview)
-        sv_scroll.setFillViewport(true)
+        sv_scroll.isFillViewport = true
+        iv_close = findViewById(R.id.iv_close)
 
         ll_Parts_list = findViewById(R.id.ll_Parts_list)
         ll_footer = findViewById(R.id.ll_footer)
@@ -438,17 +443,17 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
 
 //        val scrollView: NestedScrollView = findViewById(R.id.nest_scrollview) as NestedScrollView
 //        scrollView.setFillViewport(true)
-        ivnext!!.setOnClickListener(this)
-        ivprevious!!.setOnClickListener(this)
+        ivnext.setOnClickListener(this)
+        ivprevious.setOnClickListener(this)
 
-        mViewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
             override fun onPageScrollStateChanged(state: Int) {
                 if (!scrollStarted && state == ViewPager.SCROLLBAR_POSITION_DEFAULT) {
-                    scrollStarted = true;
-                    checkDirection = true;
+                    scrollStarted = true
+                    checkDirection = true
                 } else {
-                    scrollStarted = false;
+                    scrollStarted = false
                 }
             }
 
@@ -462,17 +467,17 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
                     Log.e("TAG", "going left")
 
 
-                    Log.e("TAG", "onClick_Previous: " + (mViewPager!!.currentItem - 1))
+                    Log.e("TAG", "onClick_Previous: " + (mViewPager.currentItem - 1))
 
-                    val mNext = (mViewPager!!.currentItem + 1).toString() + " of " + mPageCount
-                    if (!(mViewPager!!.currentItem - 1).equals(mPageCount) && !mNext.equals("0")) {
+                    val mNext = (mViewPager.currentItem + 1).toString() + " of " + mPageCount
+                    if (!(mViewPager.currentItem - 1).equals(mPageCount) && !mNext.equals("0")) {
                         tvPagerCount.text = mNext
                     }
 
 
                 } else {
 
-                    val mNext = (mViewPager!!.currentItem + 1).toString() + " of " + mPageCount
+                    val mNext = (mViewPager.currentItem + 1).toString() + " of " + mPageCount
                     Log.e("TAG", mNext)
                     if (!mNext.equals("0")) {
                         tvPagerCount.text = mNext
@@ -482,7 +487,7 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
             }
 
             override fun onPageSelected(position: Int) {
-                mCurrentFragmentPosition = position;
+                mCurrentFragmentPosition = position
             }
 
         })
@@ -492,18 +497,18 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
 
         val i = v!!.id
         if (i == R.id.ivprevious) {
-            mViewPager!!.setCurrentItem(getItemofviewpager(-1), true)
+            mViewPager.setCurrentItem(getItemofviewpager(-1), true)
 
-            Log.e("TAG", "onClick_Previous: " + mViewPager!!.currentItem)
-            val mPrev = (mViewPager!!.currentItem + 1).toString() + " of " + mPageCount
+            Log.e("TAG", "onClick_Previous: " + mViewPager.currentItem)
+            val mPrev = (mViewPager.currentItem + 1).toString() + " of " + mPageCount
             tvPagerCount.text = mPrev
 
 
         } else if (i == R.id.ivnext) {
 
-            mViewPager!!.setCurrentItem(getItemofviewpager(+1), true)
-            Log.e("TAG", "onClick_Next: " + mViewPager!!.currentItem + 1)
-            val mNext = (mViewPager!!.currentItem + 1).toString() + " of " + mPageCount
+            mViewPager.setCurrentItem(getItemofviewpager(+1), true)
+            Log.e("TAG", "onClick_Next: " + mViewPager.currentItem + 1)
+            val mNext = (mViewPager.currentItem + 1).toString() + " of " + mPageCount
             tvPagerCount.text = mNext
 
         } else if (i == R.id.backtoolbar) {
@@ -513,7 +518,7 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
     }
 
     private fun getItemofviewpager(i: Int): Int {
-        return mViewPager!!.currentItem + i
+        return mViewPager.currentItem + i
     }
 
     override fun onBackPressed() {
@@ -527,5 +532,13 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
     override fun onNavigate(dict_crops: QrData, position: Int, s: String) {
 
 
+    }
+
+    private fun hideKeyboard() {
+        val view = this.currentFocus
+        view?.let { v ->
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.let { it.hideSoftInputFromWindow(v.windowToken, 0) }
+        }
     }
 }

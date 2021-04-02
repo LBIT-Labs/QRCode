@@ -90,18 +90,34 @@
                                     android:textColor="@color/qr_code_bg"
                                     android:textSize="@dimen/_15sdp" />
 
-                                <AutoCompleteTextView
-                                    android:id="@+id/et_search_part"
+                                <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/_10sdp"
                                     android:background="@drawable/border_bg"
-                                    android:padding="@dimen/_10sdp"
-                                    android:text=""
-                                    android:imeOptions="actionSearch"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/_15sdp" />
+                                    android:orientation="horizontal">
 
+                                    <AutoCompleteTextView
+                                        android:id="@+id/et_search_part"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="40dp"
+                                        android:layout_weight="1"
+                                        android:background="@null"
+                                        android:hint="Enter Atleast 4 digits"
+                                        android:imeOptions="actionSearch"
+                                        android:padding="@dimen/_10sdp"
+                                        android:text=""
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_15sdp" />
+
+                                    <ImageView
+                                        android:id="@+id/iv_close"
+                                        android:layout_width="@dimen/_50sdp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/icon_close" />
+
+                                </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
 
@@ -198,22 +214,22 @@
                         </LinearLayout>
                     </LinearLayout>
 
-<!--                    <LinearLayout-->
-<!--                        android:id="@+id/ll_search_image"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:layout_marginTop="@dimen/_30sdp"-->
-<!--                        android:gravity="center"-->
-<!--                        android:visibility="gone">-->
+                    <!--                    <LinearLayout-->
+                    <!--                        android:id="@+id/ll_search_image"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_gravity="center"-->
+                    <!--                        android:layout_marginTop="@dimen/_30sdp"-->
+                    <!--                        android:gravity="center"-->
+                    <!--                        android:visibility="gone">-->
 
-<!--                        <ImageView-->
-<!--                            android:id="@+id/iv_search_parts"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:background="@drawable/btn_search"-->
-<!--                            android:gravity="center" />-->
-<!--                    </LinearLayout>-->
+                    <!--                        <ImageView-->
+                    <!--                            android:id="@+id/iv_search_parts"-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:background="@drawable/btn_search"-->
+                    <!--                            android:gravity="center" />-->
+                    <!--                    </LinearLayout>-->
 
                     <LinearLayout
                         android:layout_width="match_parent"

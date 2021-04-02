@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.viewpager.widget.PagerAdapter
 import workshop.lbit.qrcode.R
 import workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
@@ -33,7 +32,6 @@ class Qr_Inventory_Management_adapter(
     private lateinit var tv_im_location: MyTextView_Roboto_Regular
     private lateinit var tv_im_supplier: MyTextView_Roboto_Regular
     private lateinit var tv_im_hsn: MyTextView_Roboto_Regular
-    private lateinit var add_btn: MyTextView_Roboto_Regular
 
     lateinit var qrData: QrData
 
@@ -67,7 +65,6 @@ class Qr_Inventory_Management_adapter(
         tv_im_location = itemView.findViewById(R.id.tv_im_location)
         tv_im_supplier = itemView.findViewById(R.id.tv_im_supplier)
         tv_im_hsn = itemView.findViewById(R.id.tv_im_hsn)
-        add_btn = itemView.findViewById(R.id.add_btn)
 
 
         if(qrData.qr_part_part_dsc != null){
@@ -120,15 +117,8 @@ class Qr_Inventory_Management_adapter(
 
         }
 
-
-
         container.addView(itemView)
-        add_btn.setOnClickListener {
-            qrData = qrDataList[position]
 
-            listener.onNavigate(qrData,position,"")
-
-        }
         return itemView
     }
 

@@ -76,7 +76,7 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
     private var mServiceCost = ""
     private var mServiceHours = ""
     private var mServicePid = ""
-    private var mServiceDiscount = ""
+    private var mServiceDiscount = "0"
     private var mServiceService = ""
     private var mServiceFinalPrice = ""
     private var mServiceJobid = ""
@@ -308,39 +308,34 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
             if (mServiceService.isNotEmpty()) {
                 if (mServiceCost.isNotEmpty()) {
 
-                    if (mServiceDiscount.isNotEmpty()) {
+                    if (mServiceJobid.isNotEmpty()) {
 
-                        if (mServiceJobid.isNotEmpty()) {
+                        if (mServiceTech.isNotEmpty()) {
 
-                            if (mServiceTech.isNotEmpty()) {
-
-                                if (status.isNotEmpty()) {
-                                    if (status.equals("edit")) {
-                                        SaveService(status, mServicePid)
-                                    }
-                                } else {
-                                    SaveService("", "")
-
+                            if (status.isNotEmpty()) {
+                                if (status.equals("edit")) {
+                                    SaveService(status, mServicePid)
                                 }
-
                             } else {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Please Select Technician",
-                                    Toast.LENGTH_LONG
-                                ).show()
+                                SaveService("", "")
+
                             }
+
                         } else {
                             Toast.makeText(
                                 requireContext(),
-                                "Please Enter Discount",
+                                "Please Select Technician",
                                 Toast.LENGTH_LONG
                             ).show()
                         }
                     } else {
-                        Toast.makeText(requireContext(), "Please Enter Discount", Toast.LENGTH_LONG)
-                            .show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Please Enter Discount",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
+
                 } else {
                     Toast.makeText(requireContext(), "Please Enter Service Cost", Toast.LENGTH_LONG)
                         .show()

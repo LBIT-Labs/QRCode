@@ -710,19 +710,20 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
             override fun afterTextChanged(editable: Editable?) {
                 mSparesQuantity = editable.toString().trim()
 
-                if (mSparesQuantity.toInt() > 0) {
-                    if (mSparesMrp.isNotEmpty() && mSparesDiscount.isNotEmpty() && mSparesQuantity.isNotEmpty()) {
-                        val qty = mSparesQuantity.toDouble()
-                        val mrp = mSparesMrp.toDouble()
-                        val mValue = mrp * qty.toInt()
-                        val amount = mValue * mSparesDiscount.toLong() / 100
-                        mSparesFinalPrice = (mValue - amount).toString()
-                        tv_spares_finalprice.text = mSparesFinalPrice
+                if (mSparesQuantity.isNotEmpty()) {
+                    if (mSparesQuantity.toInt() > 0) {
+                        if (mSparesMrp.isNotEmpty() && mSparesDiscount.isNotEmpty() && mSparesQuantity.isNotEmpty()) {
+                            val qty = mSparesQuantity.toDouble()
+                            val mrp = mSparesMrp.toDouble()
+                            val mValue = mrp * qty.toInt()
+                            val amount = mValue * mSparesDiscount.toLong() / 100
+                            mSparesFinalPrice = (mValue - amount).toString()
+                            tv_spares_finalprice.text = mSparesFinalPrice
+                        }
+                    } else {
+                        et_spares_quantity.setText("")
                     }
-                } else {
-                    et_spares_quantity.setText("")
                 }
-
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -755,6 +756,23 @@ class VendorJobcardSparesFragment @SuppressLint("ValidFragment") constructor() :
             override fun afterTextChanged(editable: Editable?) {
                 mSparesMrp = editable.toString().trim()
 
+                if (mSparesMrp.isNotEmpty()) {
+                    if (mSparesDiscount.isNotEmpty() && mSparesQuantity.isNotEmpty()) {
+
+                        val mValue = mSparesMrp.toLong() * mSparesQuantity.toLong()
+                        val amount = mValue * mSparesDiscount.toLong() / 100
+                        mSparesFinalPrice = (mSparesMrp.toLong() - amount).toString()
+                        tv_spares_finalprice.text = mSparesFinalPrice
+                    } else {
+                        if (mSparesQuantity.isNotEmpty()) {
+                            val mValue = mSparesMrp.toLong() * mSparesQuantity.toLong()
+                            tv_spares_finalprice.text = mValue.toString()
+                        } else {
+                            tv_spares_finalprice.text = mSparesMrp
+
+                        }
+                    }
+                }
 
             }
 

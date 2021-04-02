@@ -105,6 +105,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/border_bg"
             android:imeOptions="actionDone"
+            android:maxLength="60"
             android:inputType="text"
             android:padding="@dimen/_5sdp" />
 
@@ -227,7 +228,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/border_bg"
-            android:padding="@dimen/_5sdp"
+            android:padding="@dimen/_10sdp"
             android:textSize="@dimen/_15sdp" />
 
     </LinearLayout>
@@ -252,9 +253,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/border_bg"
-            android:padding="@dimen/_5sdp"
-            android:text=""
-            android:textColor="@color/black"
+            android:padding="@dimen/_10sdp"
             android:textSize="@dimen/_15sdp" />
     </LinearLayout>
 
@@ -296,6 +295,7 @@
         android:orientation="vertical">
 
         <workshop.lbit.qrcode.customfonts.MyTextView_Roboto_Bold
+            android:id="@+id/tv_gstin_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/gstin"

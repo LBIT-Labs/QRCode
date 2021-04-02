@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             nav_Jobcard.isVisible = false
             nav_Livejobs.isVisible = false
             nav_serviceHistory.isVisible = true
-            nav_invManagement.isVisible = true
+            nav_invManagement.isVisible = false
             nav_vendorService.isVisible = false
         }  else if (mRole.equals("wh_security")) {
             toolbar_title!!.text = "Gate Pass"
@@ -147,14 +147,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             nav_Jobcard.isVisible = false
             nav_Livejobs.isVisible = false
             nav_serviceHistory.isVisible = true
-            nav_invManagement.isVisible = true
+            nav_invManagement.isVisible = false
             nav_vendorService.isVisible = false
         } else {
             toolbar_title!!.text = "Jobcard"
             nav_Jobcard.isVisible = true
             nav_Livejobs.isVisible = false
             nav_serviceHistory.isVisible = false
-            nav_invManagement.isVisible = false
+            nav_invManagement.isVisible = true
             nav_vendorService.isVisible = true
         }
 

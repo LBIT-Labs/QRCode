@@ -50,6 +50,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     lateinit var tv_customer_address: MyTextView_Roboto_Bold
     lateinit var tv_customer_paymentType: MyTextView_Roboto_Bold
     lateinit var tv_customer_gst_applicable: MyTextView_Roboto_Bold
+    lateinit var tv_gstin_txt: MyTextView_Roboto_Bold
     lateinit var tv_customer_pincode_txt: MyTextView_Roboto_Bold
 
     lateinit var tv_workshop_supervisor_mobile: MyTextView_Roboto_Bold
@@ -287,6 +288,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
         MandatoryCustomerAddress(resources.getString(R.string.address))
         MandatoryCustomerPaymentType(resources.getString(R.string.payment_type))
         MandatoryCustomerGST(resources.getString(R.string.gst))
+        MandatoryCustomerGSTIN(resources.getString(R.string.gstin))
         MandatoryPincode(resources.getString(R.string.pincode))
         MandatoryLocation(resources.getString(R.string.location))
 
@@ -302,7 +304,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun getDetailsWithMobile(mobile: String, mJObCardNid: String, reg: String) {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading...")
+        mProgressDialog.setMessage("Mobile Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.getDetails(mobile, mJObCardNid, reg).enqueue(object :
             Callback<ResponseBody> {
@@ -543,9 +545,137 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                             GetLocation()
                         }
 
-                    } else {
-                        Toast.makeText(requireContext(), "No Record Found", Toast.LENGTH_LONG)
-                            .show()
+                        mProgressDialog.dismiss()
+
+//                    } else {
+//                        Toast.makeText(requireContext(), "No Record Found", Toast.LENGTH_LONG)
+//                            .show()
+                    }
+                    mProgressDialog.dismiss()
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.e(
+                    "TAG",
+                    "onFailure() called with: call = [" + call.request()
+                        .url() + "], t = [" + t + "]",
+                    t
+                )
+
+                if (mProgressDialog.isShowing)
+                    mProgressDialog.dismiss()
+            }
+        })
+
+    }
+
+    private fun getCustomerDetails(mobile: String, mJObCardNid: String, reg: String) {
+        val mProgressDialog = ProgressDialog(requireContext())
+        mProgressDialog.isIndeterminate = true
+        mProgressDialog.setMessage("Mobile Loading...")
+        mProgressDialog.show()
+        Constants.qrCode_uat.getDetails(mobile, mJObCardNid, reg).enqueue(object :
+            Callback<ResponseBody> {
+            override fun onResponse(
+                call: Call<ResponseBody>,
+                response: Response<ResponseBody>
+            ) {
+
+                try {
+                    val string = response.body()!!.string()
+
+                    Log.e("Mobile", string)
+
+                    if (!string.equals("{}")) {
+
+                        val jsonArray = JSONArray(string)
+                        val jsonObject = jsonArray.getJSONObject(0)
+
+                        mCustomerName = jsonObject.getString("customer_name").toString()
+                        mCustomerMobile = jsonObject.getString("phone_number").toString()
+                        mCustomerAddress = jsonObject.getString("cus_address").toString()
+                        mCustomerCity = jsonObject.getString("cus_city").toString()
+                        mCustomerCRN = jsonObject.getString("customer_crn").toString()
+                        mCustomerEmail = jsonObject.getString("customer_email").toString()
+                        mCustomerPincode = jsonObject.getString("pincode").toString()
+                        mCustomerGSTIN = jsonObject.getString("gstin").toString()
+                        mCustomerGSTApplicable = jsonObject.getString("gst_applicable").toString()
+                        mCustomerState = jsonObject.getString("cus_state").toString()
+                        mCustomerPaymentType = jsonObject.getString("payment_type").toString()
+
+                        if (!mCustomerName.equals("null")) {
+                            et_customer_name.setText(mCustomerName)
+                        }
+
+                        if (!mCustomerMobile.equals("null")) {
+                            et_customer_mobile.setText(mCustomerMobile)
+                        }
+
+                        if (!mCustomerAddress.equals("null")) {
+                            et_customer_address.setText(mCustomerAddress)
+                        }
+
+                        if (!mCustomerEmail.equals("null")) {
+                            et_customer_email.setText(mCustomerEmail)
+                        }
+
+                        if (!mCustomerPincode.equals("null")) {
+                            et_customer_pincode.setText(mCustomerPincode)
+                        }
+
+                        if (!mCustomerGSTIN.equals("null")) {
+                            et_customer_gstin.setText(mCustomerGSTIN)
+                        }
+
+                        if (!mCustomerCRN.equals("null")) {
+                            ll_crn.visibility = View.VISIBLE
+                            tv_customer_crn.text = mCustomerCRN
+                        }
+
+                        if (!mCustomerPaymentType.equals("null")) {
+                            if (mCustomerPaymentType.isNotEmpty()) {
+                                tv_customer_paymentType_value.text = mCustomerPaymentType
+                            } else {
+                                mCustomerPaymentType = "Cash"
+                                tv_customer_paymentType_value.text = mCustomerPaymentType
+
+                            }
+                        }
+
+                        if (!mCustomerGSTApplicable.equals("null") && mCustomerGSTApplicable.isNotEmpty()) {
+                            val list = resources.getStringArray(R.array.gst_array).asList()
+                            if (list.indexOf(mCustomerGSTApplicable) > -1) {
+                                sp_customer_gst_applicable.setSelection(
+                                    list.indexOf(
+                                        mCustomerGSTApplicable
+                                    )
+                                )
+
+                            }
+                        }
+
+                        if (!mCustomerState.equals("null") && mCustomerState.isNotEmpty()) {
+                            Log.d("makelist", stateList.toString())
+
+                            GetStatesList()
+
+                        }
+
+                        if (!mCustomerCity.equals("null") && mCustomerCity.isNotEmpty()) {
+                            Log.d("makelist", cityList.toString())
+                            av_city.setText(mCustomerCity)
+
+                            GetCitiesList()
+
+                        }
+
+                        mProgressDialog.dismiss()
+
                     }
                     mProgressDialog.dismiss()
 
@@ -573,7 +703,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun GetMakeList() {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading...")
+        mProgressDialog.setMessage("Make Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.getMakeList("").enqueue(object :
             Callback<ResponseBody> {
@@ -637,7 +767,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun GetCitiesList() {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading...")
+        mProgressDialog.setMessage("City Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.GetFiltersData("cities", "")
             .enqueue(object :
@@ -710,6 +840,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun GetStatesList() {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
+        mProgressDialog.setMessage("State Loading...")
         mProgressDialog.setMessage("workshop.lbit.qrcode.scroll.MyNestedScrollView...")
         mProgressDialog.show()
         Constants.qrCode_uat.GetFiltersData("state", "")
@@ -780,7 +911,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun GetRegNo() {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading...")
+        mProgressDialog.setMessage("Reg Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.GetFiltersData("reg", "", "jobcard")
             .enqueue(object :
@@ -851,7 +982,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun GetRegNoVendor() {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading...")
+        mProgressDialog.setMessage("Vendor Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.GetFiltersData("reg", "", "vendor")
             .enqueue(object :
@@ -898,7 +1029,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun VerifyMobile(text: String) {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading...")
+        mProgressDialog.setMessage("Verify Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.VerifyMobile("user_mobile", text)
             .enqueue(object :
@@ -910,7 +1041,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
                     try {
                         val string = response.body()!!.string()
-                        Log.d("RegVendor", string)
+                        Log.d("Verify Mobile", string)
 
                         if (string.contains("False")) {
 
@@ -923,7 +1054,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                         } else {
                             mProgressDialog.dismiss()
 
-                            getDetailsWithMobile(text, "", "")
+                            getCustomerDetails(text, "", "")
 
                         }
 
@@ -953,7 +1084,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun GetLocation() {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading...")
+        mProgressDialog.setMessage("Loc Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.GetLocation(mMobileNumber.toString())
             .enqueue(object :
@@ -1017,7 +1148,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun GetModelList(mVehicleMake: String) {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loading...")
+        mProgressDialog.setMessage("Model Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.getMakeList(mVehicleMake).enqueue(object :
             Callback<ResponseBody> {
@@ -1534,7 +1665,10 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
         })
 
         et_customer_mobile.addTextChangedListener(object : TextWatcher {
+            var considerChange = true
+
             override fun afterTextChanged(editable: Editable?) {
+
                 val text = editable.toString().trim()
 
                 if (text.length == 1) {
@@ -1551,14 +1685,20 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
                 if (text.length == 10) {
                     mCustomerMobile = text
+                    et_customer_mobile.clearFocus()
+                    if (considerChange) {
+                        VerifyMobile(text)
+                    }
+                    considerChange = false
 
-                    VerifyMobile(text)
                 }
 
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
         })
 
         et_customer_email.addTextChangedListener(object : TextWatcher {
@@ -1831,6 +1971,23 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
     }
 
+    private fun MandatoryCustomerGSTIN(reg: String) {
+        val colored = " *"
+        val builder = SpannableStringBuilder()
+
+        builder.append(reg)
+        val start: Int = builder.length
+        builder.append(colored)
+        val end: Int = builder.length
+
+        builder.setSpan(
+            ForegroundColorSpan(Color.RED), start, end,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        tv_gstin_txt.text = builder
+
+    }
+
     private fun MandatoryTechnician(reg: String) {
         val colored = " *"
         val builder = SpannableStringBuilder()
@@ -1934,6 +2091,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
         tv_customer_paymentType = v.findViewById(R.id.tv_customer_paymentType)
         tv_customer_gst_applicable = v.findViewById(R.id.tv_customer_gst_applicable)
         tv_customer_pincode_txt = v.findViewById(R.id.tv_customer_pincode_txt)
+        tv_gstin_txt = v.findViewById(R.id.tv_gstin_txt)
 
         tv_workshop_technician = v.findViewById(R.id.tv_workshop_technician)
         tv_workshop_supervisor = v.findViewById(R.id.tv_workshop_supervisor)
@@ -1987,6 +2145,8 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 //            if (expandableButtonListener != null) expandableButtonListener!!.onViewExpanded()
 //
 //        }
+
+        tv_customer_paymentType_value.text = mCustomerPaymentType
     }
 
     fun Save() {
@@ -2199,9 +2359,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             ).show()
             return false
         } else {
-            if (mobileVerify == true) {
-                return true
-            } else {
+            if (mobileVerify) {
                 Toast.makeText(
                     requireContext(),
                     "Customer Mobile exists with User Mobile",
@@ -2251,6 +2409,41 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             return false
         }
 
+        if (mCustomerGSTIN.isEmpty()) {
+
+            Toast.makeText(
+                requireContext(),
+                "Please Enter GSTIN in Customer Details",
+                Toast.LENGTH_LONG
+            ).show()
+            return false
+        } else {
+            if (!mCustomerGSTIN.equals("null")) {
+                if (mCustomerGSTIN.length == 15) {
+                    val pattern =
+                        Pattern.compile("[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[A-Z]{1}[0-9]{1}")
+                    val pattern1 =
+                        Pattern.compile("[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[A-Z]{1}[A-Z]{1}")
+                    val matcher = pattern.matcher(mCustomerGSTIN)
+                    val matcher1 = pattern1.matcher(mCustomerGSTIN)
+                    if (matcher.matches()) {
+                        return true
+
+                    } else if (matcher1.matches()) {
+                        return true
+
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Invalid GSTIN Number, Please Re-enter GSTIN Number",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        return false
+                    }
+                }
+            }
+        }
+
         if (mWorkshopTechnician.isEmpty()) {
 
             Toast.makeText(
@@ -2280,30 +2473,6 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
             return false
         }
 
-        if (mCustomerGSTIN.isNotEmpty()) {
-            if (mCustomerGSTIN.length == 15) {
-                val pattern =
-                    Pattern.compile("[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[A-Z]{1}[0-9]{1}")
-                val pattern1 =
-                    Pattern.compile("[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[0-9]{1}[A-Z]{1}[A-Z]{1}")
-                val matcher = pattern.matcher(mCustomerGSTIN)
-                val matcher1 = pattern1.matcher(mCustomerGSTIN)
-                if (matcher.matches()) {
-                    return true
-
-                } else if (matcher1.matches()) {
-                    return true
-
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Invalid GSTIN Number, Please Re-enter GSTIN Number",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    return false
-                }
-            }
-        }
         if (mVehicleRegNumber.isNotEmpty()) {
             if (mVehicleRegNumber.length == 10) {
                 val pattern = Pattern.compile("[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}")
