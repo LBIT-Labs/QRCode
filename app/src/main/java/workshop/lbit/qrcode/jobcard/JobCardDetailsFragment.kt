@@ -304,7 +304,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun getDetailsWithMobile(mobile: String, mJObCardNid: String, reg: String) {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Mobile Loading...")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.getDetails(mobile, mJObCardNid, reg).enqueue(object :
             Callback<ResponseBody> {
@@ -467,7 +467,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                             }
                         }
 
-                        if (!mWorkshopSupervisor.equals("null")) {
+                        if (!mWorkshopSupervisor.equals("null") && mWorkshopSupervisor.isNotEmpty()) {
                             val list = resources.getStringArray(R.array.supervisor_array).asList()
                             if (list.indexOf(mWorkshopSupervisor) > -1) {
                                 sp_workshop_supervisor.setSelection(
@@ -479,7 +479,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                             }
                         }
 
-                        if (!mWorkshopTechnician.equals("null")) {
+                        if (!mWorkshopTechnician.equals("null") && mWorkshopTechnician.isNotEmpty()) {
                             val list = resources.getStringArray(R.array.technician_array).asList()
                             if (list.indexOf(mWorkshopTechnician) > -1) {
                                 sp_workshop_technician.setSelection(
@@ -495,13 +495,6 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                             et_vehicle_variant.setText(mVehicleVariant)
                         }
 
-                        if (!mCustomerState.equals("null") && mCustomerState.isNotEmpty()) {
-                            Log.d("makelist", stateList.toString())
-
-                            GetStatesList()
-
-                        }
-
                         if (!mVehicleRegNumber.equals("null") && mCustomerState.isNotEmpty()) {
 
                             GetRegNo()
@@ -509,14 +502,18 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
 
                         if (!mCustomerCity.equals("null") && mCustomerCity.isNotEmpty()) {
-                            Log.d("makelist", cityList.toString())
                             av_city.setText(mCustomerCity)
 
                             GetCitiesList()
-
-
                         }
 
+                        if (!mCustomerState.equals("null") && mCustomerState.isNotEmpty()) {
+
+                            av_state.setText(mCustomerState)
+                            GetStatesList()
+                        }
+
+//
                         if (!mVehicleMake.equals("null") && mVehicleMake.isNotEmpty()) {
                             Log.d("makelist", makeList.toString())
                             if (makeList.size > 0) {
@@ -577,7 +574,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun getCustomerDetails(mobile: String, mJObCardNid: String, reg: String) {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Mobile Loading...")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.getDetails(mobile, mJObCardNid, reg).enqueue(object :
             Callback<ResponseBody> {
@@ -659,12 +656,12 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                             }
                         }
 
-                        if (!mCustomerState.equals("null") && mCustomerState.isNotEmpty()) {
-                            Log.d("makelist", stateList.toString())
-
-                            GetStatesList()
-
-                        }
+//                        if (!mCustomerState.equals("null") && mCustomerState.isNotEmpty()) {
+//                            Log.d("makelist", stateList.toString())
+//
+//                            GetStatesList()
+//
+//                        }
 
                         if (!mCustomerCity.equals("null") && mCustomerCity.isNotEmpty()) {
                             Log.d("makelist", cityList.toString())
@@ -703,7 +700,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun GetMakeList() {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Make Loading...")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.getMakeList("").enqueue(object :
             Callback<ResponseBody> {
@@ -739,14 +736,10 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                             android.R.layout.simple_spinner_dropdown_item, makeList
                         )
                     }
-
-
                     mProgressDialog.dismiss()
-
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -767,7 +760,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun GetCitiesList() {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("City Loading...")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.GetFiltersData("cities", "")
             .enqueue(object :
@@ -840,8 +833,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun GetStatesList() {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("State Loading...")
-        mProgressDialog.setMessage("workshop.lbit.qrcode.scroll.MyNestedScrollView...")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.GetFiltersData("state", "")
             .enqueue(object :
@@ -911,7 +903,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun GetRegNo() {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Reg Loading...")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.GetFiltersData("reg", "", "jobcard")
             .enqueue(object :
@@ -982,7 +974,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun GetRegNoVendor() {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Vendor Loading...")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.GetFiltersData("reg", "", "vendor")
             .enqueue(object :
@@ -1029,7 +1021,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun VerifyMobile(text: String) {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Verify Loading...")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.VerifyMobile("user_mobile", text)
             .enqueue(object :
@@ -1084,7 +1076,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun GetLocation() {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Loc Loading...")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.GetLocation(mMobileNumber.toString())
             .enqueue(object :
@@ -1148,7 +1140,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
     private fun GetModelList(mVehicleMake: String) {
         val mProgressDialog = ProgressDialog(requireContext())
         mProgressDialog.isIndeterminate = true
-        mProgressDialog.setMessage("Model Loading...")
+        mProgressDialog.setMessage("Loading...")
         mProgressDialog.show()
         Constants.qrCode_uat.getMakeList(mVehicleMake).enqueue(object :
             Callback<ResponseBody> {
@@ -1554,11 +1546,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
         et_vehicle_kms_driven.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
-                val text = editable.toString().trim()
-
-                if (text.length == 8) {
-                    mVehicleKmsDriven = text
-                }
+                mVehicleKmsDriven = editable.toString().trim()
 
             }
 
@@ -1607,7 +1595,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
                     } else {
 
-                        et_vehicle_driver_mobile.setText("")
+                        et_vehicle_incharge_mobile.setText("")
 
                     }
                 }
@@ -1678,7 +1666,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
                     } else {
 
-                        et_vehicle_driver_mobile.setText("")
+                        et_customer_mobile.setText("")
 
                     }
                 }
@@ -1773,8 +1761,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                     if (matcher.matches()) {
 
                     } else {
-
-                        et_vehicle_driver_mobile.setText("")
+                        et_workshop_supervisor_mobile.setText("")
 
                     }
                 }
@@ -1782,7 +1769,6 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                 if (text.length == 10) {
                     mWorkshopSupervisorMobile = text
                 }
-
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -2253,7 +2239,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
                         Toast.makeText(
                             requireContext(),
-                            "Details Saved Succesfully " + mCustId1,
+                            "Details Saved Succesfully ",
                             Toast.LENGTH_LONG
                         ).show()
 
@@ -2411,12 +2397,14 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
         if (mCustomerGSTIN.isEmpty()) {
 
-            Toast.makeText(
-                requireContext(),
-                "Please Enter GSTIN in Customer Details",
-                Toast.LENGTH_LONG
-            ).show()
-            return false
+            if (mCustomerGSTIN.equals("Yes")) {
+                Toast.makeText(
+                    requireContext(),
+                    "Please Enter GSTIN in Customer Details",
+                    Toast.LENGTH_LONG
+                ).show()
+                return false
+            }
         } else {
             if (!mCustomerGSTIN.equals("null")) {
                 if (mCustomerGSTIN.length == 15) {

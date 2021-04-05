@@ -161,7 +161,7 @@
             android:background="@drawable/border_bg"
             android:imeOptions="actionDone"
             android:inputType="number"
-            android:maxLength="8"
+            android:maxLength="6"
             android:padding="@dimen/_5sdp" />
 
     </LinearLayout>
@@ -246,6 +246,7 @@
             android:background="@drawable/border_bg"
             android:imeOptions="actionDone"
             android:inputType="text"
+            android:maxLength="12"
             android:padding="@dimen/_5sdp" />
 
     </LinearLayout>
@@ -272,6 +273,7 @@
             android:background="@drawable/border_bg"
             android:imeOptions="actionDone"
             android:inputType="text"
+            android:maxLength="17"
             android:padding="@dimen/_5sdp" />
 
     </LinearLayout>
@@ -327,6 +329,7 @@
             android:background="@drawable/border_bg"
             android:imeOptions="actionDone"
             android:inputType="text"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:padding="@dimen/_5sdp" />
 
     </LinearLayout>
@@ -381,6 +384,7 @@
             android:background="@drawable/border_bg"
             android:imeOptions="actionDone"
             android:inputType="text"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:padding="@dimen/_5sdp" />
 
     </LinearLayout>

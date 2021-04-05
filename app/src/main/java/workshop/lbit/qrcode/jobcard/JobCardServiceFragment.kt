@@ -223,7 +223,7 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
             mServiceCost = ""
             mServiceService = ""
             mServiceHours = ""
-            mServiceDiscount = ""
+            mServiceDiscount = "0"
             mServiceFinalPrice = ""
             mServiceJobid = ""
 
@@ -350,7 +350,7 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
             mServiceCost = ""
             mServiceService = ""
             mServiceHours = ""
-            mServiceDiscount = ""
+            mServiceDiscount = "0"
             mServiceFinalPrice = ""
             mServiceJobid = ""
 
@@ -807,14 +807,32 @@ class JobCardServiceFragment @SuppressLint("ValidFragment") constructor() : Frag
     override fun onNavigate(mJCData: JobcardData, position: Int, status: String) {
 
 
-        mServiceService = mJCData.jc_service_type!!
-        mServiceCost = mJCData.jc_service_mrp!!
-        mServiceDiscount = mJCData.jc_discount!!
-        mServiceFinalPrice = mJCData.jc_final!!
-        mServiceHours = mJCData.jc_hours!!
-        mServicePid = mJCData.jc_pid!!
-        mServiceJobid = mJCData.jc_job_id!!
-        mServiceTech = mJCData.jc_live_tech!!
+        if (!mJCData.jc_service_type!!.equals("null")) {
+            mServiceService = mJCData.jc_service_type!!
+
+        } else if (!mJCData.jc_service_mrp!!.equals("null")) {
+            mServiceCost = mJCData.jc_service_mrp!!
+
+        } else if (!mJCData.jc_discount!!.equals("null")) {
+            mServiceDiscount = mJCData.jc_discount!!
+
+        } else if (!mJCData.jc_final!!.equals("null")) {
+            mServiceFinalPrice = mJCData.jc_final!!
+
+        } else if (!mJCData.jc_hours!!.equals("null")) {
+            mServiceHours = mJCData.jc_hours!!
+
+        } else if (!mJCData.jc_pid!!.equals("null")) {
+            mServicePid = mJCData.jc_pid!!
+
+        } else if (!mJCData.jc_job_id!!.equals("null")) {
+            mServiceJobid = mJCData.jc_job_id!!
+
+        } else if (!mJCData.jc_live_tech!!.equals("null")) {
+            mServiceTech = mJCData.jc_live_tech!!
+
+        }
+
 
         if (status.equals("edit")) {
             AddJobsDialog(status)

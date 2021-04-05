@@ -329,7 +329,7 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
                         val sparejsonArray = jsonObject.getJSONArray("spares")
                         val servicejsonArray = jsonObject.getJSONArray("services")
                         mTotalAmount = jsonObject.getString("total_final")
-                        mServiceList = jsonObject.getString("no_of_services").toString()
+//                        mServiceList = jsonObject.getString("no_of_services").toString()
 
 
                         val mCustomerName = detailsjsonObject.getString("customer").toString()
@@ -389,6 +389,7 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
 
                             if (mServicePageCount!!.length > 0) {
                                 tv_service_size.text = "1 of " + mServicePageCount!!
+                                mServiceList = mServicePageCount.toString()
                             }
                         } else {
                             ll_services_added_details.visibility = View.GONE

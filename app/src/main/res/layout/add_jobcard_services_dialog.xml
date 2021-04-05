@@ -121,6 +121,7 @@
                             android:background="@drawable/border_bg"
                             android:imeOptions="actionDone"
                             android:inputType="number"
+                            android:maxLength="10"
                             android:padding="@dimen/_10sdp" />
                     </LinearLayout>
 

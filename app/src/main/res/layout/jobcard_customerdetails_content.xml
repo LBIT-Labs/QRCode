@@ -56,6 +56,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/border_bg"
             android:imeOptions="actionDone"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:inputType="text"
             android:padding="@dimen/_5sdp" />
     </LinearLayout>

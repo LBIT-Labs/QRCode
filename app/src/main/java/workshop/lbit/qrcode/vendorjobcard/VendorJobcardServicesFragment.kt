@@ -75,7 +75,7 @@ class VendorJobcardServicesFragment @SuppressLint("ValidFragment") constructor()
     private var mServiceCost = ""
     private var mServiceHours = ""
     private var mServicePid = ""
-    private var mServiceDiscount = ""
+    private var mServiceDiscount = "0"
     private var mServiceService = ""
     private var mServiceFinalPrice = ""
     private var mServiceJobid = ""
@@ -231,7 +231,7 @@ class VendorJobcardServicesFragment @SuppressLint("ValidFragment") constructor()
             mServiceCost = ""
             mServiceService = ""
             mServiceHours = ""
-            mServiceDiscount = ""
+            mServiceDiscount = "0"
             mServiceFinalPrice = ""
             mServiceJobid = ""
 
@@ -274,8 +274,6 @@ class VendorJobcardServicesFragment @SuppressLint("ValidFragment") constructor()
 
         MandatoryService(resources.getString(R.string.select_service))
         MandatoryCost(resources.getString(R.string.cost))
-        MandatoryDiscount(resources.getString(R.string.discount1))
-
 
         if (mServiceService.isNotEmpty()) {
             et_services_service.setText(mServiceService)
@@ -304,20 +302,15 @@ class VendorJobcardServicesFragment @SuppressLint("ValidFragment") constructor()
             if (mServiceService.isNotEmpty()) {
                 if (mServiceCost.isNotEmpty()) {
 
-                    if (mServiceDiscount.isNotEmpty()) {
-
-                        if (status.isNotEmpty()) {
-                            if (status.equals("edit")) {
-                                SaveService(status, mServicePid)
-                            }
-                        } else {
-                            SaveService("", "")
-
+                    if (status.isNotEmpty()) {
+                        if (status.equals("edit")) {
+                            SaveService(status, mServicePid)
                         }
                     } else {
-                        Toast.makeText(requireContext(), "Please Enter Discount", Toast.LENGTH_LONG)
-                            .show()
+                        SaveService("", "")
+
                     }
+
                 } else {
                     Toast.makeText(requireContext(), "Please Enter Service Cost", Toast.LENGTH_LONG)
                         .show()
