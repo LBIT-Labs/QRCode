@@ -111,7 +111,7 @@ class LiveJobCardLiveRecordsFragment : Fragment(), View.OnClickListener, JobCard
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-        Log.e("test***", "Role  " + mRole)
+//        Log.e("test***", "Role  " + mRole)
 
         init(v)
 
@@ -181,10 +181,10 @@ class LiveJobCardLiveRecordsFragment : Fragment(), View.OnClickListener, JobCard
             ) {
 
                 if (thresholdOffset > positionOffset && positionOffsetPixels > thresholdOffsetPixels) {
-                    Log.e("TAG", "going left")
+//                    Log.e("TAG", "going left")
 
 
-                    Log.e("TAG", "onClick_Previous: " + (vp_pager!!.currentItem - 1))
+//                    Log.e("TAG", "onClick_Previous: " + (vp_pager!!.currentItem - 1))
 
                     val mNext =
                         (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
@@ -197,7 +197,7 @@ class LiveJobCardLiveRecordsFragment : Fragment(), View.OnClickListener, JobCard
 
                     val mNext =
                         (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
-                    Log.e("TAG", mNext)
+//                    Log.e("TAG", mNext)
                     if (!mNext.equals("0")) {
                         tv_size.text = mNext
                     }
@@ -225,7 +225,7 @@ class LiveJobCardLiveRecordsFragment : Fragment(), View.OnClickListener, JobCard
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("Live Jobs List ", string)
+//                    Log.e("Live Jobs List ", string)
 
                     if (!string.equals("{}")) {
                         ll_live_jobcard_data.visibility = View.VISIBLE
@@ -287,7 +287,7 @@ class LiveJobCardLiveRecordsFragment : Fragment(), View.OnClickListener, JobCard
         if (i == R.id.tvPrevious) {
             vp_pager!!.setCurrentItem(getItemofviewpager(-1), true)
 
-            Log.e("TAG", "onClick_Previous: " + vp_pager!!.currentItem)
+//            Log.e("TAG", "onClick_Previous: " + vp_pager!!.currentItem)
             val mPrev = (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
             tv_size.text = mPrev
 
@@ -295,7 +295,7 @@ class LiveJobCardLiveRecordsFragment : Fragment(), View.OnClickListener, JobCard
         } else if (i == R.id.tvnext) {
 
             vp_pager!!.setCurrentItem(getItemofviewpager(+1), true)
-            Log.e("TAG", "onClick_Next: " + vp_pager!!.currentItem + 1)
+//            Log.e("TAG", "onClick_Next: " + vp_pager!!.currentItem + 1)
             val mNext = (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
             tv_size.text = mNext
 

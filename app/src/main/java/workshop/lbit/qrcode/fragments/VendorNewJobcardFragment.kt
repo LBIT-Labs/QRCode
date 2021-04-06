@@ -112,7 +112,7 @@ class VendorNewJobcardFragment : Fragment(), View.OnClickListener, JobCardList {
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-        Log.e("test***", "Role  " + mRole)
+//        Log.e("test***", "Role  " + mRole)
 
         init(v)
 

@@ -114,7 +114,7 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
             mRole = dict_data.optString("role")
             mJobCardCustID = dict_data.optString("JobCardCustID")
 
-            Log.d("data", dict_data.toString())
+//            Log.d("data", dict_data.toString())
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -134,7 +134,7 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
 
                 getJobsList()
 
-                Log.d("data", dict_data.toString())
+//                Log.d("data", dict_data.toString())
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
@@ -165,7 +165,7 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("Jobs List ", mJobCardCustID + " " + string)
+//                    Log.e("Jobs List ", mJobCardCustID + " " + string)
 
                     if (!string.equals("{}")) {
                         ll_jobs_data.visibility = View.VISIBLE
@@ -249,10 +249,10 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
             ) {
 
                 if (thresholdOffset > positionOffset && positionOffsetPixels > thresholdOffsetPixels) {
-                    Log.e("TAG", "going left")
+//                    Log.e("TAG", "going left")
 
 
-                    Log.e("TAG", "onClick_Previous: " + (vp_pager!!.currentItem - 1))
+//                    Log.e("TAG", "onClick_Previous: " + (vp_pager!!.currentItem - 1))
 
                     val mNext =
                         (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
@@ -268,7 +268,7 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
 
                     val mNext =
                         (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
-                    Log.e("TAG", mNext)
+//                    Log.e("TAG", mNext)
                     if (!mNext.equals("0")) {
                         tv_size!!.text = mNext
                     }
@@ -404,7 +404,7 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
         } else if (i == R.id.tv_previous) {
             vp_pager!!.setCurrentItem(getItemofviewpager(-1), true)
 
-            Log.e("TAG", "onClick_Previous: " + vp_pager!!.currentItem)
+//            Log.e("TAG", "onClick_Previous: " + vp_pager!!.currentItem)
             val mPrev = (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
             tv_size!!.text = mPrev
 
@@ -412,7 +412,7 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
         } else if (i == R.id.tv_next) {
 
             vp_pager!!.setCurrentItem(getItemofviewpager(+1), true)
-            Log.e("TAG", "onClick_Next: " + vp_pager!!.currentItem + 1)
+//            Log.e("TAG", "onClick_Next: " + vp_pager!!.currentItem + 1)
             val mNext = (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
             tv_size!!.text = mNext
 
@@ -501,7 +501,7 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
                         ).show()
 
                     }
-                    Log.d("data", dict_data.toString())
+//                    Log.d("data", dict_data.toString())
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -572,7 +572,7 @@ class JobCardJobsFragment @SuppressLint("ValidFragment") constructor() : Fragmen
                     try {
                         val string = response.body()!!.string()
 
-                        Log.d("JOb Save", mJobCardCustID + " " + string)
+//                        Log.d("JOb Save", mJobCardCustID + " " + string)
                         if (string.contains("Added jobs Succesfully")) {
 
                             mAlertDialog.dismiss()

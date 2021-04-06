@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -76,9 +75,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             e.printStackTrace()
         }
 
-        Log.e("test***", "Role  " + mRole)
 
-        Log.e("test***", "toolbarRole  " + mRole)
+//        Log.e("test***", "toolbarRole  " + mRole)
         /*Shared*/
         sharedpreferences = getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE)
         editor = sharedpreferences!!.edit()

@@ -127,7 +127,7 @@ class VendorJobCardDetailsFragment : Fragment() {
 
                     try {
                         val string = response.body()!!.string()
-                        Log.d("Reg", string)
+//                        Log.d("Reg", string)
 
                         if (!string.equals("{}")) {
 
@@ -345,7 +345,7 @@ class VendorJobCardDetailsFragment : Fragment() {
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("Details", mJobCard + " " + mSearchRegNo + "" + string)
+//                    Log.e("Details", mJobCard + " " + mSearchRegNo + "" + string)
 
 
                     if (!string.equals("{}")) {
@@ -476,12 +476,12 @@ class VendorJobCardDetailsFragment : Fragment() {
                     try {
                         val string = response.body()!!.string()
 
-                        Log.e("Make", string)
+//                        Log.e("Make", string)
 
 
                         val list = ArrayList<String>()
 
-                        Log.e("Test", "Make_List: $string")
+//                        Log.e("Test", "Make_List: $string")
 
                         mVendorList = Utilities.getItemList(list, string)
 

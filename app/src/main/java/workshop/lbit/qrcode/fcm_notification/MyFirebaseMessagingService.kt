@@ -10,7 +10,6 @@ import android.graphics.Color
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -28,16 +27,17 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
-        remoteMessage?.let { message ->
+        remoteMessage.let { message ->
 
             val params = remoteMessage.data
-//            val `object` = JSONObject(params)
-//            Log.e("JSON_OBJECT", `object`.toString())
+            //            val `object` = JSONObject(params)
+            //            Log.e("JSON_OBJECT", `object`.toString())
 
 
             val title = remoteMessage.data["title"]
             val message = remoteMessage.data["body"]
-            notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
             //Setting up Notification channels for android O and above
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -65,7 +65,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     override fun onNewToken(token: String) {
-        Log.d(TAG, "Refreshed token: $token")
+//        Log.d(TAG, "Refreshed token: $token")
 
     }
 

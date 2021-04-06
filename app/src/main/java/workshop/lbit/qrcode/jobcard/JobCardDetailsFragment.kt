@@ -316,7 +316,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("Mobile", string)
+//                    Log.e("Mobile", string)
 
                     if (!string.equals("{}")) {
 
@@ -515,7 +515,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
 //
                         if (!mVehicleMake.equals("null") && mVehicleMake.isNotEmpty()) {
-                            Log.d("makelist", makeList.toString())
+//                            Log.d("makelist", makeList.toString())
                             if (makeList.size > 0) {
                                 if (makeList.indexOf(mVehicleMake) > -1) {
                                     sp_vehicle_make.setSelection(makeList.indexOf(mVehicleMake))
@@ -527,7 +527,6 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                         }
 
                         if (!mVehicleModel.equals("null") && mVehicleModel.isNotEmpty()) {
-                            Log.d("makelist", modelList.toString())
                             if (modelList.size > 0) {
                                 if (modelList.indexOf(mVehicleMake) > -1) {
                                     sp_vehicle_model.setSelection(modelList.indexOf(mVehicleModel))
@@ -586,7 +585,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("Mobile", string)
+//                    Log.e("Mobile", string)
 
                     if (!string.equals("{}")) {
 
@@ -664,7 +663,6 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 //                        }
 
                         if (!mCustomerCity.equals("null") && mCustomerCity.isNotEmpty()) {
-                            Log.d("makelist", cityList.toString())
                             av_city.setText(mCustomerCity)
 
                             GetCitiesList()
@@ -712,12 +710,12 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("Make", string)
+//                    Log.e("Make", string)
 
 
                     val list = ArrayList<String>()
 
-                    Log.e("Test", "Make_List: $string")
+//                    Log.e("Test", "Make_List: $string")
 
                     makeList = Utilities.getItemList(list, string)
 
@@ -772,7 +770,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
 
                     try {
                         val string = response.body()!!.string()
-                        Log.d("city's", string)
+//                        Log.d("city's", string)
 
                         if (!string.equals("{}")) {
 
@@ -846,7 +844,7 @@ class JobCardDetailsFragment @SuppressLint("ValidFragment") constructor() : Frag
                     try {
                         val string = response.body()!!.string()
 
-                        Log.d("State", string)
+//                        Log.d("State", string)
 
                         if (!string.equals("{}")) {
 

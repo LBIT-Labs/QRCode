@@ -62,18 +62,14 @@ class LiveJobcardHistoryFragment : Fragment(), View.OnClickListener, JobCardList
     private var srl_swipetorefresh: SwipeRefreshLayout? = null
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        super.setUserVisibleHint(isVisibleToUser);
-        this.isVisibleToUser = isVisibleToUser;
-        if (isVisibleToUser && isAdded()) {
+        super.setUserVisibleHint(isVisibleToUser)
+        this.isVisibleToUser = isVisibleToUser
+        if (isVisibleToUser && isAdded) {
             et_search.setText("")
             loadData("")
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -84,7 +80,7 @@ class LiveJobcardHistoryFragment : Fragment(), View.OnClickListener, JobCardList
             et_search.setText("")
             loadData("")
 
-            isLoaded = true;
+            isLoaded = true
         }
     }
 
@@ -112,7 +108,7 @@ class LiveJobcardHistoryFragment : Fragment(), View.OnClickListener, JobCardList
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-        Log.e("test***", "Role  " + mRole)
+//        Log.e("test***", "Role  " + mRole)
 
         init(v)
 
@@ -126,7 +122,7 @@ class LiveJobcardHistoryFragment : Fragment(), View.OnClickListener, JobCardList
 
         }
 
-        et_search!!.addTextChangedListener(object : TextWatcher {
+        et_search.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
                 val text = editable.toString().trim()
 
@@ -166,10 +162,10 @@ class LiveJobcardHistoryFragment : Fragment(), View.OnClickListener, JobCardList
 
             override fun onPageScrollStateChanged(state: Int) {
                 if (!scrollStarted && state == ViewPager.SCROLLBAR_POSITION_DEFAULT) {
-                    scrollStarted = true;
-                    checkDirection = true;
+                    scrollStarted = true
+                    checkDirection = true
                 } else {
-                    scrollStarted = false;
+                    scrollStarted = false
                 }
             }
 
@@ -180,10 +176,10 @@ class LiveJobcardHistoryFragment : Fragment(), View.OnClickListener, JobCardList
             ) {
 
                 if (thresholdOffset > positionOffset && positionOffsetPixels > thresholdOffsetPixels) {
-                    Log.e("TAG", "going left")
+//                    Log.e("TAG", "going left")
 
 
-                    Log.e("TAG", "onClick_Previous: " + (vp_pager!!.currentItem - 1))
+//                    Log.e("TAG", "onClick_Previous: " + (vp_pager!!.currentItem - 1))
 
                     val mNext =
                         (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
@@ -196,7 +192,7 @@ class LiveJobcardHistoryFragment : Fragment(), View.OnClickListener, JobCardList
 
                     val mNext =
                         (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
-                    Log.e("TAG", mNext)
+//                    Log.e("TAG", mNext)
                     if (!mNext.equals("0")) {
                         tv_size.text = mNext
                     }
@@ -205,7 +201,7 @@ class LiveJobcardHistoryFragment : Fragment(), View.OnClickListener, JobCardList
             }
 
             override fun onPageSelected(position: Int) {
-                mCurrentFragmentPosition = position;
+                mCurrentFragmentPosition = position
             }
 
         })
@@ -224,7 +220,7 @@ class LiveJobcardHistoryFragment : Fragment(), View.OnClickListener, JobCardList
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("Live Jobs List ", string)
+//                    Log.e("Live Jobs List ", string)
 
                     if (!string.equals("{}")) {
                         ll_live_jobcard_data.visibility = View.VISIBLE
@@ -286,17 +282,17 @@ class LiveJobcardHistoryFragment : Fragment(), View.OnClickListener, JobCardList
         if (i == R.id.tvPrevious) {
             vp_pager!!.setCurrentItem(getItemofviewpager(-1), true)
 
-            Log.e("TAG", "onClick_Previous: " + vp_pager!!.currentItem)
+//            Log.e("TAG", "onClick_Previous: " + vp_pager!!.currentItem)
             val mPrev = (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
-            tv_size!!.text = mPrev
+            tv_size.text = mPrev
 
 
         } else if (i == R.id.tvnext) {
 
             vp_pager!!.setCurrentItem(getItemofviewpager(+1), true)
-            Log.e("TAG", "onClick_Next: " + vp_pager!!.currentItem + 1)
+//            Log.e("TAG", "onClick_Next: " + vp_pager!!.currentItem + 1)
             val mNext = (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
-            tv_size!!.text = mNext
+            tv_size.text = mNext
 
         }
     }

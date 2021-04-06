@@ -129,7 +129,7 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
             mGPStatus = dict_data.optString("gatepass_status")
             mGPAuthStatus = dict_data.optString("gatepass_auth_status")
 
-            Log.d("data", dict_data.toString())
+//            Log.d("data", dict_data.toString())
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -219,10 +219,10 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
             ) {
 
                 if (thresholdOffset > positionOffset && positionOffsetPixels > thresholdOffsetPixels) {
-                    Log.e("TAG", "going left")
+//                    Log.e("TAG", "going left")
 
 
-                    Log.e("TAG", "onClick_Previous: " + (vp_sparespager!!.currentItem - 1))
+//                    Log.e("TAG", "onClick_Previous: " + (vp_sparespager!!.currentItem - 1))
 
                     val mNext =
                         (vp_sparespager!!.currentItem + 1).toString() + " of " + mSparePageCount
@@ -238,7 +238,7 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
 
                     val mNext =
                         (vp_sparespager!!.currentItem + 1).toString() + " of " + mSparePageCount
-                    Log.e("TAG", mNext)
+//                    Log.e("TAG", mNext)
                     if (!mNext.equals("0")) {
                         tv_spare_size.text = mNext
                     }
@@ -270,10 +270,10 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
             ) {
 
                 if (thresholdOffset > positionOffset && positionOffsetPixels > thresholdOffsetPixels) {
-                    Log.e("TAG", "going left")
+//                    Log.e("TAG", "going left")
 
 
-                    Log.e("TAG", "onClick_Previous: " + (vp_serviepager!!.currentItem - 1))
+//                    Log.e("TAG", "onClick_Previous: " + (vp_serviepager!!.currentItem - 1))
 
                     val mNext =
                         (vp_serviepager!!.currentItem + 1).toString() + " of " + mServicePageCount
@@ -289,7 +289,7 @@ class VendorJobcardSummaryFragment @SuppressLint("ValidFragment") constructor() 
 
                     val mNext =
                         (vp_serviepager!!.currentItem + 1).toString() + " of " + mServicePageCount
-                    Log.e("TAG", mNext)
+//                    Log.e("TAG", mNext)
                     if (!mNext.equals("0")) {
                         tv_service_size.text = mNext
                     }

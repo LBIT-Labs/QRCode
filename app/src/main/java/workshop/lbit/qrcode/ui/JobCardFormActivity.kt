@@ -2,7 +2,6 @@ package workshop.lbit.qrcode.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -103,7 +102,7 @@ class JobCardFormActivity : AppCompatActivity(), View.OnClickListener {
         }
         previous.setOnClickListener {
 
-            Log.d("Index", currentPageIndex.toString())
+//            Log.d("Index", currentPageIndex.toString())
             currentPageIndex--
             mViewPager!!.currentItem = currentPageIndex
         }

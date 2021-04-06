@@ -153,7 +153,7 @@ class QrScanningGatepassDetails : AppCompatActivity(), View.OnClickListener {
                 try {
                     val string = response.body()!!.string()
 
-                    Log.d("gatepass Details Allow", status + " " + string)
+//                    Log.d("gatepass Details Allow", status + " " + string)
 
                     if (status.equals("Delivered")) {
 

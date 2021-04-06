@@ -171,7 +171,7 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
                     try {
 
                         val string = response.body()!!.string()
-                        Log.e("TAG", "DashBoard " + string)
+//                        Log.e("TAG", "DashBoard " + string)
 
                         if (!string.equals("{}")) {
                             mPartDetailsListArray = JSONArray(string)
@@ -271,10 +271,10 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
 
                         var list = ArrayList<String>()
 
-                        Log.e("Test", "Make_List: $string")
+//                        Log.e("Test", "Make_List: $string")
 
                         list = Utilities.getItemList(list, string)
-                        Log.e("Test", "Make_List: $list")
+//                        Log.e("Test", "Make_List: $list")
 
                         sp_make.adapter = ArrayAdapter(
                             this@InventoryManagementActivity,
@@ -325,10 +325,10 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
 
                         list = ArrayList<String>()
 
-                        Log.e("Test", "Make_List: $string")
+//                        Log.e("Test", "Make_List: $string")
 
                         list = Utilities.getItemList(list, string)
-                        Log.e("Test", "Make_List: $list")
+//                        Log.e("Test", "Make_List: $list")
 
                         sp_partCategory.adapter = ArrayAdapter(
                             this@InventoryManagementActivity,
@@ -378,10 +378,10 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
 
                             mPartsList = ArrayList<String>()
 
-                            Log.e("Test", "Parts_List: $string")
+//                            Log.e("Test", "Parts_List: $string")
 
                             mPartsList = Utilities.getItemListPart(mPartsList!!, string)
-                            Log.e("Test", "Make_List: $mPartsList")
+//                            Log.e("Test", "Make_List: $mPartsList")
 
                             et_search_part.setAdapter(
                                 ArrayAdapter(
@@ -464,10 +464,10 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
             ) {
 
                 if (thresholdOffset > positionOffset && positionOffsetPixels > thresholdOffsetPixels) {
-                    Log.e("TAG", "going left")
+//                    Log.e("TAG", "going left")
 
 
-                    Log.e("TAG", "onClick_Previous: " + (mViewPager.currentItem - 1))
+//                    Log.e("TAG", "onClick_Previous: " + (mViewPager.currentItem - 1))
 
                     val mNext = (mViewPager.currentItem + 1).toString() + " of " + mPageCount
                     if (!(mViewPager.currentItem - 1).equals(mPageCount) && !mNext.equals("0")) {
@@ -478,7 +478,7 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
                 } else {
 
                     val mNext = (mViewPager.currentItem + 1).toString() + " of " + mPageCount
-                    Log.e("TAG", mNext)
+//                    Log.e("TAG", mNext)
                     if (!mNext.equals("0")) {
                         tvPagerCount.text = mNext
                     }
@@ -499,7 +499,7 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
         if (i == R.id.ivprevious) {
             mViewPager.setCurrentItem(getItemofviewpager(-1), true)
 
-            Log.e("TAG", "onClick_Previous: " + mViewPager.currentItem)
+//            Log.e("TAG", "onClick_Previous: " + mViewPager.currentItem)
             val mPrev = (mViewPager.currentItem + 1).toString() + " of " + mPageCount
             tvPagerCount.text = mPrev
 
@@ -507,7 +507,7 @@ class InventoryManagementActivity : AppCompatActivity(), View.OnClickListener, Q
         } else if (i == R.id.ivnext) {
 
             mViewPager.setCurrentItem(getItemofviewpager(+1), true)
-            Log.e("TAG", "onClick_Next: " + mViewPager.currentItem + 1)
+//            Log.e("TAG", "onClick_Next: " + mViewPager.currentItem + 1)
             val mNext = (mViewPager.currentItem + 1).toString() + " of " + mPageCount
             tvPagerCount.text = mNext
 

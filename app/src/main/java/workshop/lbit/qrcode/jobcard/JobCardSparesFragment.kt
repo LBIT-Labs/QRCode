@@ -136,7 +136,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
 
             getSparesList()
 
-            Log.d("data", dict_data.toString())
+//            Log.d("data", dict_data.toString())
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -196,10 +196,10 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
             ) {
 
                 if (thresholdOffset > positionOffset && positionOffsetPixels > thresholdOffsetPixels) {
-                    Log.e("TAG", "going left")
+//                    Log.e("TAG", "going left")
 
 
-                    Log.e("TAG", "onClick_Previous: " + (vp_pager!!.currentItem - 1))
+//                    Log.e("TAG", "onClick_Previous: " + (vp_pager!!.currentItem - 1))
 
                     val mNext =
                         (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
@@ -215,7 +215,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
 
                     val mNext =
                         (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
-                    Log.e("TAG", mNext)
+//                    Log.e("TAG", mNext)
                     if (!mNext.equals("0")) {
                         tv_size!!.text = mNext
                     }
@@ -245,7 +245,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
         } else if (i == R.id.tv_previous) {
             vp_pager!!.setCurrentItem(getItemofviewpager(-1), true)
 
-            Log.e("TAG", "onClick_Previous: " + vp_pager!!.currentItem)
+//            Log.e("TAG", "onClick_Previous: " + vp_pager!!.currentItem)
             val mPrev = (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
             tv_size!!.text = mPrev
 
@@ -253,7 +253,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
         } else if (i == R.id.tv_next) {
 
             vp_pager!!.setCurrentItem(getItemofviewpager(+1), true)
-            Log.e("TAG", "onClick_Next: " + vp_pager!!.currentItem + 1)
+//            Log.e("TAG", "onClick_Next: " + vp_pager!!.currentItem + 1)
             val mNext = (vp_pager!!.currentItem + 1).toString() + " of " + mPageCount
             tv_size!!.text = mNext
 
@@ -273,7 +273,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("Jobs List ", mJobCardCustID + " " + string)
+//                    Log.e("Jobs List ", mJobCardCustID + " " + string)
 
                     if (!string.equals("{}")) {
                         ll_spares_data.visibility = View.VISIBLE
@@ -371,7 +371,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
                     try {
 
                         val string = response.body()!!.string()
-                        Log.e("TAG", "DashBoard " + string)
+//                        Log.e("TAG", "DashBoard " + string)
 
 
                         if (!string.equals("{}")) {
@@ -591,12 +591,12 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("Make", string)
+//                    Log.e("Make", string)
 
 
                     val list = ArrayList<String>()
 
-                    Log.e("Test", "Make_List: $string")
+//                    Log.e("Test", "Make_List: $string")
 
                     jobsList = Utilities.getItemList(list, string)
 
@@ -748,7 +748,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
                     try {
                         val string = response.body()!!.string()
 
-                        Log.d("Spare Edit", mSparesDiscount + " " + string)
+//                        Log.d("Spare Edit", mSparesDiscount + " " + string)
                         if (string.contains("Added Spare Succesfully")) {
 
                             mAlertDialog.dismiss()
@@ -810,7 +810,7 @@ class JobCardSparesFragment @SuppressLint("ValidFragment") constructor() : Fragm
                     try {
                         val string = response.body()!!.string()
 
-                        Log.d("Spare Edit", mSparesDiscount + " " + string)
+//                        Log.d("Spare Edit", mSparesDiscount + " " + string)
                         if (string.contains("Added Spare Succesfully")) {
 
                             mProgressDialog.dismiss()

@@ -2,7 +2,6 @@ package workshop.lbit.qrcode.vendorjobcard
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -97,7 +96,7 @@ class VendorJobCardFormActivity : AppCompatActivity(), View.OnClickListener {
 
         previous.setOnClickListener {
 
-            Log.d("Index", currentPageIndex.toString())
+//            Log.d("Index", currentPageIndex.toString())
             currentPageIndex--
             mViewPager!!.currentItem = currentPageIndex
         }
@@ -161,7 +160,7 @@ class VendorJobCardFormActivity : AppCompatActivity(), View.OnClickListener {
             mCustomerReg = dict_data.optString("RegNo")
             mJobcardNo = dict_data.optString("VendorJobCardID")
 
-            Log.e("data", dict_data.toString())
+//            workshop.lbit.qrcode.scroll.MyNestedScrollViewe("data", dict_data.toString())
         } catch (e: JSONException) {
             e.printStackTrace()
         }

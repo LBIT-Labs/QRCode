@@ -221,10 +221,10 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
             ) {
 
                 if (thresholdOffset > positionOffset && positionOffsetPixels > thresholdOffsetPixels) {
-                    Log.e("TAG", "going left")
+//                    Log.e("TAG", "going left")
 
 
-                    Log.e("TAG", "onClick_Previous: " + (vp_sparespager!!.currentItem - 1))
+//                    Log.e("TAG", "onClick_Previous: " + (vp_sparespager!!.currentItem - 1))
 
                     val mNext =
                         (vp_sparespager!!.currentItem + 1).toString() + " of " + mSparePageCount
@@ -240,7 +240,7 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
 
                     val mNext =
                         (vp_sparespager!!.currentItem + 1).toString() + " of " + mSparePageCount
-                    Log.e("TAG", mNext)
+//                    Log.e("TAG", mNext)
                     if (!mNext.equals("0")) {
                         tv_spare_size.text = mNext
                     }
@@ -272,10 +272,10 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
             ) {
 
                 if (thresholdOffset > positionOffset && positionOffsetPixels > thresholdOffsetPixels) {
-                    Log.e("TAG", "going left")
+//                    Log.e("TAG", "going left")
 
 
-                    Log.e("TAG", "onClick_Previous: " + (vp_serviepager!!.currentItem - 1))
+//                    Log.e("TAG", "onClick_Previous: " + (vp_serviepager!!.currentItem - 1))
 
                     val mNext =
                         (vp_serviepager!!.currentItem + 1).toString() + " of " + mServicePageCount
@@ -291,7 +291,7 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
 
                     val mNext =
                         (vp_serviepager!!.currentItem + 1).toString() + " of " + mServicePageCount
-                    Log.e("TAG", mNext)
+//                    Log.e("TAG", mNext)
                     if (!mNext.equals("0")) {
                         tv_service_size.text = mNext
                     }
@@ -321,7 +321,7 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("Summary List ", mJobCardCustID + " " + string)
+//                    Log.e("Summary List ", mJobCardCustID + " " + string)
 
                     if (!string.equals("{}")) {
 
@@ -519,7 +519,7 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
         if (i == R.id.tv_spare_previous) {
 
             vp_sparespager!!.setCurrentItem(getItemofviewpager(-1), true)
-            Log.e("TAG", "onClick_Previous: " + vp_sparespager!!.currentItem)
+//            Log.e("TAG", "onClick_Previous: " + vp_sparespager!!.currentItem)
             val mPrev = (vp_sparespager!!.currentItem + 1).toString() + " of " + mSparePageCount
             tv_spare_size.text = mPrev
 
@@ -527,14 +527,14 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
         } else if (i == R.id.tv_spare_next) {
 
             vp_sparespager!!.setCurrentItem(getItemofviewpager(+1), true)
-            Log.e("TAG", "onClick_Next: " + vp_sparespager!!.currentItem + 1)
+//            Log.e("TAG", "onClick_Next: " + vp_sparespager!!.currentItem + 1)
             val mNext = (vp_sparespager!!.currentItem + 1).toString() + " of " + mSparePageCount
             tv_spare_size.text = mNext
 
         } else if (i == R.id.tv_service_previous) {
 
             vp_serviepager!!.setCurrentItem(getItemofviewpager1(-1), true)
-            Log.e("TAG", "onClick_Previous: " + vp_serviepager!!.currentItem)
+//            Log.e("TAG", "onClick_Previous: " + vp_serviepager!!.currentItem)
             val mPrev = (vp_serviepager!!.currentItem + 1).toString() + " of " + mServicePageCount
             tv_service_size.text = mPrev
 
@@ -542,7 +542,7 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
         } else if (i == R.id.tv_service_next) {
 
             vp_serviepager!!.setCurrentItem(getItemofviewpager1(+1), true)
-            Log.e("TAG", "onClick_Next: " + vp_serviepager!!.currentItem + 1)
+//            Log.e("TAG", "onClick_Next: " + vp_serviepager!!.currentItem + 1)
             val mNext = (vp_serviepager!!.currentItem + 1).toString() + " of " + mServicePageCount
             tv_service_size.text = mNext
 
@@ -707,7 +707,7 @@ class JobCardSummaryFragment @SuppressLint("ValidFragment") constructor() : Frag
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("Jobs List ", mJobCardCustID + " " + string)
+//                    Log.e("Jobs List ", mJobCardCustID + " " + string)
 
                     if (!string.equals("{}")) {
 

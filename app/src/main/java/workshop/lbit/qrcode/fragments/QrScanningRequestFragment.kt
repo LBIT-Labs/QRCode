@@ -169,7 +169,7 @@ class QrScanningRequestFragment @SuppressLint("ValidFragment") constructor() : F
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-        Log.e("test***", "Role  " + mRole)
+//        Log.e("test***", "Role  " + mRole)
 
         init(v)
 
@@ -254,7 +254,7 @@ class QrScanningRequestFragment @SuppressLint("ValidFragment") constructor() : F
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("ws Data Req", string)
+//                    Log.e("ws Data Req", string)
 
                     if (!string.equals("{}")) {
                         mRecyclerView!!.visibility = View.VISIBLE
@@ -315,7 +315,7 @@ class QrScanningRequestFragment @SuppressLint("ValidFragment") constructor() : F
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("ws Data Req gatepass", string)
+//                    Log.e("ws Data Req gatepass", string)
 
                     if (!string.equals("{}")) {
                         mRecyclerView!!.visibility = View.VISIBLE
@@ -330,7 +330,12 @@ class QrScanningRequestFragment @SuppressLint("ValidFragment") constructor() : F
                             }.type
                         )
                         qrScanningAdapter =
-                            QrScanningRequestListAdapter(requireContext(), saledatalist, mRole,mGatePassType)
+                            QrScanningRequestListAdapter(
+                                requireContext(),
+                                saledatalist,
+                                mRole,
+                                mGatePassType
+                            )
                         mRecyclerView!!.adapter = qrScanningAdapter
 
                     } else {
@@ -376,7 +381,7 @@ class QrScanningRequestFragment @SuppressLint("ValidFragment") constructor() : F
 
                 try {
                     val string = response.body()!!.string()
-                    Log.e("wh_store_boy Data Req", string)
+//                    Log.e("wh_store_boy Data Req", string)
 
                     if (!string.equals("{}")) {
                         mRecyclerView!!.visibility = View.VISIBLE
@@ -440,7 +445,6 @@ class QrScanningRequestFragment @SuppressLint("ValidFragment") constructor() : F
 
                     try {
                         val string = response.body()!!.string()
-                        Log.e("wh_security Data Req", string)
                         if (!string.equals("{}")) {
                             mRecyclerView!!.visibility = View.VISIBLE
                             tvNodata!!.visibility = View.GONE

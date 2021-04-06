@@ -163,7 +163,7 @@ class QrScanningHistoryFragment @SuppressLint("ValidFragment") constructor() : F
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-        Log.e("test***", "Role  " + mRole)
+//        Log.e("test***", "Role  " + mRole)
 
         init(v)
 
@@ -246,7 +246,7 @@ class QrScanningHistoryFragment @SuppressLint("ValidFragment") constructor() : F
 
                 try {
                     val string = response.body()!!.string()
-                    Log.e("ws Data", string)
+//                    Log.e("ws Data", string)
 
                     if (!string.equals("{}")) {
                         mRecyclerView!!.visibility = View.VISIBLE
@@ -305,7 +305,7 @@ class QrScanningHistoryFragment @SuppressLint("ValidFragment") constructor() : F
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("ws Data Req gatepass", string)
+//                    Log.e("ws Data Req gatepass", string)
 
                     if (!string.equals("{}")) {
                         mRecyclerView!!.visibility = View.VISIBLE
@@ -375,7 +375,7 @@ class QrScanningHistoryFragment @SuppressLint("ValidFragment") constructor() : F
                 try {
                     val string = response.body()!!.string()
 
-                    Log.e("wh_store_boy Data", string)
+//                    Log.e("wh_store_boy Data", string)
 
                     if (!string.equals("{}")) {
                         mRecyclerView!!.visibility = View.VISIBLE
@@ -442,7 +442,7 @@ class QrScanningHistoryFragment @SuppressLint("ValidFragment") constructor() : F
 
                 try {
                     val string = response.body()!!.string()
-                    Log.e("wh_security Data", string)
+//                    Log.e("wh_security Data", string)
                     if (!string.equals("{}")) {
                         mRecyclerView!!.visibility = View.VISIBLE
                         tvNodata!!.visibility = View.GONE

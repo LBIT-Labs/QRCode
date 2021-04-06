@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONException
 import org.json.JSONObject
-import android.util.Log
 import workshop.lbit.qrcode.MainActivity
 import workshop.lbit.qrcode.R
 import workshop.lbit.qrcode.Singleton.UserSession
@@ -56,7 +55,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profilescreen)
-        getSupportActionBar()!!.hide();
+        supportActionBar!!.hide()
 
 
         /*Shared*/
@@ -81,17 +80,17 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-        Log.e("test***", "Name  " + mAdv_Name)
+//        Log.e("test***", "Name  " + mAdv_Name)
 
         init()
 
-        tvProfilename?.setText(mAdv_Name)
-        tvPhoneNumbers?.setText(mMobileNumber)
-        tvEmployeeid?.setText(mEmply_ID)
-        tvdesignation?.setText(mDesignation)
-        tvdepartment?.setText(mDepartment)
-        tvManger?.setText(mManger)
-        tvbrand?.setText(mBrand)
+        tvProfilename?.text = mAdv_Name
+        tvPhoneNumbers?.text = mMobileNumber
+        tvEmployeeid?.text = mEmply_ID
+        tvdesignation?.text = mDesignation
+        tvdepartment?.text = mDepartment
+        tvManger?.text = mManger
+        tvbrand?.text = mBrand
 
     }
 
